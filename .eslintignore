@@ -1,0 +1,13 @@
+dist/
+build/
+node_modules/
+.eslintrc.cjs
+public/
+coverage/
+.vscode/
+out/
+.env
+.env.* 
+logs/
+*.log
+package-lock.json

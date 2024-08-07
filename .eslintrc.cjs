@@ -38,7 +38,7 @@ module.exports = {
     "react/jsx-no-target-blank": "off",
     "no-unused-vars": "warn",
     "eqeqeq": ["error", "always"],
-    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/classnames-order": "off",
     "tailwindcss/no-custom-classname": "off",
     'react-refresh/only-export-components': [
       'warn',

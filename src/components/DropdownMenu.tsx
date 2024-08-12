@@ -7,7 +7,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, isVisible, onMouseEnt
 
   return (
     <div
-      className={`shadow-custom-down absolute left-0 top-[70px] w-full bg-white transition-all duration-300 ${
+      className={`absolute left-0 top-[70px] w-full bg-white shadow-custom-down transition-all duration-300 ${
         isVisible ? 'animate-slideDown' : 'hidden'
       }`}
       onMouseEnter={onMouseEnter}

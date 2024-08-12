@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className='border-gray h-[385px] w-full bg-white px-[100px] pb-[60px] pt-[45px]'>
-      <div className='border-gray-75 flex items-start justify-between border-b'>
+      <div className='flex items-start justify-between border-b border-gray-75'>
         <div>
           <p className='mt-[16px] text-[32px]'>ALL THE</p>
           <p className='my-[20px] w-[292px]'>
@@ -15,6 +15,7 @@ const Footer = () => {
               <img src='/public/images/x.png' alt='X' className='h-[15px] w-[15px]' />
             </span>
             <span className='mr-[10px] flex h-[33px] w-[33px] items-center justify-center rounded-[50%] bg-white shadow-custom-light'>
+              layoutf
               <img src='/public/images/instagram.png' alt='Instagram' className='h-[15px] w-[15px]' />
             </span>
           </div>

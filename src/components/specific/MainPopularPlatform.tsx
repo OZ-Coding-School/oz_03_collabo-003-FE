@@ -39,30 +39,30 @@ const MainPopularPlatform = () => {
 
       <div className='flex flex-col items-center justify-center gap-4 md:gap-6 xl:gap-8'>
         <div className='flex'>
-          <div
+          <button
             className={`${tabStyle} ${selectedCategory === 'task' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('task')}
           >
             업무
-          </div>
-          <div
+          </button>
+          <button
             className={`${tabStyle} ${selectedCategory === 'ai' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('ai')}
           >
             AI
-          </div>
-          <div
+          </button>
+          <button
             className={`${tabStyle} ${selectedCategory === 'information_platform' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('information_platform')}
           >
             정보 플랫폼
-          </div>
-          <div
+          </button>
+          <button
             className={`${tabStyle} ${selectedCategory === 'government_support' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('government_support')}
           >
             정부지원
-          </div>
+          </button>
         </div>
         <div className='grid grid-cols-4 grid-rows-2 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6'>
           {popularContents.length > 0 &&

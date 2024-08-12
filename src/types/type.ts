@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface ButtonProps {
   onClick: () => void;
   children: React.ReactNode;
@@ -22,4 +20,22 @@ export interface DropdownMenuProps {
   isVisible: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+}
+
+export interface Content {
+  id: number;
+  title: string;
+  link: string;
+  image: string;
+  description: string;
+  category: string;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  role: string;
+  businessNumber: number | null;
+  points: number | null;
 }

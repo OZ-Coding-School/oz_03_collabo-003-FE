@@ -11,6 +11,12 @@
     font-size: 1.6rem;
   }
 
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   html,
   body {
     margin: 0;
@@ -18,10 +24,34 @@
     font-family: 'KoddiUDOnGothic-Regular';
     font-size: 16px;
     font-weight: 400;
+    color: #333333;
+    background-color: #fff;
   }
 
   input {
     outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    pointer-events: auto;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 }
 

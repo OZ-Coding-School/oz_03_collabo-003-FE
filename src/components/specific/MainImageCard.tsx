@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ImageCardLandingProps {
+interface MainImageCardProps {
   title: string;
   description: string;
   imageUrl: string;
@@ -8,13 +8,7 @@ interface ImageCardLandingProps {
   className?: string;
 }
 
-const ImageCardLanding: React.FC<ImageCardLandingProps> = ({
-  title,
-  description,
-  imageUrl,
-  layout,
-  className = '',
-}) => {
+const MainImageCard: React.FC<MainImageCardProps> = ({ title, description, imageUrl, layout, className = '' }) => {
   return (
     <div className={`flex ${layout === 'horizontal' ? 'flex-row' : 'flex-col'} overflow-hidden ${className}`}>
       <img src={imageUrl} alt={title} className={`object-cover ${layout === 'horizontal' ? 'w-1/4' : 'h-48 w-full'}`} />
@@ -26,4 +20,4 @@ const ImageCardLanding: React.FC<ImageCardLandingProps> = ({
   );
 };
 
-export default ImageCardLanding;
+export default MainImageCard;

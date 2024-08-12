@@ -1,6 +1,6 @@
-import ImageCardLanding from './ImageCardLanding';
+import ImageCardLanding from './MainImageCard';
 
-const LandingDescription = () => {
+const MainDescription = () => {
   const title = 'text-[40px] font-semibold text-black-b2';
   const subTitle = 'text-[15px] text-gray-75';
   const smallFont = 'text-[13px] text-gray-75';
@@ -201,4 +201,4 @@ const LandingDescription = () => {
   );
 };
 
-export default LandingDescription;
+export default MainDescription;

@@ -17,10 +17,10 @@ const ImageCardLanding: React.FC<ImageCardLandingProps> = ({
 }) => {
   return (
     <div className={`flex ${layout === 'horizontal' ? 'flex-row' : 'flex-col'} overflow-hidden ${className}`}>
-      <img src={imageUrl} alt={title} className={`object-cover ${layout === 'horizontal' ? 'w-1/2' : 'h-48 w-full'}`} />
-      <div className='flex flex-col justify-between p-4'>
-        <h2 className='text-xl font-bold'>{title}</h2>
-        <p className='mt-2 text-[13px]'>{description}</p>
+      <img src={imageUrl} alt={title} className={`object-cover ${layout === 'horizontal' ? 'w-1/4' : 'h-48 w-full'}`} />
+      <div className={`${layout === 'horizontal' ? 'w-1/4' : 'h-auto'} justify- center m-8 flex flex-col`}>
+        <h2 className='text-2xl font-bold'>{title}</h2>
+        <p className='mt-2 text-[13px] text-gray-75'>{description}</p>
       </div>
     </div>
   );

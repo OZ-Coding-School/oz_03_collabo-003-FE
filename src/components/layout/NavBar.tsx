@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BtnNav from '../common/button/BtnNav';
 import DropdownMenu from '../DropdownMenu';
-import { categoryData } from '../../Data/categoryData';
-import { promoData } from '../../Data/promoData';
+import { categoryData } from '../../data/categoryData';
+import { promoData } from '../../data/promoData';
 import { Category } from '../../types/type';
 
 const NavBar = () => {

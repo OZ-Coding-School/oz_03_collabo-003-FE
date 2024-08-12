@@ -1,5 +1,12 @@
-const HomePage = () => {
-  return <div>HomePage</div>;
-};
+import LandingDescription from '../components/specific/LandingDescription';
 
+const HomePage = () => {
+  return (
+    <div>
+      <div>
+        <LandingDescription />
+      </div>
+    </div>
+  );
+};
 export default HomePage;

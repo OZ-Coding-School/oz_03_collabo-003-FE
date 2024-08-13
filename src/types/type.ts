@@ -39,5 +39,5 @@ export interface User {
   name: string;
   role: string;
   businessNumber: number | null;
-  points: number | null;
+  points: number;
 }

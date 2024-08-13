@@ -24,7 +24,6 @@ module.exports = {
     }
   },
   plugins: ["import",
-  "jsx-a11y",
   "react",
   "react-hooks",
   "react-refresh",

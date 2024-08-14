@@ -158,5 +158,13 @@
     "image": "https://via.placeholder.com/330x220",
     "description": "보조금 소개, 맞춤형보조사업, 공모사업 찾기, 사용자매뉴얼 안내",
     "category": "government_support"
+  },
+  {
+    "id": 21,
+    "title": "국민취업지원제도",
+    "link": "https://www.kua.go.kr/uaptm010/selectMain.do",
+    "image": "https://via.placeholder.com/330x220",
+    "description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
+    "category": "government_support"
   }
 ]

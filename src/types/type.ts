@@ -38,6 +38,8 @@ export interface User {
   email: string;
   name: string;
   role: string;
+  businessName: string | null;
   businessNumber: number | null;
+  phoneNumber: number | null;
   points: number;
 }

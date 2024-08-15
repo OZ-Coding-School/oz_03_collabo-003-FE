@@ -9,8 +9,8 @@ const BtnHeart: React.FC = () => {
   };
 
   return (
-    <button onClick={handleToggle} className='text-2xl text-blue-primary'>
-      {isToggled ? <GoHeartFill /> : <GoHeart />}
+    <button onClick={handleToggle} className='text-2xl'>
+      {isToggled ? <GoHeartFill className='text-blue-primary' /> : <GoHeart />}
     </button>
   );
 };

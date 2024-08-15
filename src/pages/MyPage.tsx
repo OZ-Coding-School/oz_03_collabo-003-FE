@@ -1,20 +1,20 @@
-import MyPageImgCard from '../components/specific/MyPageImgCard';
+import { useState } from 'react';
+import SideBar from '../components/common/SideBar';
+import MyPageCardContainer from '../components/specific/MyPageCardContainer';
+import MyPageUserInfo from '../components/specific/MyPageUserInfo';
 
 const MyPage = () => {
+  const items: string[] = ['찜 목록', '회원 정보', '권한 관리'];
+  const [selectedItem, setSelectedItem] = useState(items[0]);
+
   return (
-    <div className='grid grid-cols-3'>
-      <MyPageImgCard
-        id={1}
-        title='야놀자'
-        description='숙박 예약 사이트'
-        image='/images/possible-4.png'
-        link=''
-        layout='user'
-        rating={8.8}
-        ratingParticipation={350}
-        viewer={350}
-        className='bg-white'
-      />
+    <div className='flex size-auto'>
+      <SideBar items={items} selectedItem={selectedItem} onSelectedItem={setSelectedItem} />
+      <div className='grow'>
+        {selectedItem === '찜 목록' && <MyPageCardContainer layout='user' />}
+        {selectedItem === '회원 정보' && <MyPageUserInfo />}
+        {selectedItem === '권한 관리' && <div>권한 관리 컴포넌트</div>}
+      </div>
     </div>
   );
 };

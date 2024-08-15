@@ -9,14 +9,14 @@ const Footer = () => {
           </p>
           <div className='flex'>
             <span className='mr-[10px] flex h-[33px] w-[33px] items-center justify-center rounded-[50%] bg-white shadow-custom-light'>
-              <img src='/public/images/facebook.png' alt='FaceBook' className='h-[15px] w-[9px]' />
+              <img src='/images/facebook.png' alt='FaceBook' className='h-[15px] w-[9px]' />
             </span>
             <span className='mr-[10px] flex h-[33px] w-[33px] items-center justify-center rounded-[50%] bg-white shadow-custom-light'>
-              <img src='/public/images/x.png' alt='X' className='h-[15px] w-[15px]' />
+              <img src='/images/x.png' alt='X' className='h-[15px] w-[15px]' />
             </span>
             <span className='mr-[10px] flex h-[33px] w-[33px] items-center justify-center rounded-[50%] bg-white shadow-custom-light'>
               layoutf
-              <img src='/public/images/instagram.png' alt='Instagram' className='h-[15px] w-[15px]' />
+              <img src='/images/instagram.png' alt='Instagram' className='h-[15px] w-[15px]' />
             </span>
           </div>
         </div>

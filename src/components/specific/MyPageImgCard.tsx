@@ -32,8 +32,8 @@ const MyPageImgCard: React.FC<MyPageImgCardProps> = ({
       <img src={image} alt={title} className='h-3/4 object-cover' />
       <div className='text-box relative my-2'>
         <div className='title mx-4 mb-1'>
-          <h2 className='mb-1 text-2xl font-bold'>{title}</h2>
-          <p className='text-lg'>{description}</p>
+          <h2 className='mb-1 w-full truncate text-xl font-bold'>{title}</h2>
+          <p className='w-4/5 truncate text-lg'>{description}</p>
         </div>
         <div className='mx-4 text-sm text-gray-75'>
           <span className='font-bold'>평점: {rating}&nbsp;</span>

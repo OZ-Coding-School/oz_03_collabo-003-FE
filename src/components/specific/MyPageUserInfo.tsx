@@ -22,7 +22,7 @@ const MyPageUserInfo = () => {
 
   return (
     <div className='flex h-full flex-col items-center justify-center'>
-      <div className='w-full max-w-4xl p-6'>
+      <div className='mb-10 w-full max-w-4xl p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
             환영합니다, <strong>{userData.name}</strong>님
@@ -38,9 +38,11 @@ const MyPageUserInfo = () => {
                 <div className='mr-4 text-5xl'>
                   <img src='/images/point-icon.png' alt='point-icon'></img>
                 </div>
-                <div>
-                  <p className='text-lg font-semibold'>포인트</p>
-                  <p className='text-xl font-bold'>50,000원</p>
+                <div className='relative w-full'>
+                  <p className='absolute bottom-[1px] text-lg font-semibold'>포인트</p>
+                  <p className='absolute right-6 text-xl font-bold text-gray-75'>
+                    50,000<span className='font-medium'>원</span>
+                  </p>
                 </div>
               </div>
               <hr className='h-auto w-[1px] flex-none border border-gray-dc' />

@@ -1,85 +1,13 @@
 import React, { useState } from 'react';
 import MyPageImgCard from './MyPageImgCard';
 import Pagination from '../common/Pagination';
+import allCards from '../../data/siteCard.json';
 
 interface MyPageCardContainerProps {
   layout: 'user' | 'client'; // user = 찜 하트 활성화, client = 찜 하트 비활성화
 }
 
 const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => {
-  const allCards = [
-    {
-      id: 1,
-      title: 'Card 1',
-      description: '숙박 예약 사이트 1',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card1',
-      rating: 4.5,
-      ratingParticipation: 100,
-      viewer: 200,
-    },
-    {
-      id: 2,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-    {
-      id: 7,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-    {
-      id: 3,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-    {
-      id: 4,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-    {
-      id: 5,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-    {
-      id: 6,
-      title: 'Card 2',
-      description: '숙박 예약 사이트 2',
-      image: '/public/images/possible-1.png',
-      link: 'https://example.com/card2',
-      rating: 4.0,
-      ratingParticipation: 120,
-      viewer: 250,
-    },
-  ];
-
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 

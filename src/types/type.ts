@@ -31,6 +31,18 @@ export interface Content {
   image: string;
   description: string;
   category: string;
+  review?: {
+    id: number;
+    user_id: number;
+    rating: number;
+  };
+  qna?: {
+    id: number;
+    user_id: number;
+    content: string;
+  };
+  viewCount?: number;
+  likeCount?: number;
 }
 
 export interface User {

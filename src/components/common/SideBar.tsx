@@ -43,7 +43,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
           {user.role === 'client' && pathname === '/mypage/owner' && (
             <BtnMypage
               onClick={() => navigate('/mypage')}
-              className='mb-[50px] min-h-[44px] min-w-[170px] self-center text-[16px]'
+              className='mb-[50px] min-h-[40px] min-w-[160px] self-center text-[14px] font-semibold'
             >
               이용자로 돌아가기
             </BtnMypage>

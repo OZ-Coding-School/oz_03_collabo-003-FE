@@ -32,7 +32,7 @@ const LogInPage: React.FC = () => {
     return axios.post('/api/v1/users/login', data);
   };
 
-  const onSubmit: SubmitHandler<LogInInputs> = async (data) => {
+  const onSubmit: SubmitHandler<LogInInputs> = async (data: LogInInputs) => {
     setIsLoading(true);
     try {
       const response = await loginUser(data);

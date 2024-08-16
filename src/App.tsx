@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import MyPageOwner from './pages/MyPageOwner';
 import LogInPage from './pages/LogInPage';
-import SignUpPage from './pages/SignUpPage';
+//import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path='/mypage/owner' element={<MyPageOwner />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />
-      <Route path='/signup' element={<SignUpPage />} />
+      {/* <Route path='/signup' element={<SignUpPage />} /> */}
     </Routes>
   );
 }

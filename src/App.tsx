@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import MyPageOwner from './pages/MyPageOwner';
 import LogInPage from './pages/LogInPage';
-//import SignUpPage from './pages/SignUpPage';
+// import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (

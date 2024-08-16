@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import SideBar from '../components/common/SideBar';
+import MyPageCardContainer from '../components/specific/MyPageCardContainer';
+import MyPageUserInfo from '../components/specific/MyPageUserInfo';
+import MyPageAuthz from '../components/specific/MyPageAuthz';
 
 const MyPage = () => {
   const items: string[] = ['찜 목록', '회원 정보', '권한 관리'];
   const [selectedItem, setSelectedItem] = useState(items[0]);
 
   return (
-    <div className='flex'>
+    <div className='size-auo flex'>
       <SideBar items={items} selectedItem={selectedItem} onSelectedItem={setSelectedItem} />
       <div className='h-[calc(100vh-70px)] grow'>
-        {/* item은 목록이고, 선택한 목록을 selectedItem으로 관리합니다.
-        selectedItem 값에 따라서 보여줄 컴포넌트 여기에 작성하시면 됩니다. */}
+        {selectedItem === '찜 목록' && <MyPageCardContainer layout='user' />}
+        {selectedItem === '회원 정보' && <MyPageUserInfo />}
+        {selectedItem === '권한 관리' && <MyPageAuthz />}
       </div>
     </div>
   );

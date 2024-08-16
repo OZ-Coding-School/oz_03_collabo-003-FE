@@ -8,7 +8,7 @@ const MyPage = () => {
   return (
     <div className='flex'>
       <SideBar items={items} selectedItem={selectedItem} onSelectedItem={setSelectedItem} />
-      <div className='grow'>
+      <div className='h-[calc(100vh-70px)] grow'>
         {/* item은 목록이고, 선택한 목록을 selectedItem으로 관리합니다.
         selectedItem 값에 따라서 보여줄 컴포넌트 여기에 작성하시면 됩니다. */}
       </div>

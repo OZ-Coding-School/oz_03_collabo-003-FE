@@ -1,5 +1,6 @@
 import React from 'react';
 import BtnHeart from '../common/button/BtnHeart';
+import { useNavigate } from 'react-router-dom';
 
 interface MyPageImgCardProps {
   id: number;
@@ -24,12 +25,24 @@ const MyPageImgCard: React.FC<MyPageImgCardProps> = ({
   viewer,
   layout,
 }) => {
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    switch (layout) {
+      case 'user':
+        return;
+      case 'client':
+        return navigate(`/mypage/owner/${id}`);
+    }
+  };
+
   return (
     <div
       id={id.toString()}
-      className='card-container shadow-lg flex h-[360px] w-[380px] flex-col overflow-hidden rounded-md bg-white'
+      className='card-container shadow-lg flex min-h-[310px] min-w-[280px] cursor-pointer flex-col gap-6 overflow-hidden rounded-md bg-white hover:scale-105 xl:h-[330px] xl:w-[330px] 2xl:h-[360px] 2xl:w-[380px]'
+      onClick={clickHandler}
     >
-      <img src={image} alt={title} className='h-3/4 object-cover' />
+      <img src={image} alt={title} className='h-3/4 object-cover xl:h-3/5 2xl:h-[65%]' />
       <div className='text-box relative my-2'>
         <div className='title mx-4 mb-1'>
           <h2 className='mb-1 w-full truncate text-xl font-bold'>{title}</h2>

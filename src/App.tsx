@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import MyPage from './pages/MyPage';
 import MyPageOwner from './pages/MyPageOwner';
 import LogInPage from './pages/LogInPage';
+import MyPageOwnerSiteDetail from './pages/MyPageOwnerSiteDetail';
 // import SignUpPage from './pages/SignUpPage';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/mypage/owner' element={<MyPageOwner />} />
+        <Route path='/mypage/owner/:contentId' element={<MyPageOwnerSiteDetail />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />
       {/* <Route path='/signup' element={<SignUpPage />} /> */}

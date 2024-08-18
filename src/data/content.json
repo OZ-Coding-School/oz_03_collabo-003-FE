@@ -4,10 +4,7 @@
   "link": "https://www.figma.com/",
   "image": "https://via.placeholder.com/330x220",
   "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
-  "category": {
-    "id": 1,
-    "name": "업무"
-  },
+  "category": "업무",
   "review": {
     "id": 1,
     "user_id": 11,

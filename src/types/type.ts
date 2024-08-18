@@ -34,6 +34,7 @@ export interface Content {
   review?: {
     id: number;
     user_id: number;
+    comment: string;
     rating: number;
   };
   qna?: {

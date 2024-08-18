@@ -1,15 +1,46 @@
-import { useState } from 'react';
-import contentData from '../../data/content.json';
+import React, { useState } from 'react';
 import BtnMypage from '../common/button/BtnMypage';
+import { Content } from '../../types/type';
+import { useNavigate } from 'react-router-dom';
+//import axios, { AxiosError } from 'axios';
 
-const MypageOwnerItemDetail = () => {
-  const content = contentData;
+interface MypageOwnerItemDetailProps {
+  contentId: string;
+  content: Content;
+}
+
+const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId, content }) => {
   const [titleEditing, setTitleEditing] = useState<boolean>(false);
   const [descriptionEditing, setDescriptionEditing] = useState<boolean>(false);
   const [linkEditing, setLinkEditing] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>(content.title);
   const [descriptionValue, setDescriptionValue] = useState<string>(content.description);
   const [linkValue, setLinkValue] = useState<string>(content.link);
+  const navigate = useNavigate();
+
+  const fetchContentDeleteData = async () => {
+    console.log(contentId);
+    // try {
+    //   const response = await axios.delete(`/api/v1/contents/${contentId}`);
+    //   console.log(response);
+    // } catch (error) {
+    //   console.error(error);
+    //   if (error instanceof AxiosError && error.response) {
+    //     switch (error.response.status) {
+    //       case 500:
+    //         return console.error('server error', error);
+    //       case 403:
+    //         return console.error('not authenticated', error);
+    //       case 400:
+    //         return console.error('bad request', error);
+    //       default:
+    //         return console.error(error);
+    //     }
+    //   } else {
+    //     console.error(error)
+    //   }
+    // }
+  };
 
   const moveToDetailPage = () => {
     const result = confirm('Q&A 답변을 위한 사이트 상세페이지로 이동합니다.');
@@ -23,14 +54,14 @@ const MypageOwnerItemDetail = () => {
   const deleteContentHandler = () => {
     const result = confirm('해당 사이트를 삭제하시겠습니까?');
     if (result) {
-      // /api/v1/contents/{contentId}
+      fetchContentDeleteData();
     } else {
       return;
     }
   };
 
   const returnToList = () => {
-    // 목록 리스트 컴포넌트를 보여줘야 됨
+    navigate('/mypage/owner');
   };
 
   return (

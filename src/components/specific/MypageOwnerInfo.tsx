@@ -24,24 +24,27 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
     const numStr = phoneNumber.toString();
 
     switch (numStr.length) {
-      case 11:
+      case 11: {
         const part1 = numStr.slice(0, 3);
         const part2 = numStr.slice(3, 7);
         const part3 = numStr.slice(7);
         const formattedPhoneNumber11 = `${part1}-${part2}-${part3}`;
         return formattedPhoneNumber11;
-      case 10:
+      }
+      case 10: {
         const part4 = numStr.slice(0, 2);
         const part5 = numStr.slice(2, 6);
         const part6 = numStr.slice(6);
         const formattedPhoneNumber10 = `${part4}-${part5}-${part6}`;
         return formattedPhoneNumber10;
-      case 9:
+      }
+      case 9: {
         const part7 = numStr.slice(0, 2);
         const part8 = numStr.slice(2, 5);
         const part9 = numStr.slice(5);
         const formattedPhoneNumber9 = `${part7}-${part8}-${part9}`;
         return formattedPhoneNumber9;
+      }
       default:
         return phoneNumber;
     }

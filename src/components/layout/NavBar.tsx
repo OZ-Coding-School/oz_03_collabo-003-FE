@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BtnNav from '../common/button/BtnNav';
-import DropdownMenu from '../DropdownMenu';
+import NavBtn from '../common/button/NavBtn';
+import NavDropdownMenu from '../specific/NavDropdownMenu';
+import NavMenu from '../specific/NavMenu';
 import { categoryData } from '../../data/categoryData';
-import { promoData } from '../../data/promoData';
+import { userGuideData } from '../../data/userGuideData';
 import { Category } from '../../types/type';
 
 const NavBar = () => {
@@ -20,10 +21,18 @@ const NavBar = () => {
     setDropdownVisible(false);
   };
 
+  const menuItems = [
+    { label: '이용안내', data: userGuideData },
+    { label: '업무 툴', data: categoryData },
+    { label: 'AI 툴', data: categoryData },
+    { label: '정보 플랫폼', data: categoryData },
+    { label: '정부지원', data: categoryData },
+  ];
+
   return (
     <>
       <div
-        className='flex h-[70px] w-full items-center justify-between border-b border-gray-dc px-[100px]'
+        className='z-30 flex h-[70px] w-full items-center justify-between border-b border-gray-dc bg-white px-[100px]'
         onMouseLeave={handleMouseLeave}
       >
         <div className='flex items-center'>
@@ -34,34 +43,20 @@ const NavBar = () => {
             tabIndex={0}
             className='flex cursor-pointer items-center'
           >
-            <div className='h-[30px] w-[30px] rounded-[5px] bg-blue-primary'></div>
-            <h1 className='ml-[10px] text-[20px] font-bold text-blue-primary'>ALLTHE</h1>
+            <h1 className='ml-[10px] text-[25px] font-bold text-blue-primary'>ALLTHE</h1>
           </div>
-          <div className='ml-[30px] flex space-x-[20px]'>
-            <button
-              className='text-[14px] font-bold hover:text-blue-hover'
-              onMouseEnter={() => handleMouseEnter(categoryData)}
-            >
-              카테고리
-            </button>
-            <button
-              className='text-[14px] font-bold hover:text-blue-hover'
-              onMouseEnter={() => handleMouseEnter(promoData)}
-            >
-              프로모
-            </button>
-          </div>
+          <NavMenu menuItems={menuItems} onMenuItemMouseEnter={handleMouseEnter} />
         </div>
         <div className='flex space-x-[10px]'>
-          <BtnNav onClick={() => navigate('/login')} className='bg-white text-black hover:bg-white-f9'>
+          <NavBtn onClick={() => navigate('/login')} className='bg-white text-black hover:bg-white-f9'>
             로그인
-          </BtnNav>
-          <BtnNav onClick={() => navigate('/signup')} className='bg-blue-primary text-white hover:bg-blue-hover'>
+          </NavBtn>
+          <NavBtn onClick={() => navigate('/signup')} className='bg-blue-primary text-white hover:bg-blue-hover'>
             회원가입
-          </BtnNav>
+          </NavBtn>
         </div>
       </div>
-      <DropdownMenu
+      <NavDropdownMenu
         data={dropdownContent}
         isVisible={isDropdownVisible}
         onMouseEnter={() => setDropdownVisible(true)}

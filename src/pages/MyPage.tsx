@@ -9,12 +9,14 @@ const MyPage = () => {
   const [selectedItem, setSelectedItem] = useState(items[0]);
 
   return (
-    <div className='size-auo flex'>
+    <div className='flex size-auto'>
       <SideBar items={items} selectedItem={selectedItem} onSelectedItem={setSelectedItem} />
-      <div className='h-[calc(100vh-70px)] grow'>
-        {selectedItem === '찜 목록' && <MyPageCardContainer layout='user' />}
-        {selectedItem === '회원 정보' && <MyPageUserInfo />}
-        {selectedItem === '권한 관리' && <MyPageAuthz />}
+      <div className='w-[calc(100vw-292px)] grow'>
+        <div className='flex h-[calc(100vh-70px)] grow justify-center'>
+          {selectedItem === '찜 목록' && <MyPageCardContainer layout='user' />}
+          {selectedItem === '회원 정보' && <MyPageUserInfo />}
+          {selectedItem === '권한 관리' && <MyPageAuthz />}
+        </div>
       </div>
     </div>
   );

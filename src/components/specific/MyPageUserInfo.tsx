@@ -21,8 +21,8 @@ const MyPageUserInfo = () => {
   const grayRounded = 'rounded-lg border border-gray-dc bg-white p-4';
 
   return (
-    <div className='flex h-full flex-col items-center justify-center'>
-      <div className='mb-10 w-full max-w-4xl p-6'>
+    <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
+      <div className='mx-auto my-24 flex min-h-[480px] w-[580px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
             환영합니다, <strong>{userData.name}</strong>님

@@ -8,7 +8,7 @@ const MainPopularPlatform = () => {
   const [selectedCategory, setSelectedCategory] = useState('task');
 
   useEffect(() => {
-    const categories = ['task', 'ai', 'information_platform', 'government_support'];
+    const categories = ['업무', 'ai', '정보 플랫폼', '정부지원'];
     const currentIndex = categories.indexOf(selectedCategory);
     const nextIndex = (currentIndex + 1) % categories.length;
 
@@ -40,7 +40,7 @@ const MainPopularPlatform = () => {
       <div className='flex flex-col items-center justify-center gap-4 md:gap-6 xl:gap-8'>
         <div className='flex'>
           <button
-            className={`${tabStyle} ${selectedCategory === 'task' ? activeTabStyle : inactiveTabStyle}`}
+            className={`${tabStyle} ${selectedCategory === '업무' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('task')}
           >
             업무
@@ -52,14 +52,14 @@ const MainPopularPlatform = () => {
             AI
           </button>
           <button
-            className={`${tabStyle} ${selectedCategory === 'information_platform' ? activeTabStyle : inactiveTabStyle}`}
+            className={`${tabStyle} ${selectedCategory === '정보 플랫폼' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('information_platform')}
           >
             정보 플랫폼
           </button>
           <button
             className={`${tabStyle} ${selectedCategory === 'government_support' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('government_support')}
+            onClick={() => setSelectedCategory('정부지원')}
           >
             정부지원
           </button>

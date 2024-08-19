@@ -5,7 +5,7 @@ import { Content } from '../types/type';
 import contentData from '../data/content.json';
 import MypageOwnerItemDetail from '../components/specific/MypageOwnerItemDetail';
 
-const MyPageOwnerSiteDetail = () => {
+const OwnerSiteDetailPage = () => {
   const { contentId } = useParams<string>();
   const [content, setContent] = useState<Content | null>(null);
 
@@ -42,4 +42,4 @@ const MyPageOwnerSiteDetail = () => {
   );
 };
 
-export default MyPageOwnerSiteDetail;
+export default OwnerSiteDetailPage;

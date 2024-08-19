@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
-import googleLogo from '../../public/images/google-logo.png';
-import kakaoLogo from '../../public/images/kakao-logo.png';
-import naverLogo from '../../public/images/naver-logo.png';
 
 interface LogInInputs {
   email: string;
@@ -35,7 +32,7 @@ const LogInPage: React.FC = () => {
     return axios.post('/api/v1/users/login', data);
   };
 
-  const onSubmit: SubmitHandler<LogInInputs> = async (data) => {
+  const onSubmit: SubmitHandler<LogInInputs> = async (data: LogInInputs) => {
     setIsLoading(true);
     try {
       const response = await loginUser(data);
@@ -58,28 +55,42 @@ const LogInPage: React.FC = () => {
             });
             break;
           default:
-            // 기타 에러 처리
+            // 기타 응답 처리
             console.error('알 수 없는 에러:', errorMessage);
             break;
         }
       } else {
         // 서버 응답 없음
         console.error('로그인 에러:', error.message);
-        setError('general', {
-          type: 'manual',
-          message: '로그인 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.',
-        });
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  const apiUrl = import.meta.env.API_URL || 'http://localhost:5173';
+  // const googleRedirectUrl =
+  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/google?redirect_uri=${window.location.origin}${import.meta.env.GOOGLE_REDIRECT_PATH}` ||
+  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/google`;
+  // const kakaoRedirectUrl =
+  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/kakao?redirect_uri=${window.location.origin}${import.meta.env.KAKAO_REDIRECT_PATH}` ||
+  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/kakao`;
+  // const naverRedirectUrl =
+  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/naver?redirect_uri=${window.location.origin}${import.meta.env.NAVER_REDIRECT_PATH}` ||
+  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/naver`;
+
+  const googleRedirectUrl =
+    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/google` ||
+    `http://localhost:5173${import.meta.env.LOG_IN_API}/google`;
+  const kakaoRedirectUrl =
+    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/kakao` ||
+    `http://localhost:5173${import.meta.env.LOG_IN_API}/kakao`;
+  const naverRedirectUrl =
+    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/naver` ||
+    `http://localhost:5173${import.meta.env.LOG_IN_API}/naver`;
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
-      <a href='/' className='mb-6 h-[50px] w-[166px] text-[40px] font-bold text-blue-primary'>
+      <a href='/' className='mb-6 h-[50px] w-[150px] text-[40px] font-bold text-blue-primary'>
         ALLTHE
       </a>
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-lg rounded-lg p-8'>
@@ -132,21 +143,9 @@ const LogInPage: React.FC = () => {
       <div className='mb-8 mt-4 text-center'>
         <h2 className='text-l mb-4 font-bold'>소셜 로그인</h2>
         <div className='flex justify-center'>
-          <SocialLoginButton
-            provider='Google'
-            logo={googleLogo}
-            redirectUrl={`${apiUrl}/api/v1/users/login/google?redirect_uri=${window.location.origin}/accounts/google/login/callback/`}
-          />
-          <SocialLoginButton
-            provider='Kakao'
-            logo={kakaoLogo}
-            redirectUrl={`${apiUrl}/api/v1/users/login/kakao?redirect_uri=${window.location.origin}/accounts/kakao/login/callback/`}
-          />
-          <SocialLoginButton
-            provider='Naver'
-            logo={naverLogo}
-            redirectUrl={`${apiUrl}/api/v1/users/login/naver?redirect_uri=${window.location.origin}/accounts/naver/login/callback/`}
-          />
+          <SocialLoginButton provider='Google' logo='/images/google-logo.png' redirectUrl={googleRedirectUrl} />
+          <SocialLoginButton provider='Kakao' logo='/images/kakao-logo.png' redirectUrl={kakaoRedirectUrl} />
+          <SocialLoginButton provider='Naver' logo='/images/naver-logo.png' redirectUrl={naverRedirectUrl} />
         </div>
       </div>
       <a href='/signup' className='hover:text-blue-primary'>

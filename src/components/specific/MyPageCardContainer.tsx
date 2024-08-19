@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MyPageImgCard from './MyPageImgCard';
 import Pagination from '../common/Pagination';
 import allCards from '../../data/siteCard.json';
+import BtnMypage from '../common/button/BtnMypage';
 
 interface MyPageCardContainerProps {
   layout: 'user' | 'client'; // user = 찜 하트 활성화, client = 찜 하트 비활성화
@@ -19,15 +20,32 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const sitePlusBtn = () => {
+    // 사이트 등록 페이지로 연결해야 됨
+  };
+
   return (
     <div className='mx-15 my-10 w-full'>
       {allCards.length > 0 ? (
         <>
-          <div className='m-auto grid w-[1200px] grid-cols-3 gap-6'>
-            <div className='col-span-3 text-lg'>
-              <span className='text-gray-75'>전체</span>
-              <span className='ml-1 font-semibold text-blue-accent'>{allCards.length}</span>
-            </div>
+          <div className='m-auto grid w-[860px] grid-cols-3 gap-4 xl:w-[1030px] xl:gap-5 2xl:w-[1200px] 2xl:gap-6'>
+            {layout === 'user' && (
+              <div className='col-span-3 text-lg'>
+                <span className='text-gray-75'>전체</span>
+                <span className='ml-1 font-semibold text-blue-accent'>{allCards.length}</span>
+              </div>
+            )}
+            {layout === 'client' && (
+              <div className='col-span-3 flex justify-between'>
+                <div className='text-lg'>
+                  <span className='text-gray-75'>전체</span>
+                  <span className='ml-1 font-semibold text-blue-accent'>{allCards.length}</span>
+                </div>
+                <BtnMypage onClick={sitePlusBtn} className='mx-2 w-[160px] p-2 text-sm font-semibold'>
+                  + 사이트 등록하기
+                </BtnMypage>
+              </div>
+            )}
             {currentCards.map((card) => (
               <MyPageImgCard key={card.id} {...card} layout={layout} />
             ))}

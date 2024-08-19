@@ -6,6 +6,8 @@ import MyPageOwner from './pages/MyPageOwner';
 import LogInPage from './pages/LogInPage';
 import MyPageOwnerSiteDetail from './pages/MyPageOwnerSiteDetail';
 // import SignUpPage from './pages/SignUpPage';
+import SiteRegistrationPage from './pages/SiteRegistrationPage';
+import AnalyzePayMain from './components/specific/AnalyzePayMain';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/mypage/owner' element={<MyPageOwner />} />
+        <Route path='/register' element={<SiteRegistrationPage />} />
+        <Route path='/analyze' element={<AnalyzePayMain />} />
         <Route path='/mypage/owner/:contentId' element={<MyPageOwnerSiteDetail />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />

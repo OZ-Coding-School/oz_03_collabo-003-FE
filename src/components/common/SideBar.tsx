@@ -25,7 +25,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
   return (
     <div className='relative flex'>
       {isOpen && (
-        <div className='relative flex h-[calc(100vh-70px)] min-w-[292px] flex-col border-r border-r-gray-dc'>
+        <div className='relative z-10 flex h-[calc(100vh-70px)] min-w-[292px] flex-col border-r border-r-gray-dc bg-white-f9'>
           <span className='flex min-h-[90px] items-center justify-center border-b border-b-gray-dc text-[18px] font-semibold'>
             {user.name} 님
           </span>
@@ -43,7 +43,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
           {user.role === 'client' && pathname === '/mypage/owner' && (
             <BtnMypage
               onClick={() => navigate('/mypage')}
-              className='mb-[50px] min-h-[44px] min-w-[170px] self-center text-[16px]'
+              className='mb-[50px] min-h-[40px] min-w-[160px] self-center text-[14px] font-semibold'
             >
               이용자로 돌아가기
             </BtnMypage>

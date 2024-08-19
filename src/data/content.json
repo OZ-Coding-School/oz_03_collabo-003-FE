@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "title": "Figma(피그마)",
+  "link": "https://www.figma.com/",
+  "image": "https://via.placeholder.com/330x220",
+  "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
+  "category": "업무",
+  "review": {
+    "id": 1,
+    "user_id": 11,
+    "comment": "팀 단위의 UX/UI 디자인 작업에서 매우 유용하게 사용하고 있습니다. 여러 명의 사용자가 동시에 하나의 프로젝트에서 작업할 수 있도록 해주는 실시간 협업 기능이 가능한 점이 매우 강력한 장점이라고 생각합니다.",
+    "rating": 4
+  },
+  "qna": {
+    "id": 1,
+    "user_id": 11,
+    "content": "전체 서비스를 무료로 이용 가능한가요?"
+  },
+  "viewCount": 267,
+  "likeCount": 51
+}

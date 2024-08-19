@@ -8,6 +8,8 @@ import OwnerSiteDetailPage from './pages/OwnerSiteDetailPage';
 import AnalystMyPage from './pages/AnalystMyPage';
 
 // import SignUpPage from './pages/SignUpPage';
+import SiteRegistrationPage from './pages/SiteRegistrationPage';
+import AnalyzePayMain from './components/specific/AnalyzePayMain';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='/mypage' element={<MyPage />} />.
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
+        <Route path='/register' element={<SiteRegistrationPage />} />
+        <Route path='/analyze' element={<AnalyzePayMain />} />
         <Route path='/mypage/owner/:contentId' element={<OwnerSiteDetailPage />} />
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />
       </Route>

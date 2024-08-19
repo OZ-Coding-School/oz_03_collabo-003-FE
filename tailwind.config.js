@@ -31,8 +31,8 @@ export default {
       red: '#E4381E', // 경고/위험 알림, 취소 버튼
     },
     boxShadow: {
-      'custom-light': '0px 0px 4px 0px rgba(0, 0, 0, 0.20)', //아이콘-연한 그림자
-      'custom-dark': '0px 0px 4px 0px rgba(0, 0, 0, 0.40)', //버튼-진한 그림자
+      'custom-light': '0px 0px 4px 0px rgba(0, 0, 0, 0.10)', //아이콘-연한 그림자
+      'custom-dark': '0px 0px 4px 0px rgba(0, 0, 0, 0.30)', //버튼-진한 그림자
       'custom-down': '0px 4px 4px 0px rgba(0, 0, 0, 0.20)', // 아래쪽에만 그림자
     },
     keyframes: {
@@ -41,7 +41,9 @@ export default {
         '100%': { transform: 'translateY(0)', opacity: '1' },
       },
     },
-    animation: { slideDown: 'slideDown 0.3s ease-out forwards' },
+    animation: {
+      slideDown: 'slideDown 0.3s ease-out forwards',
+    },
   },
   plugins: [],
 };

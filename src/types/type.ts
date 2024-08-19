@@ -10,13 +10,11 @@ export interface CategoryItem {
   label: string;
   href: string;
 }
-
 export interface Category {
   title: string;
   href: string;
   items: CategoryItem[];
 }
-
 export interface DropdownMenuProps {
   data: Category[];
   isVisible: boolean;
@@ -43,3 +41,11 @@ export interface User {
   phoneNumber: number | null;
   points: number;
 }
+
+export type PaymentBtnProps = {
+  methodId: string;
+  imgSrc: string;
+  name: string;
+  isSelected: boolean;
+  onClick: (methodId: string) => void;
+};

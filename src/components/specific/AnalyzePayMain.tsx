@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 const AnalyzePayMain = () => {
   return (
     <div className='flex h-full flex-col items-center'>

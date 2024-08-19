@@ -41,7 +41,7 @@ const MainPopularPlatform = () => {
         <div className='flex'>
           <button
             className={`${tabStyle} ${selectedCategory === '업무' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('task')}
+            onClick={() => setSelectedCategory('업무')}
           >
             업무
           </button>
@@ -53,12 +53,12 @@ const MainPopularPlatform = () => {
           </button>
           <button
             className={`${tabStyle} ${selectedCategory === '정보 플랫폼' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('information_platform')}
+            onClick={() => setSelectedCategory('정보 플랫폼')}
           >
             정보 플랫폼
           </button>
           <button
-            className={`${tabStyle} ${selectedCategory === 'government_support' ? activeTabStyle : inactiveTabStyle}`}
+            className={`${tabStyle} ${selectedCategory === '정부지원' ? activeTabStyle : inactiveTabStyle}`}
             onClick={() => setSelectedCategory('정부지원')}
           >
             정부지원

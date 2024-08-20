@@ -1,31 +1,32 @@
 // import React from 'react';
-import BtnHeart from '../components/common/button/BtnHeart';
-import BtnMypage from '../components/common/button/BtnMypage';
-import detailedInfo from '../data/detailedInfo.json';
+import DetailedContents from '../components/specific/DetailedContents.tsx';
+import DetailedTitle from '../components/specific/DetailedTitle.tsx';
+import { useParams } from 'react-router-dom';
+import contentData from '../data/detailedContents.json';
 
 const DetailedPage = () => {
-  // const handleLikeClick = () => {};
-  const handleJoinClick = () => {};
+  const { contentId } = useParams<{ contentId: string }>();
+
+  const numericContentId = Number(contentId);
+
+  const content = contentData.find((item) => item.id === numericContentId);
+
+  if (!content) {
+    return <div>해당 콘텐츠를 찾을 수 없습니다.</div>;
+  }
 
   return (
     <div className='detail-container'>
       <div className='img-box h-[60vh] bg-gray-c4'>
-        <img src='../images/site-sample-img.png' className='m-auto h-full'></img>
+        <img src={content.image} alt={content.title} className='m-auto h-full'></img>
       </div>
       <div className='site-title-box'>
         <div>
-          <h2 className=''>{detailedInfo.title}</h2>
-          {/* <BtnMypage onClick={handleLikeClick}>ㅇ</BtnMypage> */}
-          <BtnMypage onClick={handleJoinClick}>Join</BtnMypage>
-          <BtnHeart />
+          <DetailedTitle content={content} />
         </div>
-        <p></p>
       </div>
-      <div className='side-bar'></div>
-      <div className='detail-box'>
-        <div className='detail'></div>
-        <div className='QnA'></div>
-        <div className='review'></div>
+      <div>
+        <DetailedContents content={content} />
       </div>
     </div>
   );

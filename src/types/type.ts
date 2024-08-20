@@ -10,18 +10,28 @@ export interface CategoryItem {
   label: string;
   href: string;
 }
-
 export interface Category {
   title: string;
   href: string;
   items: CategoryItem[];
 }
-
 export interface DropdownMenuProps {
   data: Category[];
   isVisible: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+}
+
+export interface QnA {
+  id: number;
+  user_id: number;
+  content: string;
+  created_at: string;
+  answer?: {
+    admin_id: number;
+    content: string;
+    created_at: string;
+  } | null;
 }
 
 export interface Content {
@@ -31,6 +41,17 @@ export interface Content {
   image: string;
   description: string;
   category: string;
+  detailedInfo?: string;
+  review?: {
+    id: number;
+    user_id: number;
+    user_name?: string;
+    comment: string;
+    rating: number;
+  };
+  qna?: QnA;
+  viewCount?: number;
+  likeCount?: number;
 }
 
 export interface User {
@@ -43,3 +64,11 @@ export interface User {
   phoneNumber: number | null;
   points: number;
 }
+
+export type PaymentBtnProps = {
+  methodId: string;
+  imgSrc: string;
+  name: string;
+  isSelected: boolean;
+  onClick: (methodId: string) => void;
+};

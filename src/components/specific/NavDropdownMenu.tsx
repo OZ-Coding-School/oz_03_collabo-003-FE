@@ -1,13 +1,12 @@
-// DropdownMenu.tsx
 import React from 'react';
-import { DropdownMenuProps } from '../types/type';
+import { DropdownMenuProps } from '../../types/type';
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, isVisible, onMouseEnter, onMouseLeave }) => {
+const NavDropdownMenu: React.FC<DropdownMenuProps> = ({ data, isVisible, onMouseEnter, onMouseLeave }) => {
   if (!isVisible) return null;
 
   return (
     <div
-      className={`absolute left-0 top-[70px] w-full bg-white shadow-custom-down transition-all duration-300 ${
+      className={`absolute left-0 top-[70px] z-30 w-full bg-white pl-[205px] shadow-custom-down transition-all duration-300 ${
         isVisible ? 'animate-slideDown' : 'hidden'
       }`}
       onMouseEnter={onMouseEnter}
@@ -37,4 +36,4 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ data, isVisible, onMouseEnt
   );
 };
 
-export default DropdownMenu;
+export default NavDropdownMenu;

@@ -57,7 +57,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
-      <div className='mx-auto my-24 flex min-w-[480px] flex-col gap-6 sm:max-w-[580px] md:max-w-[680px]'>
+      <div className='mx-auto my-24 flex min-w-[480px] flex-col gap-6 px-4 sm:max-w-[580px] md:max-w-[680px]'>
         <div className='flex items-end justify-between border-b-2 border-b-gray-75 p-1'>
           <div className='flex gap-2'>
             <span className='text-[24px] text-gray-46'>환영합니다,</span>

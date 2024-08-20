@@ -20,7 +20,7 @@ function App() {
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
         <Route path='/register' element={<SiteRegistrationPage />} />
         <Route path='/analyze' element={<AnalyzePayMain />} />
-        <Route path='/mypage/owner/:contentId' element={<OwnerSiteDetailPage />} />
+        <Route path='/mypage/owner/:id' element={<OwnerSiteDetailPage />} />
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />

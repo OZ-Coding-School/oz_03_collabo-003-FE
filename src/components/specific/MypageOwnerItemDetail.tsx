@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import BtnMypage from '../common/button/BtnMypage';
 import { Content } from '../../types/type';
 import { useNavigate } from 'react-router-dom';
+import { useAnalysisRequestSite } from '../../store/store';
+import WhiteBtn from '../common/button/WhiteBtn';
 //import axios, { AxiosError } from 'axios';
 
 interface MypageOwnerItemDetailProps {
-  contentId: string;
+  contentId: number;
   content: Content;
 }
 
@@ -17,8 +19,9 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const [descriptionValue, setDescriptionValue] = useState<string>(content.description);
   const [linkValue, setLinkValue] = useState<string>(content.link);
   const navigate = useNavigate();
+  const setContent = useAnalysisRequestSite((state) => state.setContent);
 
-  const fetchContentDeleteData = async () => {
+  const deletedContent = async () => {
     console.log(contentId);
     // try {
     //   const response = await axios.delete(`/api/v1/contents/${contentId}`);
@@ -45,7 +48,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const moveToDetailPage = () => {
     const result = confirm('Q&A 답변을 위한 사이트 상세페이지로 이동합니다.');
     if (result) {
-      // 사이트 상세 페이지로 연결
+      navigate(`/contents/${contentId}`);
     } else {
       return;
     }
@@ -54,7 +57,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const deleteContentHandler = () => {
     const result = confirm('해당 사이트를 삭제하시겠습니까?');
     if (result) {
-      fetchContentDeleteData();
+      deletedContent();
     } else {
       return;
     }
@@ -64,12 +67,25 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
     navigate('/mypage/owner');
   };
 
+  const analysisRequestMySite = () => {
+    const result = confirm('해당 사이트에 대한 분석을 의뢰하시겠습니까? 확인을 누르시면 결제 페이지로 이동합니다.');
+    if (result) {
+      setContent(contentId);
+      navigate('/analyze');
+    } else {
+      return;
+    }
+  };
+
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
       <section className='mx-auto my-10 flex w-[810px] flex-col items-center gap-10'>
-        <div className='flex w-full items-center'>
-          <BtnMypage className='min-h-[38px] w-[170px] text-sm font-semibold' onClick={returnToList}>
+        <div className='flex w-full items-center justify-between'>
+          <WhiteBtn className='min-h-[38px] w-[170px] text-sm font-semibold text-gray-46' onClick={returnToList}>
             &lt;&lt; 목록으로 돌아가기
+          </WhiteBtn>
+          <BtnMypage className='min-h-[38px] w-[170px] text-sm font-semibold' onClick={analysisRequestMySite}>
+            사이트 분석 의뢰하기
           </BtnMypage>
         </div>
         <div className='flex w-[400px] flex-col'>

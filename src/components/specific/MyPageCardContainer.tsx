@@ -3,12 +3,14 @@ import MyPageImgCard from './MyPageImgCard';
 import Pagination from '../common/Pagination';
 import allCards from '../../data/siteCard.json';
 import BtnMypage from '../common/button/BtnMypage';
+import { useNavigate } from 'react-router-dom';
 
 interface MyPageCardContainerProps {
   layout: 'user' | 'client'; // user = 찜 하트 활성화, client = 찜 하트 비활성화
 }
 
 const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 
@@ -21,12 +23,12 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const sitePlusBtn = () => {
-    // 사이트 등록 페이지로 연결해야 됨
+    navigate('/register');
   };
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
-      <div className='mx-15 my-10 w-full'>
+      <div className='mx-15 my-10 w-full px-4'>
         {allCards.length > 0 ? (
           <>
             <div className='m-auto grid w-[860px] grid-cols-3 gap-4 xl:w-[1030px] xl:gap-5 2xl:w-[1200px] 2xl:gap-6'>

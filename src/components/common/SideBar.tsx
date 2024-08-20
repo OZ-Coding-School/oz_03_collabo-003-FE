@@ -52,7 +52,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
         </div>
       )}
       <button
-        className={`absolute flex h-[35px] w-[40px] items-center justify-center border-b border-r border-b-gray-dc border-r-gray-dc ${arrowLocation}`}
+        className={`absolute z-10 flex h-[35px] w-[40px] items-center justify-center border-b border-r border-b-gray-dc border-r-gray-dc bg-white-f9 ${arrowLocation}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (

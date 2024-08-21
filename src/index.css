@@ -27,6 +27,8 @@
     font-weight: 400;
     font-color: #333333;
     background-color: #f9f9f9;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   input {

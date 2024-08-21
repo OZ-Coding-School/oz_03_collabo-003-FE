@@ -4,8 +4,8 @@
     "title": "Figma(피그마)",
     "link": "https://www.figma.com/",
     "image": "https://via.placeholder.com/330x220",
-    "description": "가장 유명하고 널리 쓰이는 디자인 툴이에요. 개발자, 디자이너, 기획자 협력하여 각종 프레임을 제작할 수 있어요.",
-    "category": "task"
+    "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
+    "category": "업무"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "link": "https://pixabay.com/",
     "image": "https://via.placeholder.com/330x220",
     "description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "link": "https://gamma.app/",
     "image": "https://via.placeholder.com/330x220",
     "description": "프레젠테이션, 웹사이트 등을 몇 초만에 무제한으로 만들 수 있습니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 4,
@@ -29,15 +29,15 @@
     "link": "https://www.airtable.com/",
     "image": "https://via.placeholder.com/330x220",
     "description": "팀과 협업하여 제작이 가능한 웹 사이트입니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 5,
     "title": "Figma(피그마)",
     "link": "https://www.figma.com/",
     "image": "https://via.placeholder.com/330x220",
-    "description": "가장 유명하고 널리 쓰이는 디자인 툴이에요. 개발자, 디자이너, 기획자 협력하여 각종 프레임을 제작할 수 있어요.",
-    "category": "task"
+    "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
+    "category": "업무"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "link": "https://pixabay.com/",
     "image": "https://via.placeholder.com/330x220",
     "description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "link": "https://gamma.app/",
     "image": "https://via.placeholder.com/330x220",
     "description": "프레젠테이션, 웹사이트 등을 몇 초만에 무제한으로 만들 수 있습니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "link": "https://www.airtable.com/",
     "image": "https://via.placeholder.com/330x220",
     "description": "팀과 협업하여 제작이 가능한 웹 사이트입니다.",
-    "category": "task"
+    "category": "업무"
   },
   {
     "id": 9,
@@ -93,7 +93,7 @@
     "link": "https://www.startup-plus.kr/",
     "image": "https://via.placeholder.com/330x220",
     "description": "서울 창업의 모든 것",
-    "category": "information_platform"
+    "category": "정보 플랫폼"
   },
   {
     "id": 13,
@@ -101,7 +101,7 @@
     "link": "https://dacon.io/",
     "image": "https://via.placeholder.com/330x220",
     "description": "개발자 공모전, 경진대회 플랫폼",
-    "category": "information_platform"
+    "category": "정보 플랫폼"
   },
   {
     "id": 14,
@@ -109,7 +109,7 @@
     "link": "https://bonusjob.co.kr/",
     "image": "https://via.placeholder.com/330x220",
     "description": "취업하면 보너스 축하금을 주는 채용 사이트",
-    "category": "information_platform"
+    "category": "정보 플랫폼"
   },
   {
     "id": 15,
@@ -117,7 +117,7 @@
     "link": "https://www.all-con.co.kr/",
     "image": "https://via.placeholder.com/330x220",
     "description": "한국경제신문이 운영하는 각종 공모전 사이트",
-    "category": "information_platform"
+    "category": "정보 플랫폼"
   },
   {
     "id": 16,
@@ -125,7 +125,7 @@
     "link": "https://www.wanted.co.kr/",
     "image": "https://via.placeholder.com/330x220",
     "description": "채용정보 플랫폼",
-    "category": "information_platform"
+    "category": "정보 플랫폼"
   },
   {
     "id": 17,
@@ -133,7 +133,7 @@
     "link": "https://www.kua.go.kr/uaptm010/selectMain.do",
     "image": "https://via.placeholder.com/330x220",
     "description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
-    "category": "government_support"
+    "category": "정부지원"
   },
   {
     "id": 18,
@@ -141,7 +141,7 @@
     "link": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
     "image": "https://via.placeholder.com/330x220",
     "description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
-    "category": "government_support"
+    "category": "정부지원"
   },
   {
     "id": 19,
@@ -149,7 +149,7 @@
     "link": "https://idolbom.go.kr/front/",
     "image": "https://via.placeholder.com/330x220",
     "description": "시간제, 양아종일제 돌봄 등 아이돌봄서비스 온라인 신청",
-    "category": "government_support"
+    "category": "정부지원"
   },
   {
     "id": 20,
@@ -157,7 +157,7 @@
     "link": "https://www.bojo.go.kr/bojo.do",
     "image": "https://via.placeholder.com/330x220",
     "description": "보조금 소개, 맞춤형보조사업, 공모사업 찾기, 사용자매뉴얼 안내",
-    "category": "government_support"
+    "category": "정부지원"
   },
   {
     "id": 21,
@@ -165,6 +165,6 @@
     "link": "https://www.kua.go.kr/uaptm010/selectMain.do",
     "image": "https://via.placeholder.com/330x220",
     "description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
-    "category": "government_support"
+    "category": "정부지원"
   }
 ]

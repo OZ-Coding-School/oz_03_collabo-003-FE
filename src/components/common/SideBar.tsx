@@ -25,7 +25,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
   return (
     <div className='relative flex'>
       {isOpen && (
-        <div className='relative z-10 flex h-[calc(100vh-70px)] min-w-[292px] flex-col border-r border-r-gray-dc bg-white-f9'>
+        <div className='relative z-10 flex min-w-[292px] flex-col border-r border-r-gray-dc bg-white-f9'>
           <span className='flex min-h-[90px] items-center justify-center border-b border-b-gray-dc text-[18px] font-semibold'>
             {user.name} 님
           </span>
@@ -40,10 +40,11 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
               </li>
             ))}
           </ul>
-          {user.role === 'client' && pathname === '/mypage/owner' && (
+          {((user.role === 'client' && pathname === '/mypage/owner') ||
+            (user.role === 'analyst' && pathname === '/mypage/analyst')) && (
             <BtnMypage
               onClick={() => navigate('/mypage')}
-              className='mb-[50px] min-h-[40px] min-w-[160px] self-center text-[14px] font-semibold'
+              className='absolute bottom-[60px] min-h-[40px] min-w-[160px] self-center text-[14px] font-semibold'
             >
               이용자로 돌아가기
             </BtnMypage>
@@ -51,7 +52,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
         </div>
       )}
       <button
-        className={`absolute flex h-[35px] w-[40px] items-center justify-center border-b border-r border-b-gray-dc border-r-gray-dc ${arrowLocation}`}
+        className={`absolute z-10 flex h-[35px] w-[40px] items-center justify-center border-b border-r border-b-gray-dc border-r-gray-dc bg-white-f9 ${arrowLocation}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (

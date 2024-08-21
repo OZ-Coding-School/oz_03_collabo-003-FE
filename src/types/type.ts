@@ -72,3 +72,9 @@ export type PaymentBtnProps = {
   isSelected: boolean;
   onClick: (methodId: string) => void;
 };
+
+export type AnalysisRequestSiteState = {
+  contentId: number | null;
+  setContent: (id: number) => void;
+  clearContent: () => void;
+};

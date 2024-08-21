@@ -1,0 +1,42 @@
+[
+  {
+    "contentId": 1,
+    "clientId": 1,
+    "accepted": [
+      {
+        "analystId": 11,
+        "analystName": "분석가11"
+      },
+      {
+        "analystId": 12,
+        "analystName": "분석가12"
+      },
+      {
+        "analystId": 13,
+        "analystName": "분석가13"
+      }
+    ],
+    "selected": [
+      {
+        "analystId": 11,
+        "analystName": "분석가11"
+      }
+    ],
+    "title": "Figma(피그마)",
+    "link": "https://www.figma.com/",
+    "image": "https://via.placeholder.com/330x220",
+    "created_at": "2024-08-02T16:40:20Z",
+    "scheduled_at": "2024-09-18T00:00:00Z"
+  },
+  {
+    "contentId": 2,
+    "clientId": 1,
+    "accepted": [],
+    "selected": [],
+    "title": "Pixabay(픽사베이)",
+    "link": "https://pixabay.com/",
+    "image": "https://via.placeholder.com/330x220",
+    "created_at": "2024-08-11T16:40:20Z",
+    "scheduled_at": "2024-08-31T00:00:00Z"
+  }
+]

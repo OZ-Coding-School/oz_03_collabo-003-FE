@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { GoHeartFill, GoHeart } from 'react-icons/go';
 
-const BtnHeart: React.FC = () => {
+interface BtnHeartProps {
+  className?: string;
+}
+const BtnHeart: React.FC<BtnHeartProps> = ({ className = '' }) => {
   const [isToggled, setIsToggled] = useState(false);
 
   const handleToggle = () => {
@@ -9,7 +12,7 @@ const BtnHeart: React.FC = () => {
   };
 
   return (
-    <button onClick={handleToggle} className='text-2xl'>
+    <button onClick={handleToggle} className={`${className}`}>
       {isToggled ? <GoHeartFill className='text-blue-primary' /> : <GoHeart />}
     </button>
   );

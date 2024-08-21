@@ -28,8 +28,10 @@ const LogInPage: React.FC = () => {
     formState: { errors },
   } = useForm<LogInInputs>();
 
+  const baseUrl = import.meta.env.VITE_API_URL;
+
   const loginUser = (data: LogInInputs) => {
-    return axios.post('/api/v1/users/login', data);
+    return axios.post(`${baseUrl}/api/v1/users/login`, data, { withCredentials: true });
   };
 
   const onSubmit: SubmitHandler<LogInInputs> = async (data: LogInInputs) => {
@@ -55,38 +57,20 @@ const LogInPage: React.FC = () => {
             });
             break;
           default:
-            // 기타 응답 처리
             console.error('알 수 없는 에러:', errorMessage);
             break;
         }
       } else {
-        // 서버 응답 없음
-        console.error('로그인 에러:', error.message);
+        console.error('로그인 에러:', error.message || '알 수 없는 에러');
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  // const googleRedirectUrl =
-  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/google?redirect_uri=${window.location.origin}${import.meta.env.GOOGLE_REDIRECT_PATH}` ||
-  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/google`;
-  // const kakaoRedirectUrl =
-  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/kakao?redirect_uri=${window.location.origin}${import.meta.env.KAKAO_REDIRECT_PATH}` ||
-  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/kakao`;
-  // const naverRedirectUrl =
-  //   `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/naver?redirect_uri=${window.location.origin}${import.meta.env.NAVER_REDIRECT_PATH}` ||
-  //   `http://localhost:5173${import.meta.env.LOG_IN_API}/naver`;
-
-  const googleRedirectUrl =
-    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/google` ||
-    `http://localhost:5173${import.meta.env.LOG_IN_API}/google`;
-  const kakaoRedirectUrl =
-    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/kakao` ||
-    `http://localhost:5173${import.meta.env.LOG_IN_API}/kakao`;
-  const naverRedirectUrl =
-    `${import.meta.env.API_URL}${import.meta.env.LOG_IN_API}/naver` ||
-    `http://localhost:5173${import.meta.env.LOG_IN_API}/naver`;
+  const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
+  const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
+  const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
@@ -143,14 +127,23 @@ const LogInPage: React.FC = () => {
       <div className='mb-8 mt-4 text-center'>
         <h2 className='text-l mb-4 font-bold'>소셜 로그인</h2>
         <div className='flex justify-center'>
-          <SocialLoginButton provider='Google' logo='/images/google-logo.png' redirectUrl={googleRedirectUrl} />
-          <SocialLoginButton provider='Kakao' logo='/images/kakao-logo.png' redirectUrl={kakaoRedirectUrl} />
-          <SocialLoginButton provider='Naver' logo='/images/naver-logo.png' redirectUrl={naverRedirectUrl} />
+          <SocialLoginButton provider='Google' logo='/images/google-logo.png' redirectUrl={googleLoginUrl} />
+          <SocialLoginButton provider='Kakao' logo='/images/kakao-logo.png' redirectUrl={kakaoLoginUrl} />
+          <SocialLoginButton provider='Naver' logo='/images/naver-logo.png' redirectUrl={naverLoginUrl} />
         </div>
       </div>
-      <a href='/signup' className='hover:text-blue-primary'>
-        이메일로 회원가입하기
-      </a>
+      <div className='mt-4 flex space-x-4'>
+        <a href='/signup' className='hover:text-blue-primary'>
+          이메일로 회원가입하기
+        </a>
+        <span>|</span>
+        {/* 비밀번호 찾을 때, 일단 이메일로 링크를 보내는 식으로 코드 작성했습니다.          
+        근데 그 링크가 어떤 방식으로 동작할지 아직 몰라요.... 저도 알고 싶어요....          
+        일단 비밀번호 찾기 페이지는 만들어 놨습니다..*/}
+        <a href='/password-reset' className='hover:text-blue-primary'>
+          비밀번호 찾기
+        </a>
+      </div>
     </div>
   );
 };

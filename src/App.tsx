@@ -5,10 +5,11 @@ import DetailedPage from './pages/DetailedPage';
 import MyPage from './pages/MyPage';
 import OwnerMyPage from './pages/OwnerMyPage';
 import LogInPage from './pages/LogInPage';
+import SignUpPage from './pages/SignUpPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 import OwnerSiteDetailPage from './pages/OwnerSiteDetailPage';
 import AnalystMyPage from './pages/AnalystMyPage';
 
-// import SignUpPage from './pages/SignUpPage';
 import SiteRegistrationPage from './pages/SiteRegistrationPage';
 import AnalyzePayMain from './components/specific/AnalyzePayMain';
 
@@ -26,7 +27,8 @@ function App() {
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />
-      {/* <Route path='/signup' element={<SignUpPage />} /> */}
+      <Route path='/signup' element={<SignUpPage />} />
+      <Route path='/password-reset' element={<PasswordResetPage />} />
     </Routes>
   );
 }

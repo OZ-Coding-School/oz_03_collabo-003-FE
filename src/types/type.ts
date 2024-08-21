@@ -22,6 +22,18 @@ export interface DropdownMenuProps {
   onMouseLeave: () => void;
 }
 
+export interface QnA {
+  id: number;
+  user_id: number;
+  content: string;
+  created_at: string;
+  answer?: {
+    admin_id: number;
+    content: string;
+    created_at: string;
+  } | null;
+}
+
 export interface Content {
   id: number;
   title: string;
@@ -29,17 +41,15 @@ export interface Content {
   image: string;
   description: string;
   category: string;
+  detailedInfo?: string;
   review?: {
     id: number;
     user_id: number;
+    user_name?: string;
     comment: string;
     rating: number;
   };
-  qna?: {
-    id: number;
-    user_id: number;
-    content: string;
-  };
+  qna?: QnA;
   viewCount?: number;
   likeCount?: number;
 }

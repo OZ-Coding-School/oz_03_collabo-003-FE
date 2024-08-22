@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface LogInInputs {
   email: string;
@@ -29,9 +30,16 @@ const LogInPage: React.FC = () => {
   } = useForm<LogInInputs>();
 
   const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const loginUser = (data: LogInInputs) => {
     return axios.post(`${baseUrl}/api/v1/users/login`, data, { withCredentials: true });
+  };
+
+  // 로그인 성공 시 처리
+  const handleLoginSuccess = () => {
+    console.log('Login successful!');
+    navigate('/'); // 로그인 완료 후, 사용자를 홈 페이지로 리다이렉트
   };
 
   const onSubmit: SubmitHandler<LogInInputs> = async (data: LogInInputs) => {
@@ -39,7 +47,8 @@ const LogInPage: React.FC = () => {
     try {
       const response = await loginUser(data);
       console.log('로그인 성공:', response.data);
-      window.location.href = '/';
+
+      handleLoginSuccess();
     } catch (error: any) {
       if (error.response?.data?.message) {
         const errorMessage = error.response.data.message;

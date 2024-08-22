@@ -64,7 +64,7 @@ const MainPopularPlatform = () => {
             정부지원
           </button>
         </div>
-        <div className='grid grid-cols-4 grid-rows-2 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6'>
+        <div className='grid min-h-[200px] grid-cols-4 grid-rows-2 gap-2 sm:min-h-[245px] sm:gap-3 md:min-h-[305px] md:gap-4 lg:min-h-[378px] lg:gap-5 xl:min-h-[458px] xl:gap-6'>
           {popularContents.length > 0 &&
             popularContents.map((content) => <MainPopularCard key={content.id} {...content} />)}
         </div>

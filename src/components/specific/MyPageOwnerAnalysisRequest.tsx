@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import analysisContents from '../../data/analysisContents.json';
 import Pagination from '../common/Pagination';
 import WhiteBtn from '../common/button/WhiteBtn';
-import BtnMypage from '../common/button/BtnMypage';
+import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
+//import axios from 'axios';
 
 type Analyst = {
   analystId: number;
@@ -14,7 +15,7 @@ type AnalysisContent = {
   contentId: number;
   clientId: number;
   accepted: Analyst[];
-  selected: Analyst[];
+  selected: Analyst | null;
   title: string;
   link: string;
   image: string;
@@ -24,13 +25,13 @@ type AnalysisContent = {
 
 const MyPageOwnerAnalysisRequest = () => {
   const [contents, setContents] = useState<AnalysisContent[]>([]);
+  const [selectedAnalyst, setSelectedAnalyst] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 1;
 
   const indexOfLastContent = currentPage * cardsPerPage;
   const indexOfFirstContent = indexOfLastContent - cardsPerPage;
   const currentContents = contents.slice(indexOfFirstContent, indexOfLastContent);
-
   const totalPages = Math.ceil(contents.length / cardsPerPage);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -40,13 +41,28 @@ const MyPageOwnerAnalysisRequest = () => {
   // }
 
   const analystProfileHandler = (analystId: number) => {
-    // 분석가 프로필 열람
     console.log('분석가 프로필 열람', analystId);
+    // 분석가 프로필 열람
   };
 
-  const selectedAnalyst = (analystId: number) => {
-    // 분석가 선택
+  const selectedAnalystHandler = async (analystId: number) => {
     console.log('분석가 선택', analystId);
+    setSelectedAnalyst(true);
+    // const result = confirm(
+    //   '사이트 분석은 단 한 명의 분석가만 진행할 수 있습니다. 이 분석가를 선택하여 분석을 진행하시겠습니까?'
+    // );
+    // if (result) {
+    //   try {
+    //     const response = await axios.post('/request/select', {
+    //       analyst_id: analystId,
+    //     });
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // } else {
+    //   return;
+    // }
   };
 
   useEffect(() => {
@@ -56,9 +72,9 @@ const MyPageOwnerAnalysisRequest = () => {
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
       {contents.length > 0 ? (
-        <div className='mx-auto my-10 flex w-[680px] flex-col gap-2 px-4'>
+        <div className='mx-auto my-20 flex w-[680px] flex-col gap-3 px-4'>
           <div className='flex items-end gap-2'>
-            <span className='mb-0.5 text-lg'>의뢰 사이트</span>
+            <span className='mb-0.5 text-lg'>분석 의뢰 사이트</span>
             <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} />
           </div>
           {currentContents.map((content) => (
@@ -76,7 +92,7 @@ const MyPageOwnerAnalysisRequest = () => {
                   </span>
                 </div>
               </div>
-              <div className='flex w-full flex-col gap-3'>
+              <div className='flex w-full flex-col gap-4'>
                 <p className='text-lg'>분석 신청자 목록</p>
                 {content.accepted.length > 0 ? (
                   <ul className='flex flex-col gap-3'>
@@ -92,12 +108,23 @@ const MyPageOwnerAnalysisRequest = () => {
                         >
                           프로필 보기
                         </WhiteBtn>
-                        <BtnMypage
-                          className='px-2 py-1 text-sm font-medium'
-                          onClick={() => selectedAnalyst(acceptedAnalyst.analystId)}
-                        >
-                          승락하기
-                        </BtnMypage>
+
+                        {content.selected ? (
+                          <button
+                            disabled={true}
+                            className='rounded-[5px] bg-blue-hover px-2 py-1 text-center text-sm font-medium text-white shadow-custom-dark'
+                          >
+                            수락종료
+                          </button>
+                        ) : (
+                          <DisabledBtn
+                            className={'px-2 py-1 text-center text-sm font-medium'}
+                            onClick={() => selectedAnalystHandler(acceptedAnalyst.analystId)}
+                            disabled={selectedAnalyst}
+                          >
+                            {selectedAnalyst ? '수락종료' : '수락하기'}
+                          </DisabledBtn>
+                        )}
                       </li>
                     ))}
                   </ul>

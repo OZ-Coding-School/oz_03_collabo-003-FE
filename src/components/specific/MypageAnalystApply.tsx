@@ -2,23 +2,22 @@ import { useEffect, useState } from 'react';
 import contentsData from '../../data/contents.json';
 import { Content } from '../../types/type';
 import { Link, useNavigate } from 'react-router-dom';
-import BtnMypage from '../common/button/BtnMypage';
 import Pagination from '../common/Pagination';
 import axios from 'axios';
 import WhiteBtn from '../common/button/WhiteBtn';
+import DisabledBtn from '../common/button/DisabledBtn';
 
 const MypageAnalystApply = () => {
   const navigate = useNavigate();
   const [contents, setContents] = useState<Content[]>([]);
+  const [selectedContent, setSelectedContent] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 6;
 
+  const cardsPerPage = 6;
   const indexOfLastContent = currentPage * cardsPerPage;
   const indexOfFirstContent = indexOfLastContent - cardsPerPage;
   const currentContents = contents.slice(indexOfFirstContent, indexOfLastContent);
-
   const totalPages = Math.ceil(contents.length / cardsPerPage);
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   // const fetchAnalysisRequestData = async () => {
@@ -46,6 +45,7 @@ const MypageAnalystApply = () => {
     );
     if (result) {
       applyAnalysisContent(id);
+      setSelectedContent(true);
     } else {
       return;
     }
@@ -61,7 +61,7 @@ const MypageAnalystApply = () => {
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
-      {currentContents.length > 0 ? (
+      {contents.length > 0 ? (
         <div className='mx-auto my-16 flex w-[1100px] flex-col gap-4 px-4'>
           <div className='mx-1 flex w-full gap-1 text-lg'>
             <span className='text-gray-75'>전체</span>
@@ -89,12 +89,13 @@ const MypageAnalystApply = () => {
                     >
                       <span>상세보기</span>
                     </WhiteBtn>
-                    <BtnMypage
-                      className='my-1 flex flex-col items-center px-2 py-1 text-sm'
+                    <DisabledBtn
+                      className={'px-2 py-1 text-center text-sm font-medium'}
                       onClick={() => applyBtnHandler(content.id)}
+                      disabled={selectedContent}
                     >
-                      <span className='font-medium'>신청하기</span>
-                    </BtnMypage>
+                      {selectedContent ? '신청완료' : '신청하기'}
+                    </DisabledBtn>
                   </div>
                 </div>
               </div>

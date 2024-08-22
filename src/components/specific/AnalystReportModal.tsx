@@ -16,7 +16,7 @@ const AnalystReportModal: React.FC<AnalystReportModalProps> = ({ isOpen, onOpen 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
     // 나중에 데이터 응답 성공시로 옮기기
-    alert('해당 사이트에 대한 분석 보고서가 제출 되었습니다.');
+    alert('해당 사이트에 대한 분석 보고서가 제출되었습니다.');
     onOpen(false);
     // const formData = new FormData();
     // formData.append('file', data.file[0]);
@@ -28,7 +28,7 @@ const AnalystReportModal: React.FC<AnalystReportModalProps> = ({ isOpen, onOpen 
     //         Accept: 'application/json',
     //       },
     //     });
-    //     console.log('분석 보고서 제출 성공', response);
+    //     console.log('분석 보고서 제출 성공', response.data);
     //   } catch (error) {
     //     console.error('분석 보고서 제출 실패', error);
     //   }
@@ -62,7 +62,7 @@ const AnalystReportModal: React.FC<AnalystReportModalProps> = ({ isOpen, onOpen 
             {...register('file', { required: true })}
           />
           <p className='truncate text-sm text-gray-75'>
-            이미지 파일 및 .txt, .pdf, .doc, .docx 형식의 이미지를 업로드 해주세요.
+            이미지 파일 및 .txt, .pdf, .doc, .docx 형식의 파일을 업로드 해주세요.
           </p>
         </div>
         <div className='mt-2 flex justify-center'>

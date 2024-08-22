@@ -4,6 +4,7 @@ import BtnMypage from '../common/button/BtnMypage';
 import Pagination from '../common/Pagination';
 import AnalystReportModal from './AnalystReportModal';
 import analysisContents from '../../data/analysisContents.json';
+//import axios from 'axios';
 
 type AnalysisContent = {
   contentId: number;
@@ -26,6 +27,17 @@ const MyPageAnalystAnalyze = () => {
   const currentContents = contents.slice(indexOfFirstContent, indexOfLastContent);
   const totalPages = Math.ceil(contents.length / cardsPerPage);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // 분석가가 분석할 사이트 목록 불러오기
+  // const fetchAnalysisContentsData = async () => {
+  //   try {
+  //     const response = await axios.get('/request/analysis')
+  //     console.log('분석가가 분석할 사이트 조회 성공', response.data);
+  //     setContents(response.data);
+  //   } catch (error) {
+  //     console.log("분석가가 분석할 사이트 조회 실패",error);
+  //   }
+  // }
 
   const openReportModal = () => {
     setIsOpen(true);

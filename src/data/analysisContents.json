@@ -17,6 +17,7 @@
       }
     ],
     "selected": null,
+    "status": "Pending",
     "title": "Figma(피그마)",
     "link": "https://www.figma.com/",
     "image": "https://via.placeholder.com/330x220",
@@ -32,12 +33,17 @@
       {
         "analystId": 11,
         "analystName": "분석가11"
+      },
+      {
+        "analystId": 12,
+        "analystName": "분석가12"
       }
     ],
     "selected": {
       "analystId": 11,
       "analystName": "분석가11"
     },
+    "status": "Completed",
     "title": "Pixabay(픽사베이)",
     "link": "https://pixabay.com/",
     "image": "https://via.placeholder.com/330x220",
@@ -49,13 +55,36 @@
   {
     "contentId": 3,
     "clientId": 2,
-    "accepted": [],
-    "selected": null,
+    "accepted": [
+      {
+        "analystId": 11,
+        "analystName": "분석가11"
+      }
+    ],
+    "selected": {
+      "analystId": 11,
+      "analystName": "분석가11"
+    },
+    "status": "Accepted",
     "title": "직업훈련포털 HRD-Net",
     "link": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
     "image": "https://via.placeholder.com/330x220",
     "description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
     "category": "정부지원",
+    "created_at": "2024-08-11T16:40:20Z",
+    "scheduled_at": "2024-08-31T00:00:00Z"
+  },
+  {
+    "contentId": 4,
+    "clientId": 3,
+    "accepted": [],
+    "selected": null,
+    "status": "Pending",
+    "title": "보너스잡",
+    "link": "https://bonusjob.co.kr/",
+    "image": "https://via.placeholder.com/330x220",
+    "description": "취업하면 보너스 축하금을 주는 채용 사이트",
+    "category": "정보 플랫폼",
     "created_at": "2024-08-11T16:40:20Z",
     "scheduled_at": "2024-08-31T00:00:00Z"
   }

@@ -12,6 +12,7 @@ import AnalystMyPage from './pages/AnalystMyPage';
 
 import SiteRegistrationPage from './pages/SiteRegistrationPage';
 import AnalyzePayMain from './components/specific/AnalyzePayMain';
+import PrivateRoute from './components/specific/PrivateRoute';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path='/' element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path='/contents/:contentId' element={<DetailedPage />} />
+        <Route element={<PrivateRoute />}>{/* 이 안에 인증된 사용자만 접근할 수 있는 라우트를 넣어주세요! */}</Route>
         <Route path='/mypage' element={<MyPage />} />.
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
         <Route path='/register' element={<SiteRegistrationPage />} />

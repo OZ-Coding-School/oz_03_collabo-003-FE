@@ -1,4 +1,4 @@
-const AnalyzePayMain = () => {
+const AnalystRequestPage = () => {
   return (
     <div className='flex h-full flex-col items-center'>
       <h1 className='my-[64px] text-center text-[27px]'>사이트분석 및 등록을 의뢰하세요</h1>
@@ -111,4 +111,4 @@ const DiscountSection = () => {
   );
 };
 
-export default AnalyzePayMain;
+export default AnalystRequestPage;

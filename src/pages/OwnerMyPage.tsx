@@ -5,7 +5,7 @@ import MypageOwnerInfo from '../components/specific/MypageOwnerInfo';
 import MyPageOwnerAnalysisRequest from '../components/specific/MyPageOwnerAnalysisRequest';
 
 const OwnerMyPage = () => {
-  const items: string[] = ['사이트 관리', '분석 의뢰 현황', '의뢰자 정보'];
+  const items: string[] = ['사이트 관리', '분석 의뢰 사이트', '의뢰자 정보'];
   const [selectedItem, setSelectedItem] = useState(items[0]);
 
   return (
@@ -14,7 +14,7 @@ const OwnerMyPage = () => {
       <div className='w-[calc(100vw-292px)] grow'>
         <div className='flex h-[calc(100vh-70px)] grow justify-center'>
           {selectedItem === '사이트 관리' && <MyPageCardContainer layout='client' />}
-          {selectedItem === '분석 의뢰 현황' && <MyPageOwnerAnalysisRequest />}
+          {selectedItem === '분석 의뢰 사이트' && <MyPageOwnerAnalysisRequest />}
           {selectedItem === '의뢰자 정보' && <MypageOwnerInfo onSelectedItem={setSelectedItem} />}
         </div>
       </div>

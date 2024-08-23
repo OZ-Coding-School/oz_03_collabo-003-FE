@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "categories": "업무 툴",
+    "slug": "business-tools",
+    "subCategories": [
+      { "id": 1, "label": "업무효율화", "slug": "efficiency" },
+      { "id": 2, "label": "디자인 협업", "slug": "design-collaboration" },
+      { "id": 3, "label": "마케팅 분석", "slug": "marketing-analysis" },
+      { "id": 4, "label": "무료 이미지 & 영상", "slug": "free-images-videos" },
+      { "id": 5, "label": "문서 작성", "slug": "document-writing" },
+      { "id": 6, "label": "설문 제작", "slug": "survey-creation" },
+      { "id": 7, "label": "이모티콘", "slug": "emoticons" },
+      { "id": 8, "label": "이미지 공유", "slug": "image-sharing" },
+      { "id": 9, "label": "전자계약", "slug": "electronic-contracts" },
+      { "id": 10, "label": "판촉물", "slug": "promotional-materials" },
+      { "id": 11, "label": "폰트", "slug": "fonts" },
+      { "id": 12, "label": "통계분석", "slug": "statistical-analysis" }
+    ]
+  },
+  {
+    "id": 2,
+    "categories": "AI 툴",
+    "slug": "ai-tools",
+    "subCategories": [
+      { "id": 13, "label": "검색", "slug": "search" },
+      { "id": 14, "label": "이미지", "slug": "image" },
+      { "id": 15, "label": "네이밍", "slug": "naming" },
+      { "id": 16, "label": "동영상 편집", "slug": "video-editing" },
+      { "id": 17, "label": "시장 분석", "slug": "market-analysis" },
+      { "id": 18, "label": "앱 제작", "slug": "app-development" },
+      { "id": 19, "label": "웹 페이지 제작", "slug": "web-development" }
+    ]
+  },
+  {
+    "id": 3,
+    "categories": "정보 플랫폼",
+    "slug": "information-platforms",
+    "subCategories": [
+      { "id": 20, "label": "스타트업", "slug": "startups" },
+      { "id": 21, "label": "쇼핑", "slug": "shopping" },
+      { "id": 22, "label": "저작물 & 특허", "slug": "copyrights-patents" },
+      { "id": 23, "label": "숙박 & 공간대여", "slug": "accommodation-space-rental" },
+      { "id": 24, "label": "자격증", "slug": "certifications" },
+      { "id": 25, "label": "교육", "slug": "education" },
+      { "id": 26, "label": "비즈니스 & 프리랜서", "slug": "business-freelance" },
+      { "id": 27, "label": "IP", "slug": "intellectual-property" },
+      { "id": 28, "label": "펀딩", "slug": "funding" },
+      { "id": 29, "label": "팀원 찾기", "slug": "team-building" },
+      { "id": 30, "label": "취업", "slug": "employment" }
+    ]
+  },
+  {
+    "id": 4,
+    "categories": "정부지원",
+    "slug": "government-support",
+    "subCategories": [
+      { "id": 31, "label": "창업지원", "slug": "startup-support" },
+      { "id": 32, "label": "청년 · 청소년 지원", "slug": "youth-support" },
+      { "id": 33, "label": "금융 · 의료 지원", "slug": "financial-medical-support" },
+      { "id": 34, "label": "복지 · 출산 · 육아 지원", "slug": "welfare-childcare-support" },
+      { "id": 35, "label": "기타 정부지원", "slug": "other-government-support" }
+    ]
+  }
+]

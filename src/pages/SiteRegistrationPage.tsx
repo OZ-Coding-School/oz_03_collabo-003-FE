@@ -25,7 +25,7 @@ const SiteRegistrationPage = () => {
   };
 
   return (
-    <div className='h-[calc(100vh-70px)]'>
+    <div className='h-[calc(100vh-70px)] overflow-x-hidden'>
       <h1 className='my-[44px] text-center text-[27px]'>직접 사이트를 등록할 수 있어요</h1>
       <div className='flex flex-col items-center justify-center'>
         <form className='flex w-[1039px] flex-col items-center gap-4' onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +87,7 @@ const SiteRegistrationPage = () => {
           </div>
           <button
             type='submit'
-            className='my-[62px] h-[46px] w-[382px] rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover'
+            className='mb-[40px] h-[46px] w-[382px] rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover'
           >
             등록
           </button>

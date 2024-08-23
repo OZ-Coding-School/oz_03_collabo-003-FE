@@ -1,16 +1,15 @@
 import React, { ReactNode } from 'react';
-import BtnMypage from './button/BtnMypage';
 
 interface ModalContainerProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: () => void;
+  // onSubmit: () => void;
   title: string;
   children: ReactNode;
   className?: string;
 }
 
-const ModalContainer: React.FC<ModalContainerProps> = ({ isOpen, onClose, onSubmit, title, children, className }) => {
+const ModalContainer: React.FC<ModalContainerProps> = ({ isOpen, onClose, title, children, className }) => {
   if (!isOpen) {
     return null;
   }
@@ -25,11 +24,6 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ isOpen, onClose, onSubm
           </button>
         </div>
         <div className='mt-4'>{children}</div>
-        <div className='mt-2 flex justify-center'>
-          <BtnMypage onClick={onSubmit} className='w-1/3 p-2'>
-            신청하기
-          </BtnMypage>
-        </div>
       </div>
     </div>
   );

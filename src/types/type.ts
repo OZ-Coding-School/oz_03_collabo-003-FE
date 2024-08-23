@@ -78,3 +78,13 @@ export type AnalysisRequestSiteState = {
   setContent: (id: number) => void;
   clearContent: () => void;
 };
+
+export interface Analyst {
+  id: number;
+  name: string;
+  image: string;
+  intro: string;
+  link?: string;
+  merit: string;
+  oneWord: string;
+}

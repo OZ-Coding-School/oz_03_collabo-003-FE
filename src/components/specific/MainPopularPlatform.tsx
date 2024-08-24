@@ -2,10 +2,30 @@ import MainPopularCard from './MainPopularCard';
 import contentsData from '../../data/contents.json';
 import { Content } from '../../types/type';
 import { useState, useEffect } from 'react';
+import LoadingSkeleton from '../common/LoadingSkeleton';
+//import axios from 'axios';
 
 const MainPopularPlatform = () => {
-  const contents: Content[] = contentsData;
-  const [selectedCategory, setSelectedCategory] = useState('task');
+  const [contents, setContents] = useState<Content[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('업무');
+  const [isLoading, setIsLoading] = useState(false);
+
+  //전체 컨텐츠 조회
+  const fetchContentsData = async () => {
+    setContents(contentsData);
+    setIsLoading(false);
+    // if (isLoading) return;
+    // setIsLoading(true);
+    // try {
+    //   const response = await axios.get('/api/v1/contents');
+    //   console.log('메인 플랫폼 컨텐츠 데이터 성공', response.data);
+    //   setContents(response.data);
+    // } catch (error) {
+    //   console.error(error);
+    // } finally {
+    //   setIsLoading(false);
+    // }
+  };
 
   useEffect(() => {
     const categories = ['업무', 'ai', '정보 플랫폼', '정부지원'];
@@ -18,6 +38,10 @@ const MainPopularPlatform = () => {
 
     return () => clearTimeout(timer);
   }, [selectedCategory]);
+
+  useEffect(() => {
+    fetchContentsData();
+  }, []);
 
   const filteredContents = contents.filter((content) => content.category === selectedCategory);
   const sortedContents = filteredContents.sort((a, b) => b.id - a.id);
@@ -64,8 +88,16 @@ const MainPopularPlatform = () => {
             정부지원
           </button>
         </div>
-        <div className='grid grid-cols-4 grid-rows-2 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6'>
-          {popularContents.length > 0 &&
+        <div className='grid min-h-[200px] grid-cols-4 grid-rows-2 gap-2 sm:min-h-[245px] sm:gap-3 md:min-h-[305px] md:gap-4 lg:min-h-[378px] lg:gap-5 xl:min-h-[458px] xl:gap-6'>
+          {isLoading &&
+            Array.from({ length: 8 }).map((_, index) => (
+              <LoadingSkeleton
+                key={index}
+                className='h-[80px] w-[95px] sm:h-[120px] sm:w-[150px] md:h-[140px] md:w-[195px] lg:h-[160px] lg:w-[245px] xl:h-[180px] xl:w-[300px] 2xl:h-[200px] 2xl:w-[335px]'
+              />
+            ))}
+          {!isLoading &&
+            contents.length > 0 &&
             popularContents.map((content) => <MainPopularCard key={content.id} {...content} />)}
         </div>
       </div>

@@ -2,25 +2,24 @@ import { useEffect, useState } from 'react';
 import contentsData from '../../data/contents.json';
 import { Content } from '../../types/type';
 import { Link, useNavigate } from 'react-router-dom';
-import BtnMypage from '../common/button/BtnMypage';
 import Pagination from '../common/Pagination';
-import axios from 'axios';
 import WhiteBtn from '../common/button/WhiteBtn';
+import BtnMypage from '../common/button/BtnMypage';
+//import axios from 'axios';
 
 const MypageAnalystApply = () => {
   const navigate = useNavigate();
   const [contents, setContents] = useState<Content[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 6;
 
+  const cardsPerPage = 6;
   const indexOfLastContent = currentPage * cardsPerPage;
   const indexOfFirstContent = indexOfLastContent - cardsPerPage;
   const currentContents = contents.slice(indexOfFirstContent, indexOfLastContent);
-
   const totalPages = Math.ceil(contents.length / cardsPerPage);
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // 의뢰 목록 불러오기
   // const fetchAnalysisRequestData = async () => {
   //     try {
   //         const response = await axios.get("/request");
@@ -31,18 +30,20 @@ const MypageAnalystApply = () => {
   //     }
   // }
 
+  // 분석가가 분석 신청하기
   const applyAnalysisContent = async (id: number) => {
-    try {
-      const response = await axios.post(`/request/accept/${id}`);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(id);
+    // try {
+    //   const response = await axios.post(`/request/accept/${id}`);
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const applyBtnHandler = (id: number) => {
     const result = confirm(
-      `해당 사이트에 대한 분석을 신청하시겠습니까? 사이트 의뢰자가 수락 시 '분석 진행 현황' 에서 확인하실 수 있습니다.`
+      `해당 사이트에 대한 분석을 신청하시겠습니까? 사이트 의뢰자가 수락 시 '분석 진행하기' 에서 확인하실 수 있습니다.`
     );
     if (result) {
       applyAnalysisContent(id);
@@ -61,7 +62,7 @@ const MypageAnalystApply = () => {
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
-      {currentContents.length > 0 ? (
+      {contents.length > 0 ? (
         <div className='mx-auto my-16 flex w-[1100px] flex-col gap-4 px-4'>
           <div className='mx-1 flex w-full gap-1 text-lg'>
             <span className='text-gray-75'>전체</span>
@@ -90,10 +91,10 @@ const MypageAnalystApply = () => {
                       <span>상세보기</span>
                     </WhiteBtn>
                     <BtnMypage
-                      className='my-1 flex flex-col items-center px-2 py-1 text-sm'
+                      className={'px-2 py-1 text-center text-sm font-medium'}
                       onClick={() => applyBtnHandler(content.id)}
                     >
-                      <span className='font-medium'>신청하기</span>
+                      신청하기
                     </BtnMypage>
                   </div>
                 </div>

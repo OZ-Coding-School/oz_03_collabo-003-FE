@@ -6,7 +6,6 @@ import MultiStepModal from './../common/ModalMultiStepPermission';
 const MyPageAuthz = () => {
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
   const [isAnalystModalOpen, setIsAnalystModalOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
 
   const navigate = useNavigate();
 
@@ -16,7 +15,6 @@ const MyPageAuthz = () => {
 
   const handleAnalystClick = () => {
     setIsAnalystModalOpen(true);
-    setCurrentStep(1);
   };
 
   const closeModal = () => {

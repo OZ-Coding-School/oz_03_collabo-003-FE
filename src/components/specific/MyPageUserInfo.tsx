@@ -18,7 +18,7 @@ const MyPageUserInfo = () => {
   };
 
   const inputBox = 'flex-1 placeholder:text-gray-c4';
-  const grayRounded = 'rounded-lg border border-gray-dc bg-white p-4';
+  const grayRounded = 'rounded-lg border border-gray-dc bg-white px-6 py-4';
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
@@ -59,12 +59,12 @@ const MyPageUserInfo = () => {
           <h2 className='mb-4 text-xl font-bold'>내 정보</h2>
           <div className='space-y-4'>
             <div className='flex items-center'>
-              <span className='mr-10 text-lg font-semibold'>이메일</span>
+              <p className='mr-10 text-lg font-semibold'>이메일</p>
               <span className='mr-10 flex-1'>example123@gmail.com</span>
               <span></span>
             </div>
             <div className='flex items-center'>
-              <span className='mr-10 text-lg font-semibold'>닉네임</span>
+              <p className='mr-10 text-lg font-semibold'>닉네임</p>
               {isEditing ? (
                 <input
                   className={inputBox}
@@ -87,7 +87,7 @@ const MyPageUserInfo = () => {
               )}
             </div>
             <div className='flex items-center'>
-              <span className='mr-6 text-lg font-semibold'>패스워드</span>
+              <p className='mr-6 text-lg font-semibold'>패스워드</p>
               {isEditing ? (
                 <input
                   className={inputBox}

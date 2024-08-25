@@ -6,7 +6,18 @@ import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
 import BtnMypage from '../common/button/BtnMypage';
 import axios from 'axios';
-//import axios from 'axios';
+import analystInfo from '../../data/analystProfile.json';
+import ModalContainer from '../common/ModalContainer';
+
+type AnalystProfile = {
+  id: number;
+  name: string;
+  image: string;
+  intro: string;
+  link: string;
+  merit: string;
+  summary: string;
+};
 
 type Analyst = {
   analystId: number;
@@ -29,7 +40,9 @@ type AnalysisContent = {
 const MyPageOwnerAnalysisRequest = () => {
   const [contents, setContents] = useState<AnalysisContent[]>([]);
   const [selectedAnalyst, setSelectedAnalyst] = useState<boolean>(false);
-  const [reportUrl, setReportUrl] = useState('');
+  const [reportUrl, setReportUrl] = useState<string>('');
+  const [analystProfile, setAnalystProfile] = useState<AnalystProfile | null>(null);
+  const [profileModalOpen, setProfileModalOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 1;
 
@@ -51,9 +64,24 @@ const MyPageOwnerAnalysisRequest = () => {
   //     }
   // }
 
-  const analystProfileHandler = (analystId: number) => {
+  const analystProfileHandler = async (analystId: number) => {
     console.log('분석가 프로필 열람', analystId);
+    setAnalystProfile(analystInfo);
+    setProfileModalOpen(true);
     // 분석가 프로필 열람
+    // try {
+    //   const response = await axios.get(`/analysts/${analystId}`)
+    //   console.log('분석가 프로필 열람 성공', response.data);
+    //   setAnalystProfile(response.data);
+    //   setProfileModalOpen(true)
+    // } catch (error) {
+    //   console.log("분석가 프로필 열람 실패",error);
+    // }
+  };
+
+  const closedAnalystProfileHandler = () => {
+    setAnalystProfile(null);
+    setProfileModalOpen(false);
   };
 
   const selectedAnalystHandler = async (analystId: number) => {
@@ -200,6 +228,31 @@ const MyPageOwnerAnalysisRequest = () => {
             <span className='text-gray-46'>클릭</span>
           </div>
         </div>
+      )}
+      {profileModalOpen && analystProfile && (
+        <ModalContainer
+          isOpen={profileModalOpen}
+          onClose={closedAnalystProfileHandler}
+          title={`분석가 ${analystProfile.name} 님의 프로필`}
+        >
+          <section className='mb-4 flex flex-col gap-4 px-2'>
+            <div className='flex items-center justify-center'>
+              <img className='m-auto size-20' src={analystProfile.image} alt={analystProfile.name} />
+            </div>
+            <div className='flex flex-col gap-1'>
+              <span className='font-semibold'>소개</span>
+              <span className='text-justify'>{analystProfile.intro}</span>
+            </div>
+            <div className='flex flex-col gap-1'>
+              <span className='font-semibold'>장점</span>
+              <span className='text-justify'>{analystProfile.merit}</span>
+            </div>
+            <div className='flex flex-col gap-1'>
+              <span className='font-semibold'>전하고 싶은 한 마디</span>
+              <span className='text-justify'>{analystProfile.summary}</span>
+            </div>
+          </section>
+        </ModalContainer>
       )}
     </div>
   );

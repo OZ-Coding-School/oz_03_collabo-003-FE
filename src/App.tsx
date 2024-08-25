@@ -6,10 +6,10 @@ import CategoryPage from './pages/CategoryPage';
 import MyPage from './pages/MyPage';
 import OwnerMyPage from './pages/OwnerMyPage';
 import LogInPage from './pages/LogInPage';
-import SignUpPage from './pages/SignUpPage';
-import PasswordResetPage from './pages/PasswordResetPage';
 import OwnerSiteDetailPage from './pages/OwnerSiteDetailPage';
 import AnalystMyPage from './pages/AnalystMyPage';
+import SignUpPage from './pages/SignUpPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 
 function App() {
   return (
@@ -19,8 +19,7 @@ function App() {
         <Route path='/contents/:contentId' element={<DetailedPage />} />
         <Route path='/category/:categorySlug' element={<CategoryPage />} />
         <Route path='/category/:categorySlug/:subCategorySlug' element={<CategoryPage />} />
-        {/* <Route path='/contents/:contentId' element={<DetailedPage />} /> */}
-        <Route path='/mypage' element={<MyPage />} />.
+        <Route path='/mypage' element={<MyPage />} />
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
         <Route path='/mypage/owner/:id' element={<OwnerSiteDetailPage />} />
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />

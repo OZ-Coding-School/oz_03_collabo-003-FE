@@ -60,38 +60,24 @@ const PasswordResetPage: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-lg rounded-lg p-8'>
         {!isEmailSent ? (
           <div>
-            <div className='mb-6'>
-              <label htmlFor='email' className='block text-sm font-medium'>
-                이메일
-              </label>
-              <input
-                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
-                type='email'
-                id='email'
-                value={getValues('email')} // react-hook-form의 getValues로 이메일 값 가져오기
-                readOnly
-              />
-            </div>
-            <div className='mb-6'>
-              <label htmlFor='password' className='block text-sm font-medium'>
-                새 비밀번호
-              </label>
-              <input
-                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
-                type='password'
-                id='password'
-                disabled={isLoading}
-                placeholder='새 비밀번호를 입력하세요.'
-                {...register('password', {
-                  required: '비밀번호를 입력하세요.',
-                  pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-                    message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
-                  },
-                })}
-              />
-              {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}
-            </div>
+            <label htmlFor='email' className='block text-sm font-medium'>
+              이메일
+            </label>
+            <input
+              className='mb-14 mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+              type='email'
+              id='email'
+              disabled={isLoading}
+              placeholder='이메일을 입력하세요.'
+              {...register('email', {
+                required: '이메일을 입력하세요.',
+                pattern: {
+                  value: /^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: '잘못된 이메일 주소입니다.',
+                },
+              })}
+            />
+            {errors.email && <p className='mt-2 text-sm text-red'>{errors.email.message}</p>}
             <button
               className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${
                 isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'
@@ -99,7 +85,7 @@ const PasswordResetPage: React.FC = () => {
               type='submit'
               disabled={isLoading}
             >
-              {isLoading ? '비밀번호 재설정 중...' : '비밀번호 재설정 완료'}
+              {isLoading ? '이메일 전송 중...' : '비밀번호 재설정 이메일 보내기'}
             </button>
           </div>
         ) : (

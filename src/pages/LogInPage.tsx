@@ -33,7 +33,8 @@ const LogInPage: React.FC = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   const loginUser = (data: LogInInputs) => {
-    return axios.post(`${baseUrl}/api/v1/users/login`, data, { withCredentials: true });
+    // withCredentials 옵션으로 쿠키를 사용한 인증 허용
+    return axios.post(`${baseUrl}/api/v1/accounts/login`, data, { withCredentials: true });
   };
 
   // 로그인 성공 시 처리
@@ -47,7 +48,6 @@ const LogInPage: React.FC = () => {
     try {
       const response = await loginUser(data);
       console.log('로그인 성공:', response.data);
-
       handleLoginSuccess();
     } catch (error: any) {
       if (error.response?.data?.message) {
@@ -77,9 +77,9 @@ const LogInPage: React.FC = () => {
     }
   };
 
-  const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
-  const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
-  const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
+  const googleLoginUrl = `${baseUrl}/api/v1/accounts/google/login/`;
+  const kakaoLoginUrl = `${baseUrl}/api/v1/accounts/kakao/login/`;
+  const naverLoginUrl = `${baseUrl}/api/v1/accounts/naver/login/`;
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
@@ -95,6 +95,7 @@ const LogInPage: React.FC = () => {
             className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
             type='email'
             id='email'
+            disabled={isLoading} // 로딩 중일 때 비활성화
             placeholder='이메일을 입력하세요.'
             {...register('email', {
               required: '이메일을 입력하세요.',
@@ -114,6 +115,7 @@ const LogInPage: React.FC = () => {
             className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-[15px] py-4 shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
             type='password'
             id='password'
+            disabled={isLoading} // 로딩 중일 때 비활성화
             placeholder='비밀번호를 입력하세요.'
             {...register('password', {
               required: '비밀번호를 입력하세요.',
@@ -146,9 +148,6 @@ const LogInPage: React.FC = () => {
           이메일로 회원가입하기
         </a>
         <span>|</span>
-        {/* 비밀번호 찾을 때, 일단 이메일로 링크를 보내는 식으로 코드 작성했습니다.          
-        근데 그 링크가 어떤 방식으로 동작할지 아직 몰라요.... 저도 알고 싶어요....          
-        일단 비밀번호 찾기 페이지는 만들어 놨습니다..*/}
         <a href='/password-reset' className='hover:text-blue-primary'>
           비밀번호 찾기
         </a>

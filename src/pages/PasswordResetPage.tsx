@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface PasswordResetInputs {
   email: string;
@@ -8,7 +9,6 @@ interface PasswordResetInputs {
 
 const PasswordResetPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -16,21 +16,21 @@ const PasswordResetPage: React.FC = () => {
   } = useForm<PasswordResetInputs>();
 
   const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
-  const resetPassword = (data: PasswordResetInputs) => {
-    return axios.post(`${baseUrl}/api/v1/users/password/reset`, data);
+  const sendPasswordResetEmail = async (data: PasswordResetInputs) => {
+    return axios.post(`${baseUrl}/api/v1/accounts/password-reset`, data);
   };
 
-  const onSubmit: SubmitHandler<PasswordResetInputs> = async (data: PasswordResetInputs) => {
+  const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {
     setIsLoading(true);
-    setMessage(null);
     try {
-      const response = await resetPassword(data);
-      setMessage('비밀번호 재설정 이메일을 보냈습니다. 이메일을 확인하세요.');
-      console.log('비밀번호 재설정 성공:', response.data);
+      await sendPasswordResetEmail(data);
+      alert('비밀번호 재설정 이메일이 발송되었습니다.');
+      navigate('/'); // 이메일 발송 후 홈으로 리다이렉트
     } catch (error: any) {
-      console.error('비밀번호 재설정 실패:', error.message);
-      setMessage('비밀번호 재설정에 실패했습니다. 다시 시도하세요.');
+      console.error('비밀번호 재설정 오류:', error);
+      alert('이메일 발송 중 오류가 발생했습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -50,6 +50,7 @@ const PasswordResetPage: React.FC = () => {
             className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
             type='email'
             id='email'
+            disabled={isLoading}
             placeholder='이메일을 입력하세요.'
             {...register('email', {
               required: '이메일을 입력하세요.',
@@ -68,13 +69,14 @@ const PasswordResetPage: React.FC = () => {
           type='submit'
           disabled={isLoading}
         >
-          {isLoading ? '요청 중...' : '비밀번호 재설정 링크 보내기'}
+          {isLoading ? '이메일 전송 중...' : '비밀번호 재설정 이메일 보내기'}
         </button>
       </form>
-      {message && <p className='mt-4 text-center text-sm text-blue-primary'>{message}</p>}
-      <a href='/login' className='mt-4 hover:text-blue-primary'>
-        로그인 페이지로 돌아가기
-      </a>
+      <div className='mt-4 flex space-x-4'>
+        <a href='/login' className='hover:text-blue-primary'>
+          로그인으로 돌아가기
+        </a>
+      </div>
     </div>
   );
 };

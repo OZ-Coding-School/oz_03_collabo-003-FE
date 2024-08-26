@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 
 interface SignUpFormInputs {
-  nickname: string;
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -13,7 +13,7 @@ const baseUrl = import.meta.env.VITE_API_URL;
 
 const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isNicknameVerified, setIsNicknameVerified] = useState(false);
+  const [isUsernameVerified, setIsUsernameVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const {
@@ -25,21 +25,21 @@ const SignUpPage: React.FC = () => {
     setError,
   } = useForm<SignUpFormInputs>();
 
-  const verifyNickname = async () => {
-    const nickname = getValues('nickname');
+  const verifyUsername = async () => {
+    const username = getValues('username');
 
-    if (!nickname) {
-      setError('nickname', { type: 'manual', message: '닉네임을 입력하세요.' });
+    if (!username) {
+      setError('username', { type: 'manual', message: '닉네임을 입력하세요.' });
       return;
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/users/verify-nickname`, { nickname });
-      if (response.data.success) {
-        setIsNicknameVerified(true);
+      const response = await axios.post(`${baseUrl}/api/v1/accounts/check-username`, { username: username });
+      if (response.data.detail === '사용 가능한 닉네임입니다.') {
+        setIsUsernameVerified(true);
         alert('닉네임 인증이 완료되었습니다.');
       } else {
-        setIsNicknameVerified(false);
+        setIsUsernameVerified(false);
         alert('이미 사용 중인 닉네임입니다.');
       }
     } catch (error) {
@@ -57,8 +57,8 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/users/verify-email`, { email });
-      if (response.data.success) {
+      const response = await axios.post(`${baseUrl}/api/v1/accounts/register/confirm`, { email });
+      if (response.data.message === '회원가입이 완료되었습니다.') {
         setIsEmailVerified(true);
         alert('이메일 인증이 완료되었습니다.');
       } else {
@@ -72,7 +72,7 @@ const SignUpPage: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
-    if (!isNicknameVerified) {
+    if (!isUsernameVerified) {
       alert('닉네임 인증을 완료해주세요.');
       return;
     }
@@ -84,8 +84,8 @@ const SignUpPage: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/users/signup`, {
-        nickname: data.nickname,
+      const response = await axios.post(`${baseUrl}/api/v1/accounts/register`, {
+        username: data.username,
         email: data.email,
         password: data.password,
       });
@@ -114,18 +114,18 @@ const SignUpPage: React.FC = () => {
             <input
               className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
               placeholder='닉네임을 입력하세요.'
-              {...register('nickname', { required: '닉네임을 입력하세요.' })}
+              {...register('username', { required: '닉네임을 입력하세요.' })}
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isNicknameVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
-              onClick={verifyNickname}
-              disabled={isNicknameVerified}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isUsernameVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              onClick={verifyUsername}
+              disabled={isUsernameVerified}
             >
-              {isNicknameVerified ? '인증 완료' : '닉네임 인증'}
+              {isUsernameVerified ? '인증 완료' : '닉네임 인증'}
             </button>
           </div>
-          {errors.nickname && <p className='mt-2 text-sm text-red'>{errors.nickname?.message}</p>}
+          {errors.username && <p className='mt-2 text-sm text-red'>{errors.username?.message}</p>}
         </div>
 
         <div className='mb-6'>

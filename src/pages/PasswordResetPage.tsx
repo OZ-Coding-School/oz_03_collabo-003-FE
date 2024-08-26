@@ -1,36 +1,52 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface PasswordResetInputs {
   email: string;
+  password?: string;
 }
 
 const PasswordResetPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
+  const [isEmailSent, setIsEmailSent] = useState(false);
+
   const {
     register,
     handleSubmit,
+    getValues, // 이메일 값을 가져오기 위해 추가
     formState: { errors },
   } = useForm<PasswordResetInputs>();
 
   const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
-  const resetPassword = (data: PasswordResetInputs) => {
-    return axios.post(`${baseUrl}/api/v1/users/password/reset`, data);
+  const sendPasswordResetEmail = async (email: string) => {
+    return axios.post(`${baseUrl}/api/v1/accounts/password-reset`, { email });
   };
 
-  const onSubmit: SubmitHandler<PasswordResetInputs> = async (data: PasswordResetInputs) => {
+  const resetPassword = async (data: PasswordResetInputs) => {
+    return axios.post(`${baseUrl}/api/v1/accounts/password-reset/confirm`, data);
+  };
+
+  const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {
     setIsLoading(true);
-    setMessage(null);
     try {
-      const response = await resetPassword(data);
-      setMessage('비밀번호 재설정 이메일을 보냈습니다. 이메일을 확인하세요.');
-      console.log('비밀번호 재설정 성공:', response.data);
+      if (!isEmailSent) {
+        // Step 1: 이메일 전송
+        await sendPasswordResetEmail(data.email);
+        setIsEmailSent(true); // 이메일 전송 성공 시, 다음 단계로 진행
+        alert('비밀번호 재설정 이메일이 발송되었습니다.');
+      } else {
+        // Step 2: 비밀번호 재설정
+        await resetPassword(data);
+        alert('비밀번호 재설정이 완료되었습니다.');
+        navigate('/login'); // 비밀번호 재설정 완료 후 로그인 페이지로 이동
+      }
     } catch (error: any) {
-      console.error('비밀번호 재설정 실패:', error.message);
-      setMessage('비밀번호 재설정에 실패했습니다. 다시 시도하세요.');
+      console.error('오류 발생:', error);
+      alert('처리 중 오류가 발생했습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -42,39 +58,82 @@ const PasswordResetPage: React.FC = () => {
         ALLTHE
       </a>
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-lg rounded-lg p-8'>
-        <div className='mb-6'>
-          <label htmlFor='email' className='block text-sm font-medium'>
-            이메일
-          </label>
-          <input
-            className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
-            type='email'
-            id='email'
-            placeholder='이메일을 입력하세요.'
-            {...register('email', {
-              required: '이메일을 입력하세요.',
-              pattern: {
-                value: /^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: '잘못된 이메일 주소입니다.',
-              },
-            })}
-          />
-          {errors.email && <p className='mt-2 text-sm text-red'>{errors.email.message}</p>}
-        </div>
-        <button
-          className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${
-            isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'
-          }`}
-          type='submit'
-          disabled={isLoading}
-        >
-          {isLoading ? '요청 중...' : '비밀번호 재설정 링크 보내기'}
-        </button>
+        {!isEmailSent ? (
+          <div>
+            <label htmlFor='email' className='block text-sm font-medium'>
+              이메일
+            </label>
+            <input
+              className='mb-14 mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+              type='email'
+              id='email'
+              disabled={isLoading}
+              placeholder='이메일을 입력하세요.'
+              {...register('email', {
+                required: '이메일을 입력하세요.',
+                pattern: {
+                  value: /^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: '잘못된 이메일 주소입니다.',
+                },
+              })}
+            />
+            {errors.email && <p className='mt-2 text-sm text-red'>{errors.email.message}</p>}
+            <button
+              className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${
+                isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'
+              }`}
+              type='submit'
+              disabled={isLoading}
+            >
+              {isLoading ? '이메일 전송 중...' : '비밀번호 재설정 이메일 보내기'}
+            </button>
+          </div>
+        ) : (
+          <div>
+            <div className='mb-6'>
+              <label htmlFor='email' className='block text-sm font-medium'>
+                이메일
+              </label>
+              <input
+                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+                type='email'
+                id='email'
+                value={getValues('email')} // react-hook-form의 getValues로 이메일 값 가져오기
+                readOnly
+              />
+            </div>
+            <div className='mb-14'>
+              <label htmlFor='password' className='block text-sm font-medium'>
+                새 비밀번호
+              </label>
+              <input
+                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+                type='password'
+                id='password'
+                disabled={isLoading}
+                placeholder='새 비밀번호를 입력하세요.'
+                {...register('password', {
+                  required: '비밀번호를 입력하세요.',
+                  pattern: {
+                    value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
+                    message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
+                  },
+                })}
+              />
+              {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}
+            </div>
+            <button
+              className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${
+                isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'
+              }`}
+              type='submit'
+              disabled={isLoading}
+            >
+              {isLoading ? '비밀번호 재설정 중...' : '비밀번호 재설정 완료'}
+            </button>
+          </div>
+        )}
       </form>
-      {message && <p className='mt-4 text-center text-sm text-blue-primary'>{message}</p>}
-      <a href='/login' className='mt-4 hover:text-blue-primary'>
-        로그인 페이지로 돌아가기
-      </a>
     </div>
   );
 };

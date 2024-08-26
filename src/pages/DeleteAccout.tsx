@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useAuthStore } from '../store/store';
 
 interface FormValues {
   confirmation: string;
@@ -23,8 +24,10 @@ const DeleteAccountPage: React.FC = () => {
         setIsDeleting(true);
 
         try {
-          await axios.delete(`${baseUrl}/api/v1/users/delete`);
+          await axios.delete(`${baseUrl}/api/v1/accounts/account-delete`);
           alert('탈퇴가 완료되었습니다.');
+          // 토큰 삭제 후 홈으로 리다이렉트
+          useAuthStore.getState().logOut();
           window.location.href = '/';
         } catch (error) {
           console.error('탈퇴 중 오류 발생:', error);

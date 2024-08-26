@@ -19,7 +19,8 @@ function App() {
         <Route path='/contents/:contentId' element={<DetailedPage />} />
         <Route path='/category/:categorySlug' element={<CategoryPage />} />
         <Route path='/category/:categorySlug/:subCategorySlug' element={<CategoryPage />} />
-        <Route path='/mypage' element={<MyPage />} />
+        {/* <Route path='/contents/:contentId' element={<DetailedPage />} /> */}
+        <Route path='/mypage' element={<MyPage />} />.
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
         <Route path='/mypage/owner/:id' element={<OwnerSiteDetailPage />} />
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />

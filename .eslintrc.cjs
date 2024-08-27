@@ -5,7 +5,6 @@ module.exports = {
     "eslint:recommended",
     "plugin:import/warnings",
     "plugin:react/jsx-runtime",
-    "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
@@ -24,7 +23,6 @@ module.exports = {
     }
   },
   plugins: ["import",
-  "jsx-a11y",
   "react",
   "react-hooks",
   "react-refresh",
@@ -38,7 +36,7 @@ module.exports = {
     "react/jsx-no-target-blank": "off",
     "no-unused-vars": "warn",
     "eqeqeq": ["error", "always"],
-    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/classnames-order": "off",
     "tailwindcss/no-custom-classname": "off",
     'react-refresh/only-export-components': [
       'warn',

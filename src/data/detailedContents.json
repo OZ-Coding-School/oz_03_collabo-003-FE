@@ -1,0 +1,310 @@
+[
+  {
+    "id": 1,
+    "title": "Figma(피그마)",
+    "link": "https://www.figma.com/",
+    "image": "https://via.placeholder.com/330x220",
+    "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
+    "category": "업무",
+    "detailedInfo": "가장 유명하고 널리 쓰이는 디자인 툴이에요. 개발자, 디자이너, 기획자 협력하여 각종 프레임을 제작할 수 있어요.",
+    "review": [
+      {
+        "id": 1,
+        "user_id": 11,
+        "user_name": "Timmo",
+        "comment": "팀 단위의 UX/UI 디자인 작업에서 매우 유용하게 사용하고 있습니다. 여러 명의 사용자가 동시에 하나의 프로젝트에서 작업할 수 있도록 해주는 실시간 협업 기능이 가능한 점이 매우 강력한 장점이라고 생각합니다.",
+        "rating": 4
+      },
+      {
+        "id": 2,
+        "user_id": 13,
+        "user_name": "봉봉",
+        "comment": "매우 좋은 경험이었습니다.",
+        "rating": 5
+      },
+      {
+        "id": 3,
+        "user_id": 21,
+        "user_name": "Alice",
+        "comment": "사용하기 쉽고 직관적입니다.",
+        "rating": 4
+      },
+      {
+        "id": 4,
+        "user_id": 22,
+        "user_name": "Bob",
+        "comment": "디자인 협업 툴로서 최고의 선택입니다.",
+        "rating": 5
+      },
+      {
+        "id": 5,
+        "user_id": 23,
+        "user_name": "Charlie",
+        "comment": "몇 가지 단점이 있지만 전반적으로 훌륭합니다.",
+        "rating": 3
+      },
+      {
+        "id": 6,
+        "user_id": 24,
+        "user_name": "David",
+        "comment": "다양한 기능이 있어 사용하기 편리합니다.",
+        "rating": 4
+      },
+      {
+        "id": 7,
+        "user_id": 25,
+        "user_name": "Eve",
+        "comment": "매우 만족합니다. 디자인 작업이 수월해졌습니다.",
+        "rating": 5
+      },
+      {
+        "id": 8,
+        "user_id": 26,
+        "user_name": "Frank",
+        "comment": "초보자도 쉽게 배울 수 있는 툴입니다.",
+        "rating": 4
+      },
+      {
+        "id": 9,
+        "user_id": 27,
+        "user_name": "Grace",
+        "comment": "성능이 뛰어나고 협업 기능이 탁월합니다.",
+        "rating": 5
+      },
+      {
+        "id": 10,
+        "user_id": 28,
+        "user_name": "Heidi",
+        "comment": "조금 복잡하지만 적응하면 편리합니다.",
+        "rating": 4
+      },
+      {
+        "id": 11,
+        "user_id": 29,
+        "user_name": "Ivan",
+        "comment": "디자인 작업이 훨씬 수월해졌습니다.",
+        "rating": 4
+      },
+      {
+        "id": 12,
+        "user_id": 30,
+        "user_name": "Judy",
+        "comment": "매우 직관적인 인터페이스를 제공합니다.",
+        "rating": 5
+      },
+      {
+        "id": 13,
+        "user_id": 31,
+        "user_name": "Kathy",
+        "comment": "협업 기능이 아주 뛰어납니다.",
+        "rating": 4
+      },
+      {
+        "id": 14,
+        "user_id": 32,
+        "user_name": "Leo",
+        "comment": "생산성이 크게 향상되었습니다.",
+        "rating": 5
+      },
+      {
+        "id": 15,
+        "user_id": 33,
+        "user_name": "Mia",
+        "comment": "많은 기능이 있지만, 적응하면 매우 유용합니다.",
+        "rating": 4
+      },
+      {
+        "id": 16,
+        "user_id": 34,
+        "user_name": "Nick",
+        "comment": "사용하기 쉽고 효율적입니다.",
+        "rating": 5
+      },
+      {
+        "id": 17,
+        "user_id": 35,
+        "user_name": "Olivia",
+        "comment": "디자인 작업에 매우 유용한 툴입니다.",
+        "rating": 5
+      },
+      {
+        "id": 18,
+        "user_id": 36,
+        "user_name": "Paul",
+        "comment": "처음에는 어렵지만 익숙해지면 매우 편리합니다.",
+        "rating": 4
+      },
+      {
+        "id": 19,
+        "user_id": 37,
+        "user_name": "Quinn",
+        "comment": "디자인 협업에 적합한 툴입니다.",
+        "rating": 5
+      },
+      {
+        "id": 20,
+        "user_id": 38,
+        "user_name": "Rachel",
+        "comment": "초보자도 쉽게 사용할 수 있습니다.",
+        "rating": 4
+      }
+    ],
+    "qna": [
+      {
+        "id": 1,
+        "user_id": 11,
+        "content": "전체 서비스를 무료로 이용 가능한가요?",
+        "created_at": "2024-08-01T12:34:56Z",
+        "answer": null
+      },
+      {
+        "id": 2,
+        "user_id": 4,
+        "content": "How can I access this?",
+        "created_at": "2024-08-01T12:34:56Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "이 제품의 보증기간은 1년입니다.",
+          "created_at": "2024-08-02T15:45:30Z"
+        }
+      },
+      {
+        "id": 3,
+        "user_id": 7,
+        "content": "이 툴은 몇 명까지 동시 작업이 가능한가요?",
+        "created_at": "2024-08-03T10:20:30Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "최대 10명이 동시 작업 가능합니다.",
+          "created_at": "2024-08-03T12:45:10Z"
+        }
+      },
+      {
+        "id": 4,
+        "user_id": 15,
+        "content": "사용 중 문제 발생 시 지원이 가능한가요?",
+        "created_at": "2024-08-04T09:10:15Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "24시간 지원팀이 대기 중입니다.",
+          "created_at": "2024-08-04T11:30:45Z"
+        }
+      },
+      {
+        "id": 5,
+        "user_id": 18,
+        "content": "모바일 앱에서도 사용 가능한가요?",
+        "created_at": "2024-08-05T08:55:30Z",
+        "answer": null
+      },
+      {
+        "id": 6,
+        "user_id": 9,
+        "content": "유료 플랜은 어떤 기능이 포함되나요?",
+        "created_at": "2024-08-06T14:12:45Z",
+        "answer": {
+          "admin_id": 2,
+          "content": "유료 플랜은 추가 저장 공간과 더 많은 협업 도구를 제공합니다.",
+          "created_at": "2024-08-06T16:05:30Z"
+        }
+      },
+      {
+        "id": 7,
+        "user_id": 20,
+        "content": "비밀번호를 잊어버렸을 때 어떻게 해야 하나요?",
+        "created_at": "2024-08-07T07:22:10Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "비밀번호 재설정 링크를 통해 쉽게 재설정할 수 있습니다.",
+          "created_at": "2024-08-07T08:30:00Z"
+        }
+      },
+      {
+        "id": 8,
+        "user_id": 13,
+        "content": "다른 사람과 파일을 공유할 수 있나요?",
+        "created_at": "2024-08-08T12:40:20Z",
+        "answer": null
+      },
+      {
+        "id": 9,
+        "user_id": 22,
+        "content": "프로젝트 데이터를 백업할 수 있나요?",
+        "created_at": "2024-08-09T15:50:00Z",
+        "answer": {
+          "admin_id": 2,
+          "content": "백업 기능을 통해 모든 프로젝트 데이터를 저장할 수 있습니다.",
+          "created_at": "2024-08-09T16:55:30Z"
+        }
+      },
+      {
+        "id": 10,
+        "user_id": 25,
+        "content": "플러그인은 어떻게 설치하나요?",
+        "created_at": "2024-08-10T10:15:45Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "설정 메뉴에서 플러그인을 검색하고 설치할 수 있습니다.",
+          "created_at": "2024-08-10T11:20:30Z"
+        }
+      },
+      {
+        "id": 11,
+        "user_id": 17,
+        "content": "이용약관을 어디에서 확인할 수 있나요?",
+        "created_at": "2024-08-11T08:05:50Z",
+        "answer": {
+          "admin_id": 2,
+          "content": "홈페이지 하단의 링크를 통해 이용약관을 확인할 수 있습니다.",
+          "created_at": "2024-08-11T09:10:30Z"
+        }
+      },
+      {
+        "id": 12,
+        "user_id": 29,
+        "content": "언제 업데이트가 예정되어 있나요?",
+        "created_at": "2024-08-12T13:25:00Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "다음 업데이트는 2024년 9월 초에 예정되어 있습니다.",
+          "created_at": "2024-08-12T14:30:45Z"
+        }
+      }
+    ],
+    "viewCount": 267,
+    "likeCount": 51
+  },
+  {
+    "id": 2,
+    "title": "Title 2",
+    "link": "https://example.com/2",
+    "image": "../images/site-sample-img-2.png",
+    "description": "Description for Content 2",
+    "category": "Category 2",
+    "detailedInfo": "Detailed info for Content 2",
+    "review": [
+      {
+        "id": 2,
+        "user_id": 3,
+        "user_name": "David",
+        "comment": "Not bad",
+        "rating": 3
+      }
+    ],
+    "qna": [
+      {
+        "id": 2,
+        "user_id": 4,
+        "content": "How can I access this?",
+        "created_at": "2024-08-01T12:34:56Z",
+        "answer": {
+          "admin_id": 1,
+          "content": "이 제품의 보증기간은 1년입니다.",
+          "created_at": "2024-08-02T15:45:30Z"
+        }
+      }
+    ],
+    "viewCount": 200,
+    "likeCount": 75
+  }
+]

@@ -17,9 +17,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ setContentImages }) => {
     const newFiles = Array.from(event.dataTransfer.files).filter(isImageFile);
 
     if (newFiles.length > 0) {
-      const updatedFiles = [...files, ...newFiles].slice(0, 5); // 최대 5개 파일만 유지
+      const updatedFiles = [...files, ...newFiles].slice(0, 5);
       setFiles(updatedFiles);
-      setContentImages(updatedFiles); // 상위 컴포넌트에 업데이트된 파일 배열 전달
+      setContentImages(updatedFiles);
       setError(null);
     } else {
       setError('이미지 파일만 업로드할 수 있습니다.');
@@ -30,9 +30,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ setContentImages }) => {
     const newFiles = Array.from(event.target.files || []).filter(isImageFile);
 
     if (newFiles.length > 0) {
-      const updatedFiles = [...files, ...newFiles].slice(0, 5); // 최대 5개 파일만 유지
+      const updatedFiles = [...files, ...newFiles].slice(0, 5);
       setFiles(updatedFiles);
-      setContentImages(updatedFiles); // 상위 컴포넌트에 업데이트된 파일 배열 전달
+      setContentImages(updatedFiles);
       setError(null);
     } else {
       setError('이미지 파일만 업로드할 수 있습니다.');
@@ -58,7 +58,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ setContentImages }) => {
           accept='image/*'
         />
         <label htmlFor='fileInput' className='cursor-pointer'>
-          <span>업로드할 파일 놓기 또는 파일 선택 (최대 5개)</span>
+          <span>상세내용 업로드할 이미지파일 놓기 또는 파일 선택 (최대 5개)</span>
         </label>
       </div>
       {error && <p className='mt-2 text-red'>{error}</p>}

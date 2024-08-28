@@ -10,7 +10,8 @@ import OwnerSiteDetailPage from './pages/OwnerSiteDetailPage';
 import AnalystMyPage from './pages/AnalystMyPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordResetPage from './pages/PasswordResetPage';
-import RedirectHandlerPage from './pages/RedirectHandlerPage';
+import SiteRegistrationPage from './pages/SiteRegistrationPage';
+import AnalystRequestPage from './pages/AnalystRequestPage';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path='/mypage/owner' element={<OwnerMyPage />} />
         <Route path='/mypage/owner/:id' element={<OwnerSiteDetailPage />} />
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />
+        <Route path='/register' element={<SiteRegistrationPage />} />
+        <Route path='/analyze' element={<AnalystRequestPage />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />
       <Route path='/redirect' element={<RedirectHandlerPage />} />

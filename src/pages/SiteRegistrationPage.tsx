@@ -5,7 +5,6 @@ import FileUpload from '../components/specific/FileUpload';
 import AutoResizeTextarea from '../components/common/AutoResizeTextarea';
 import categoriesData from '../data/categories.json';
 
-// 폼에서 사용할 입력 필드를 정의한 인터페이스
 interface RegisterInputs {
   title: string;
   link: string;
@@ -18,63 +17,49 @@ interface RegisterInputs {
 
 const SiteRegistrationPage = () => {
   const navigate = useNavigate();
-
-  // react-hook-form을 사용하여 폼 데이터를 관리
   const {
-    register, // 폼 필드 등록에 사용
-    handleSubmit, // 폼 제출을 핸들링
-    formState: { errors }, // 폼의 에러 상태를 관리
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm<RegisterInputs>();
 
-  // 선택된 카테고리에 따른 하위 카테고리를 관리하는 상태
   const [subCategories, setSubCategories] = useState<{ id: number; label: string; slug: string }[]>([]);
-  // 업로드된 이미지 파일을 관리하는 상태
   const [contentImages, setContentImages] = useState<File[]>([]);
 
-  // 폼이 제출되었을 때 호출되는 함수
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
-    // 선택된 카테고리와 하위 카테고리를 찾음
     const selectedCategory = categoriesData.find((category) => category.id.toString() === data.category);
     const selectedSubCategory = selectedCategory?.subCategories.find((sub) => sub.id.toString() === data.subCategory);
 
-    // 카테고리 또는 서브 카테고리가 존재하지 않으면 에러 출력
     if (!selectedCategory || !selectedSubCategory) {
       console.error('카테고리 또는 서브 카테고리를 찾을 수 없습니다.');
       return;
     }
 
-    // 서버로 보낼 데이터를 담을 FormData 객체를 생성
     const formData = new FormData();
-    formData.append('title', data.title); // 제목 추가
-    formData.append('link', data.link); // 링크 추가
-    formData.append('point', data.point); // 요약 포인트 추가
-    formData.append('content', data.content); // 상세 내용 추가
-    formData.append('categoryId', selectedCategory.id.toString()); // 선택된 카테고리 ID 추가
-    formData.append('subCategoryId', selectedSubCategory.id.toString()); // 선택된 서브 카테고리 ID 추가
+    formData.append('title', data.title);
+    formData.append('link', data.link);
+    formData.append('point', data.point);
+    formData.append('content', data.content);
+    formData.append('categoryId', selectedCategory.id.toString());
+    formData.append('subCategoryId', selectedSubCategory.id.toString());
 
-    // 대표 이미지가 선택된 경우 FormData에 추가
     if (data.image.length > 0) {
       formData.append('image', data.image[0]);
     }
 
-    // 업로드된 모든 이미지 파일을 FormData에 추가
     contentImages.forEach((file) => {
       formData.append('contentImages[]', file);
     });
 
-    // 디버깅을 위해 FormData에 들어있는 데이터를 콘솔에 출력
     console.log('FormData entries:');
     formData.forEach((value, key) => {
       console.log(key, value);
     });
 
-    // 서버에 데이터를 POST 요청으로 전송
     const response = await fetch('/api/upload-site', {
       method: 'POST',
       body: formData,
     });
-
-    // 요청이 성공했는지 확인하고, 사용자에게 결과 알림
     if (response.ok) {
       alert('사이트 등록이 완료되었습니다.');
       navigate('/');
@@ -83,10 +68,9 @@ const SiteRegistrationPage = () => {
     }
   };
 
-  // 상위 카테고리가 변경될 때 호출되는 함수
+  // 상위 카테고리가 변경될 때 호출
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategoryId = parseInt(event.target.value);
-    // 선택된 상위 카테고리에 따른 하위 카테고리 리스트를 설정
     const selectedCategory = categoriesData.find((category) => category.id === selectedCategoryId);
     setSubCategories(selectedCategory ? selectedCategory.subCategories : []);
   };
@@ -105,7 +89,7 @@ const SiteRegistrationPage = () => {
                     required: '카테고리를 선택해주세요.',
                   })}
                   onChange={handleCategoryChange}
-                  className='mr-[15px] h-[55px] w-full rounded-[10px] border border-gray-c4 bg-white px-[0px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
+                  className='mr-[15px] block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 >
                   <option value='default'>상위 카테고리를 선택해주세요</option>
                   {categoriesData.map((category) => (
@@ -118,7 +102,7 @@ const SiteRegistrationPage = () => {
                   {...register('subCategory', {
                     required: '카테고리를 선택해주세요.',
                   })}
-                  className='h-[55px] w-full rounded-[10px] border border-gray-c4 bg-white px-[20px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
+                  className='block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 >
                   <option value=''>하위 카테고리를 선택해주세요</option>
                   {subCategories.map((subCategory) => (
@@ -151,8 +135,14 @@ const SiteRegistrationPage = () => {
               <input
                 type='text'
                 placeholder='페이지 타이틀 명을 입력해주세요'
-                className='h-[55px] w-full rounded-[10px] border border-gray-c4 bg-white px-[20px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
-                {...register('title', { required: '페이지 타이틀을 입력해주세요.' })}
+                className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                {...register('title', {
+                  required: '페이지 타이틀을 입력해주세요.',
+                  maxLength: {
+                    value: 30,
+                    message: '페이지 타이틀은 최대 30자까지 입력할 수 있습니다.',
+                  },
+                })}
               />
               {errors.title && <p className='ml-1 text-red'>{errors.title.message}</p>}
             </div>
@@ -161,12 +151,16 @@ const SiteRegistrationPage = () => {
               <input
                 type='text'
                 placeholder='페이지 링크를 입력해주세요'
-                className='h-[55px] w-full rounded-[10px] border border-gray-c4 bg-white px-[20px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
+                className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 {...register('link', {
                   required: '페이지 링크를 입력해주세요.',
                   pattern: {
                     value: /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})+\/?/,
                     message: '유효한 링크를 입력해주세요.',
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: '페이지 링크는 최대 100자까지 입력할 수 있습니다.',
                   },
                 })}
               />
@@ -177,20 +171,31 @@ const SiteRegistrationPage = () => {
               <input
                 type='text'
                 placeholder='한줄 요약포인트를 입력해주세요'
-                className='h-[55px] w-full rounded-[10px] border border-gray-c4 bg-white px-[20px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
-                {...register('point', { required: '한줄 요약 포인트를 입력해주세요.' })}
+                className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                {...register('point', {
+                  required: '한줄 요약 포인트를 입력해주세요.',
+                  maxLength: {
+                    value: 50,
+                    message: '한줄 요약포인트는 최대 50자까지 입력할 수 있습니다.',
+                  },
+                })}
               />
               {errors.point && <p className='ml-1 text-red'>{errors.point.message}</p>}
             </div>
-            {/* 상세 내용 입력 */}
             <div className='mb-[30px]'>
               <p className='mb-[11px] text-[18px]'>상세내용</p>
               <AutoResizeTextarea
-                placeholder='상세내용을 입력해주세요'
-                className='mb-[10px] w-full rounded-[10px] border border-gray-c4 bg-white px-[20px] py-[10px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
-                {...register('content')}
+                placeholder='상세내용을 입력해주세요 (최대 1000자)'
+                className='mb-[15px] mt-2 block min-h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                {...register('content', {
+                  maxLength: {
+                    value: 1000,
+                    message: '상세내용은 최대 1000자까지 입력할 수 있습니다.',
+                  },
+                })}
               />
               <FileUpload setContentImages={setContentImages} />
+              {errors.content && <p className='ml-1 text-red'>{errors.content.message}</p>}
             </div>
           </div>
           <button

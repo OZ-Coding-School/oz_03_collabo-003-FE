@@ -19,14 +19,11 @@ const CategoryPage: React.FC = () => {
   const [contents, setContents] = useState<ContentItem[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
   const [subCategoryName, setSubCategoryName] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const cardsPerPage = 8;
 
   useEffect(() => {
-    setLoading(true);
-
     const selectedCategory = categoriesData.find((category) => category.slug === categorySlug);
 
     if (!selectedCategory) {
@@ -58,8 +55,6 @@ const CategoryPage: React.FC = () => {
 
       setContents(categoryContent ? categoryContent.content : []);
     }
-
-    setLoading(false);
   }, [categorySlug, subCategorySlug, navigate]);
 
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -70,20 +65,12 @@ const CategoryPage: React.FC = () => {
 
   const totalPages = Math.ceil(contents.length / cardsPerPage);
 
-  if (loading) {
-    return (
-      <div className='flex h-screen items-center justify-center'>
-        <p className='text-xl'>로딩 중...</p>
-      </div>
-    );
-  }
-
   return (
     <div className='flex min-h-[calc(100vh-70px)] flex-col'>
       <div className='container mx-auto px-4'>
         <div className='flex justify-center'>
           <h2 className='my-[50px] text-[28px]'>
-            {subCategoryName || categoryName}에 도움을 주는 사이트를 소개 합니다.
+            {subCategoryName || categoryName}에 도움을 주는 사이트를 소개합니다.
           </h2>
         </div>
         {contents.length === 0 ? (
@@ -93,19 +80,18 @@ const CategoryPage: React.FC = () => {
         ) : (
           <>
             <div className='flex w-full justify-center px-4'>
-              <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+              <div className='grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                 {currentCards.map((item) => (
                   <div
                     key={item.id}
-                    className='w-[330px] overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
+                    className='w-full cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
+                    onClick={() => navigate(`/contents/${item.id}`)}
                   >
-                    <a href={item.link} target='_blank' rel='noopener noreferrer'>
-                      <img src={item.image} alt={item.title} className='h-48 w-full object-cover' />
-                      <div className='p-4'>
-                        <h3 className='mb-2 text-center text-[20px] font-semibold'>{item.title}</h3>
-                        <p className='text-gray-75'>{item.summary}</p>
-                      </div>
-                    </a>
+                    <img src={item.image} alt={item.title} className='h-48 w-full object-cover' />
+                    <div className='p-4'>
+                      <h3 className='mb-2 text-center text-[20px] font-semibold'>{item.title}</h3>
+                      <p className='text-gray-75'>{item.summary}</p>
+                    </div>
                   </div>
                 ))}
               </div>

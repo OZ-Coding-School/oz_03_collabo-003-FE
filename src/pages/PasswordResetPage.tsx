@@ -27,7 +27,8 @@ const PasswordResetPage: React.FC = () => {
   };
 
   const resetPassword = async (data: PasswordResetInputs) => {
-    return axios.post(`${baseUrl}/api/v1/accounts/password-reset/confirm`, data);
+    return axios.post('http://223.130.128.216:8000/accounts/password-reset/', data);
+    // return axios.post(`${baseUrl}/api/v1/accounts/password-reset/confirm`, data);
   };
 
   const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {
@@ -64,7 +65,7 @@ const PasswordResetPage: React.FC = () => {
               이메일
             </label>
             <input
-              className='mb-14 mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+              className='mb-14 mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               type='email'
               id='email'
               disabled={isLoading}
@@ -134,6 +135,11 @@ const PasswordResetPage: React.FC = () => {
           </div>
         )}
       </form>
+      <div className='mt-4 flex space-x-4'>
+        <a href='/login' className='hover:text-blue-primary'>
+          로그인으로 돌아가기
+        </a>
+      </div>
     </div>
   );
 };

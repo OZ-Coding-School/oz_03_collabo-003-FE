@@ -12,6 +12,7 @@ import SignUpPage from './pages/SignUpPage';
 import PasswordResetPage from './pages/PasswordResetPage';
 import SiteRegistrationPage from './pages/SiteRegistrationPage';
 import AnalystRequestPage from './pages/AnalystRequestPage';
+import RedirectHandlerPage from './pages/RedirectHandlerPage';
 
 function App() {
   return (

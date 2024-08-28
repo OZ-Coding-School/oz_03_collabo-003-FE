@@ -16,7 +16,7 @@ const DeleteAccountPage: React.FC = () => {
   } = useForm<FormValues>();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  const baseUrl = import.meta.env.VITE_API_URL;
+  // const baseUrl = import.meta.env.VITE_API_URL;
 
   const onSubmit = async (data: FormValues) => {
     if (data.confirmation === '위의 내용에 동의하며, 탈퇴하겠습니다.') {
@@ -24,7 +24,8 @@ const DeleteAccountPage: React.FC = () => {
         setIsDeleting(true);
 
         try {
-          await axios.delete(`${baseUrl}/api/v1/accounts/account-delete`);
+          await axios.delete('http://223.130.128.216:8000/accounts/account-delete/');
+          // await axios.delete(`${baseUrl}/api/v1/accounts/account-delete`);
           alert('탈퇴가 완료되었습니다.');
           // 토큰 삭제 후 홈으로 리다이렉트
           useAuthStore.getState().logOut();

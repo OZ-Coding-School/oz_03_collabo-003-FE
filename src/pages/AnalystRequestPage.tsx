@@ -1,19 +1,109 @@
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+interface AnalystRequestData {
+  requirements: string;
+}
+
 const AnalystRequestPage = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<AnalystRequestData>();
+
+  const [amount] = useState(1); // 결제 금액
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.iamport.kr/js/iamport.payment-1.2.0.js';
+    script.onload = () => {
+      if (window.IMP) {
+        window.IMP.init('imp42785863'); // 가맹점 식별코드
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handlePayment = (data: AnalystRequestData) => {
+    if (!window.IMP) {
+      alert('결제 모듈이 로드되지 않았습니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+      alert('유효한 결제 금액이 설정되지 않았습니다.');
+      return;
+    }
+
+    window.IMP.request_pay(
+      {
+        pg: 'kicc', // 결제창 PG사
+        pay_method: 'card',
+        merchant_uid: 'merchant' + new Date().getTime(),
+        name: '주문명:결제테스트',
+        amount: amount,
+        buyer_email: 'iamport@siot.do',
+        buyer_name: '구매자이름',
+        buyer_tel: '010-1234-5678',
+        buyer_addr: '서울특별시 강남구 삼성동',
+        buyer_postcode: '123-456',
+        m_redirect_url: 'https://www.yourdomain.com/payments/complete', // 결제 완료 시 리다이렉트 될 주소
+      },
+      async (rsp: any) => {
+        if (rsp.success) {
+          let msg = '결제가 완료되었습니다.';
+          msg += '고유ID : ' + rsp.imp_uid;
+          msg += '상점 거래ID : ' + rsp.merchant_uid;
+          msg += '결제 금액 : ' + rsp.paid_amount;
+          msg += '카드 승인번호 : ' + rsp.apply_num;
+          alert(msg);
+
+          // 결제 성공 후 요청사항 서버에 전송
+          try {
+            const response = await fetch('/api/submit-request', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+              throw new Error('서버에 요청을 전송하는 데 실패했습니다.');
+            }
+
+            console.log('서버로 요청사항이 성공적으로 전송되었습니다.');
+          } catch (error) {
+            console.error('오류가 발생했습니다:', error);
+          }
+        } else {
+          let msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+          alert(msg);
+        }
+      }
+    );
+  };
+
   return (
     <div className='flex h-full flex-col items-center'>
       <h1 className='my-[64px] text-center text-[27px]'>사이트분석 및 등록을 의뢰하세요</h1>
       <div className='flex items-center justify-center gap-8'>
-        <BasicInfoSection />
-        <DiscountSection />
+        <BasicInfoSection register={register} errors={errors} />
+        <DiscountSection onSubmit={handleSubmit(handlePayment)} amount={amount} />
       </div>
     </div>
   );
 };
 
-// 기본 정보
-const BasicInfoSection = () => {
+const BasicInfoSection = ({ register, errors }: any) => {
   return (
-    <div className='h-[495px] w-[964px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'>
+    <div className='h-[515px] w-[964px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'>
       <h2 className='mb-[20px] text-[20px] font-bold'>기본 정보</h2>
       <div>
         <div className='mb-[25px]'>
@@ -34,15 +124,34 @@ const BasicInfoSection = () => {
             <p className='text-gray-75'>검색엔진 포털 사이트</p>
           </div>
         </div>
+        <div className='mb-[25px]'>
+          <p className='mb-[7px] font-semibold'>요청사항</p>
+          <input
+            type='text'
+            placeholder='요청사항을 입력해주세요'
+            className='h-[50px] w-full rounded-[5px] border border-gray-c4 bg-white px-[10px] focus:outline-none focus:ring-1 focus:ring-blue-primary'
+            {...register('requirements', {
+              required: '요청사항을 입력해주세요.',
+            })}
+          />
+          {errors.requirements && <p className='ml-1 text-red'>{errors.requirements.message}</p>}
+        </div>
       </div>
     </div>
   );
 };
 
-// 할인 수단
-const DiscountSection = () => {
+interface DiscountSectionProps {
+  onSubmit: () => void;
+  amount: number;
+}
+
+const DiscountSection: React.FC<DiscountSectionProps> = ({ onSubmit, amount }) => {
   return (
-    <div className='h-[495px] w-[366px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'>
+    <form
+      onSubmit={onSubmit}
+      className='h-[515px] w-[366px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'
+    >
       <h2 className='mb-[20px] text-[20px] font-bold'>할인 수단</h2>
       <div className='flex h-[calc(100%-40px)] flex-col justify-between'>
         <div>
@@ -95,10 +204,13 @@ const DiscountSection = () => {
             </div>
             <div className='mb-[8px] flex justify-between'>
               <p className='text-[18px] font-semibold'>총 결제금액</p>
-              <p className='text-[18px] font-semibold'>0원</p>
+              <p className='text-[18px] font-semibold'>{amount}원</p>
             </div>
           </div>
-          <button className='h-[46px] w-full rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover'>
+          <button
+            type='submit'
+            className='h-[46px] w-full rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover'
+          >
             결제하기
           </button>
           <p className='mt-[8px] text-[12px] text-gray-75'>
@@ -107,7 +219,7 @@ const DiscountSection = () => {
           </p>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -47,6 +47,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY_ID }}
           aws-region: ap-northeast-2
 
+      # 빌드 실행
+      - name: Build project
+        run: npm run build
+
       # S3로 업로드
       - name: Upload to S3
         env:

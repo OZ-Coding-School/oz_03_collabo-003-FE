@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface SignUpFormInputs {
   username: string;
@@ -17,6 +18,8 @@ const SignUpPage: React.FC = () => {
   const [isUsernameVerified, setIsUsernameVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 비밀번호 표시 여부 상태 추가
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 표시 여부 상태 추가
 
   const {
     register,
@@ -220,18 +223,27 @@ const SignUpPage: React.FC = () => {
           <label htmlFor='password' className='block text-sm font-medium'>
             비밀번호 8-15자 영문/숫자 또는 특수문자 조합
           </label>
-          <input
-            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
-            type='password'
-            placeholder='비밀번호를 입력하세요.'
-            {...register('password', {
-              required: '비밀번호를 입력하세요.',
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-                message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
-              },
-            })}
-          />
+          <div className='relative'>
+            <input
+              className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+              type={showPassword ? 'text' : 'password'} // 입력 타입을 상태에 따라 변경
+              placeholder='비밀번호를 입력하세요.'
+              {...register('password', {
+                required: '비밀번호를 입력하세요.',
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
+                  message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
+                },
+              })}
+            />
+            <button
+              type='button'
+              className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'
+              onClick={() => setShowPassword(!showPassword)} // 클릭 시 상태 변경
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />} {/* 아이콘 표시 */}
+            </button>
+          </div>
           {errors.password && <p className='mt-2 text-sm text-red'>{errors.password?.message}</p>}
         </div>
 
@@ -239,15 +251,24 @@ const SignUpPage: React.FC = () => {
           <label htmlFor='confirmPassword' className='block text-sm font-medium'>
             비밀번호 확인
           </label>
-          <input
-            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
-            type='password'
-            placeholder='비밀번호 확인을 입력하세요.'
-            {...register('confirmPassword', {
-              required: '비밀번호 확인을 입력하세요.',
-              validate: (value) => value === watch('password') || '비밀번호가 일치하지 않습니다.',
-            })}
-          />
+          <div className='relative'>
+            <input
+              className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+              type={showConfirmPassword ? 'text' : 'password'} // 입력 타입을 상태에 따라 변경
+              placeholder='비밀번호 확인을 입력하세요.'
+              {...register('confirmPassword', {
+                required: '비밀번호 확인을 입력하세요.',
+                validate: (value) => value === watch('password') || '비밀번호가 일치하지 않습니다.',
+              })}
+            />
+            <button
+              type='button'
+              className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)} // 클릭 시 상태 변경
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />} {/* 아이콘 표시 */}
+            </button>
+          </div>
           {errors.confirmPassword && <p className='mt-2 text-sm text-red'>{errors.confirmPassword?.message}</p>}
         </div>
 

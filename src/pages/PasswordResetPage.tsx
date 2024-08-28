@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // 아이콘 임포트
 
 interface PasswordResetInputs {
   email: string;
@@ -11,6 +12,7 @@ interface PasswordResetInputs {
 const PasswordResetPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 비밀번호 시각화 상태
 
   const {
     register,
@@ -109,20 +111,30 @@ const PasswordResetPage: React.FC = () => {
               <label htmlFor='password' className='block text-sm font-medium'>
                 새 비밀번호
               </label>
-              <input
-                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
-                type='password'
-                id='password'
-                disabled={isLoading}
-                placeholder='새 비밀번호를 입력하세요.'
-                {...register('password', {
-                  required: '비밀번호를 입력하세요.',
-                  pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-                    message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
-                  },
-                })}
-              />
+              <div className='relative'>
+                <input
+                  className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+                  type={showPassword ? 'text' : 'password'} // 비밀번호 표시 여부
+                  id='password'
+                  disabled={isLoading}
+                  placeholder='새 비밀번호를 입력하세요.'
+                  {...register('password', {
+                    required: '비밀번호를 입력하세요.',
+                    pattern: {
+                      value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
+                      message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
+                    },
+                  })}
+                />
+                <button
+                  type='button'
+                  className='absolute inset-y-0 right-0 flex items-center pr-3'
+                  onClick={() => setShowPassword(!showPassword)} // 클릭 시 비밀번호 표시/숨김 전환
+                >
+                  {/* 비밀번호 표시 상태에 따라 아이콘 변경 */}
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
               {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}
             </div>
             <button

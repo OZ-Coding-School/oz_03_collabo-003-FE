@@ -151,7 +151,7 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isUsernameVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isUsernameVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
               onClick={verifyUsername}
               disabled={isUsernameVerified}
             >
@@ -180,11 +180,11 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isVerificationCodeSent ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isVerificationCodeSent ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
               onClick={requestVerificationCode}
               disabled={isVerificationCodeSent}
             >
-              {isVerificationCodeSent ? '코드 발송 완료' : '코드 요청'}
+              {isVerificationCodeSent ? '발송 완료' : '코드 요청'}
             </button>
           </div>
           {errors.email && <p className='mt-2 text-sm text-red'>{errors.email?.message}</p>}
@@ -204,7 +204,7 @@ const SignUpPage: React.FC = () => {
               />
               <button
                 type='button'
-                className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+                className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
                 onClick={verifyCode}
                 disabled={isEmailVerified}
               >

@@ -7,14 +7,16 @@ interface SignUpFormInputs {
   email: string;
   password: string;
   confirmPassword: string;
+  verificationCode: string;
 }
 
-const baseUrl = import.meta.env.VITE_API_URL;
+// const baseUrl = import.meta.env.VITE_API_URL;
 
 const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUsernameVerified, setIsUsernameVerified] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isVerificationCodeSent, setIsVerificationCodeSent] = useState(false);
 
   const {
     register,
@@ -34,8 +36,9 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/accounts/check-username`, { username: username });
-      if (response.data.detail === '사용 가능한 닉네임입니다.') {
+      const response = await axios.post('http://127.0.0.1:8000/accounts/check-username/', { username });
+      // const response = await axios.post(`${baseUrl}/api/v1/accounts/check-username`, { username });
+      if (response.data.message === '사용 가능한 닉네임입니다.') {
         setIsUsernameVerified(true);
         alert('닉네임 인증이 완료되었습니다.');
       } else {
@@ -48,7 +51,7 @@ const SignUpPage: React.FC = () => {
     }
   };
 
-  const verifyEmail = async () => {
+  const requestVerificationCode = async () => {
     const email = getValues('email');
 
     if (!email) {
@@ -57,13 +60,41 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/accounts/register/confirm`, { email });
-      if (response.data.message === '회원가입이 완료되었습니다.') {
+      const response = await axios.post('http://127.0.0.1:8000/accounts/send-verification-code/', { email });
+      // const response = await axios.post(`${baseUrl}/api/v1/accounts/send-verification-code`, { email });
+      if (response.data.detail === '인증 코드가 이메일로 전송되었습니다.') {
+        setIsVerificationCodeSent(true);
+        alert('인증 코드가 이메일로 전송되었습니다.');
+      } else {
+        alert('인증 코드 전송에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('인증 코드 요청 실패:', error);
+      alert('인증 코드 요청에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const verifyCode = async () => {
+    const email = getValues('email');
+    const verificationCode = getValues('verificationCode');
+
+    if (!email || !verificationCode) {
+      setError('verificationCode', { type: 'manual', message: '인증 코드를 입력하세요.' });
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/accounts/verify-code/', {
+        // const response = await axios.post(`${baseUrl}/api/v1/accounts/verify-code`, {
+        email,
+        verification_code: verificationCode,
+      });
+      if (response.data.detail === '인증 코드가 확인되었습니다.') {
         setIsEmailVerified(true);
         alert('이메일 인증이 완료되었습니다.');
       } else {
         setIsEmailVerified(false);
-        alert('이메일 인증에 실패했습니다. 다시 시도해주세요.');
+        alert('인증 코드가 일치하지 않습니다.');
       }
     } catch (error) {
       console.error('이메일 인증 실패:', error);
@@ -84,9 +115,10 @@ const SignUpPage: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(`${baseUrl}/api/v1/accounts/register`, {
-        username: data.username,
+      const response = await axios.post('http://127.0.0.1:8000/accounts/register/', {
+        // const response = await axios.post(`${baseUrl}/api/v1/accounts/register-final`, {
         email: data.email,
+        username: data.username,
         password: data.password,
       });
       console.log(response.data);
@@ -106,13 +138,14 @@ const SignUpPage: React.FC = () => {
         ALLTHE
       </a>
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-lg rounded-lg p-8'>
+        {/* Username Field */}
         <div className='mb-6'>
           <label htmlFor='nickname' className='block text-sm font-medium'>
             닉네임
           </label>
           <div className='flex'>
             <input
-              className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+              className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               placeholder='닉네임을 입력하세요.'
               {...register('username', { required: '닉네임을 입력하세요.' })}
             />
@@ -122,19 +155,20 @@ const SignUpPage: React.FC = () => {
               onClick={verifyUsername}
               disabled={isUsernameVerified}
             >
-              {isUsernameVerified ? '인증 완료' : '닉네임 인증'}
+              {isUsernameVerified ? '인증 완료' : '중복 인증'}
             </button>
           </div>
           {errors.username && <p className='mt-2 text-sm text-red'>{errors.username?.message}</p>}
         </div>
 
+        {/* Email Field */}
         <div className='mb-6'>
           <label htmlFor='email' className='block text-sm font-medium'>
             이메일
           </label>
           <div className='flex'>
             <input
-              className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+              className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               placeholder='이메일을 입력하세요.'
               {...register('email', {
                 required: '이메일을 입력하세요.',
@@ -146,22 +180,48 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
-              onClick={verifyEmail}
-              disabled={isEmailVerified}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isVerificationCodeSent ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              onClick={requestVerificationCode}
+              disabled={isVerificationCodeSent}
             >
-              {isEmailVerified ? '인증 완료' : '이메일 인증'}
+              {isVerificationCodeSent ? '코드 발송 완료' : '코드 요청'}
             </button>
           </div>
           {errors.email && <p className='mt-2 text-sm text-red'>{errors.email?.message}</p>}
         </div>
 
+        {/* Verification Code Field */}
+        {isVerificationCodeSent && (
+          <div className='mb-6'>
+            <label htmlFor='verificationCode' className='block text-sm font-medium'>
+              인증 코드
+            </label>
+            <div className='flex'>
+              <input
+                className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                placeholder='이메일로 받은 인증 코드를 입력하세요.'
+                {...register('verificationCode', { required: '인증 코드를 입력하세요.' })}
+              />
+              <button
+                type='button'
+                className={`ml-2 mt-2 flex h-[50px] items-center justify-center rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+                onClick={verifyCode}
+                disabled={isEmailVerified}
+              >
+                {isEmailVerified ? '인증 완료' : '인증 확인'}
+              </button>
+            </div>
+            {errors.verificationCode && <p className='mt-2 text-sm text-red'>{errors.verificationCode?.message}</p>}
+          </div>
+        )}
+
+        {/* Password Fields */}
         <div className='mb-6'>
           <label htmlFor='password' className='block text-sm font-medium'>
             비밀번호 8-15자 영문/숫자 또는 특수문자 조합
           </label>
           <input
-            className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
             type='password'
             placeholder='비밀번호를 입력하세요.'
             {...register('password', {
@@ -180,7 +240,7 @@ const SignUpPage: React.FC = () => {
             비밀번호 확인
           </label>
           <input
-            className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
             type='password'
             placeholder='비밀번호 확인을 입력하세요.'
             {...register('confirmPassword', {
@@ -191,14 +251,16 @@ const SignUpPage: React.FC = () => {
           {errors.confirmPassword && <p className='mt-2 text-sm text-red'>{errors.confirmPassword?.message}</p>}
         </div>
 
+        {/* Submit Button */}
         <button
-          className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'} `}
+          className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'}`}
           type='submit'
           disabled={isLoading}
         >
           {isLoading ? '처리 중...' : '회원가입'}
         </button>
       </form>
+
       <div className='mt-4 text-center'>
         <a href='/login' className='hover:text-blue-primary'>
           이미 회원이신가요? 로그인

@@ -16,7 +16,7 @@ interface SocialLoginButtonProps {
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, logo, redirectUrl }) => (
-  <a href={redirectUrl} className='mx-6 inline-block'>
+  <a href={redirectUrl} className='mx-6 inline-block transform hover:scale-110'>
     <img src={logo} alt={`${provider} 로그인`} style={{ width: '50px', height: '50px' }} />
   </a>
 );

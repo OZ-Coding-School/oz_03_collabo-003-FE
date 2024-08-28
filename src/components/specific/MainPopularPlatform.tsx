@@ -10,6 +10,8 @@ const MainPopularPlatform = () => {
   const [selectedCategory, setSelectedCategory] = useState('업무');
   const [isLoading, setIsLoading] = useState(false);
 
+  //const baseUrl = import.meta.env.VITE_API_URL;
+
   //전체 컨텐츠 조회
   const fetchContentsData = async () => {
     setContents(contentsData);
@@ -17,7 +19,7 @@ const MainPopularPlatform = () => {
     // if (isLoading) return;
     // setIsLoading(true);
     // try {
-    //   const response = await axios.get('/api/v1/contents');
+    //   const response = await axios.get(`${baseUrl}/contents`);
     //   console.log('메인 플랫폼 컨텐츠 데이터 성공', response.data);
     //   setContents(response.data);
     // } catch (error) {

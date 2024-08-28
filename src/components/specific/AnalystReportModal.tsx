@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-//import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface AnalystReportModalProps {
   isOpen: boolean;
@@ -13,28 +13,47 @@ interface Inputs {
 
 const AnalystReportModal: React.FC<AnalystReportModalProps> = ({ isOpen, onOpen }) => {
   const { register, handleSubmit } = useForm<Inputs>();
+
+  const baseUrl = import.meta.env.VITE_API_URL;
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
-    // 나중에 데이터 응답 성공시로 옮기기
-    alert('해당 사이트에 대한 분석 보고서가 제출되었습니다.');
-    onOpen(false);
-    // const formData = new FormData();
-    // formData.append('file', data.file[0]);
-    // if (data) {
-    //   try {
-    //     const response = await axios.post('/', formData, {
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //         Accept: 'application/json',
-    //       },
-    //     });
-    //     console.log('분석 보고서 제출 성공', response.data);
-    //   } catch (error) {
-    //     console.error('분석 보고서 제출 실패', error);
-    //   }
-    // } else {
-    //   return;
-    // }
+    const formData = new FormData();
+    formData.append('file', data.file[0]);
+    if (data) {
+      try {
+        const response = await axios.post(`${baseUrl}/request/report`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Accept: 'application/json',
+          },
+        });
+        console.log('분석 보고서 제출 성공', response.data);
+        alert('해당 사이트에 대한 분석 보고서가 제출되었습니다.');
+        onOpen(false);
+      } catch (error) {
+        if (error instanceof AxiosError && error.response) {
+          console.error(error);
+          switch (error.response.status) {
+            case 500:
+              return alert('서버에 장애가 발생했습니다. 서비스 이용에 불편을 드려 죄송합니다.');
+            case 404:
+              return alert('해당 분석 의뢰건이 존재하지 않습니다.');
+            case 403:
+              return alert('인증 과정에서 문제가 발생했습니다. 서비스 이용에 불편을 드려 죄송합니다.');
+            case 401:
+              return alert('인증 과정에서 문제가 발생했습니다. 서비스 이용에 불편을 드려 죄송합니다.');
+            default:
+              return alert('처리중 문제가 발생했습니다. 서비스 이용에 불편을 드려 죄송합니다.');
+          }
+        } else {
+          console.error(error);
+          alert('일시적인 문제가 발생했습니다. 서비스 이용에 불편을 드려 죄송합니다.');
+        }
+      }
+    } else {
+      return;
+    }
   };
 
   if (!isOpen) {

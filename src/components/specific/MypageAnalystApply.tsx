@@ -73,14 +73,14 @@ const MypageAnalystApply = () => {
               <div className='flex min-w-[500px] gap-2 rounded-md bg-white p-4 hover:scale-105' key={content.id}>
                 <img
                   className='h-[150px] w-[150px] self-center rounded-sm object-cover'
-                  src={content.image}
+                  src={content.thumbnail}
                   alt={content.title}
                 />
                 <div className='flex min-w-[330px] grow flex-col gap-1'>
                   <span className='truncate text-lg font-semibold'>{content.title}</span>
-                  <span className='truncate text-justify'>{content.description}</span>
-                  <Link className='truncate hover:text-blue-primary hover:underline' to={content.link}>
-                    {content.link}
+                  <span className='truncate text-justify'>{content.site_description}</span>
+                  <Link className='truncate hover:text-blue-primary hover:underline' to={content.site_url}>
+                    {content.site_url}
                   </Link>
                   <span className='text-sm text-gray-75'>{`카테고리: ${content.category}`}</span>
                   <div className='flex items-center gap-2'>

@@ -16,8 +16,8 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const [descriptionEditing, setDescriptionEditing] = useState<boolean>(false);
   const [linkEditing, setLinkEditing] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>(content.title);
-  const [descriptionValue, setDescriptionValue] = useState<string>(content.description);
-  const [linkValue, setLinkValue] = useState<string>(content.link);
+  const [descriptionValue, setDescriptionValue] = useState<string>(content.site_description);
+  const [linkValue, setLinkValue] = useState<string>(content.site_url);
   const navigate = useNavigate();
   const setContent = useAnalysisRequestSite((state) => state.setContent);
 
@@ -89,7 +89,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
           </BtnMypage>
         </div>
         <div className='flex w-[400px] flex-col'>
-          <img className='h-[300px] w-full rounded-sm' src={content.image} alt={content.title} />
+          <img className='h-[300px] w-full rounded-sm' src={content.thumbnail} alt={content.title} />
           <div className='flex justify-between p-1'>
             <div className='flex gap-2'>
               <span className='font-semibold'>조회</span>
@@ -141,7 +141,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
               </div>
             ) : (
               <div className='flex w-full items-end border-b border-b-gray-75 p-1'>
-                <p className='grow text-gray-46'>{content.description}</p>
+                <p className='grow text-gray-46'>{content.site_description}</p>
                 <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setDescriptionEditing(true)}>
                   변경
                 </BtnMypage>
@@ -164,7 +164,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
               </div>
             ) : (
               <div className='flex w-full items-end border-b border-b-gray-75 p-1'>
-                <p className='grow text-gray-46'>{content.link}</p>
+                <p className='grow text-gray-46'>{content.site_url}</p>
                 <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setLinkEditing(true)}>
                   변경
                 </BtnMypage>

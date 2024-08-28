@@ -37,9 +37,9 @@ export interface QnA {
 export interface Content {
   id: number;
   title: string;
-  link: string;
-  image: string;
-  description: string;
+  site_url: string;
+  thumbnail: string;
+  site_description: string;
   category: string;
   detailedInfo?: string;
   review?: {

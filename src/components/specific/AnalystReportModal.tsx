@@ -26,6 +26,7 @@ const AnalystReportModal: React.FC<AnalystReportModalProps> = ({ isOpen, onOpen 
           headers: {
             'Content-Type': 'multipart/form-data',
             Accept: 'application/json',
+            withCredentials: true,
           },
         });
         console.log('분석 보고서 제출 성공', response.data);

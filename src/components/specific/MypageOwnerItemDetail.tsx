@@ -4,7 +4,7 @@ import { Content } from '../../types/type';
 import { useNavigate } from 'react-router-dom';
 import { useAnalysisRequestSite } from '../../store/store';
 import WhiteBtn from '../common/button/WhiteBtn';
-//import axios, { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface MypageOwnerItemDetailProps {
   contentId: number;
@@ -21,28 +21,33 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const navigate = useNavigate();
   const setContent = useAnalysisRequestSite((state) => state.setContent);
 
+  const baseUrl = import.meta.env.VITE_API_URL;
+
+  // 사이트 삭제하기
   const deletedContent = async () => {
     console.log(contentId);
-    // try {
-    //   const response = await axios.delete(`/api/v1/contents/${contentId}`);
-    //   console.log(response);
-    // } catch (error) {
-    //   console.error(error);
-    //   if (error instanceof AxiosError && error.response) {
-    //     switch (error.response.status) {
-    //       case 500:
-    //         return console.error('server error', error);
-    //       case 403:
-    //         return console.error('not authenticated', error);
-    //       case 400:
-    //         return console.error('bad request', error);
-    //       default:
-    //         return console.error(error);
-    //     }
-    //   } else {
-    //     console.error(error)
-    //   }
-    // }
+    try {
+      const response = await axios.delete(`${baseUrl}/contents/${contentId}`, {
+        withCredentials: true,
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      if (error instanceof AxiosError && error.response) {
+        switch (error.response.status) {
+          case 500:
+            return console.error('server error', error);
+          case 403:
+            return console.error('not authenticated', error);
+          case 400:
+            return console.error('bad request', error);
+          default:
+            return console.error(error);
+        }
+      } else {
+        console.error(error);
+      }
+    }
   };
 
   const moveToDetailPage = () => {

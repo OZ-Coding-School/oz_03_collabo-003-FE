@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/store';
 
 interface LogInInputs {
   email: string;
@@ -28,19 +29,17 @@ const LogInPage: React.FC = () => {
     setError,
     formState: { errors },
   } = useForm<LogInInputs>();
-
-  const baseUrl = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
+  const { logIn } = useAuthStore((state) => ({ logIn: state.logIn }));
 
   const loginUser = (data: LogInInputs) => {
-    // withCredentials 옵션으로 쿠키를 사용한 인증 허용
-    return axios.post(`${baseUrl}/api/v1/accounts/login`, data, { withCredentials: true });
+    return axios.post('http://223.130.128.216:8000/accounts/login/', data, { withCredentials: true });
   };
 
-  // 로그인 성공 시 처리
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (userId: number, nickname: string, email: string) => {
+    logIn(userId, nickname, email);
     console.log('Login successful!');
-    navigate('/'); // 로그인 완료 후, 사용자를 홈 페이지로 리다이렉트
+    navigate('/');
   };
 
   const onSubmit: SubmitHandler<LogInInputs> = async (data: LogInInputs) => {
@@ -48,7 +47,8 @@ const LogInPage: React.FC = () => {
     try {
       const response = await loginUser(data);
       console.log('로그인 성공:', response.data);
-      handleLoginSuccess();
+      const { userId, nickname, email } = response.data;
+      handleLoginSuccess(userId, nickname, email);
     } catch (error: any) {
       if (error.response?.data?.message) {
         const errorMessage = error.response.data.message;
@@ -77,9 +77,10 @@ const LogInPage: React.FC = () => {
     }
   };
 
-  const googleLoginUrl = `${baseUrl}/api/v1/accounts/google/login/`;
-  const kakaoLoginUrl = `${baseUrl}/api/v1/accounts/kakao/login/`;
-  const naverLoginUrl = `${baseUrl}/api/v1/accounts/naver/login/`;
+  // 소셜 로그인 버튼의 리다이렉트 URL 설정
+  const googleLoginUrl = 'http://223.130.128.216:8000/accounts/google/login';
+  const kakaoLoginUrl = 'http://223.130.128.216:8000/accounts/kakao/login/';
+  const naverLoginUrl = 'http://223.130.128.216:8000/accounts/naver/login/';
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
@@ -92,7 +93,7 @@ const LogInPage: React.FC = () => {
             이메일
           </label>
           <input
-            className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
             type='email'
             id='email'
             disabled={isLoading} // 로딩 중일 때 비활성화
@@ -112,7 +113,7 @@ const LogInPage: React.FC = () => {
             비밀번호
           </label>
           <input
-            className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-[15px] py-4 shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
             type='password'
             id='password'
             disabled={isLoading} // 로딩 중일 때 비활성화

@@ -10,6 +10,7 @@ import OwnerSiteDetailPage from './pages/OwnerSiteDetailPage';
 import AnalystMyPage from './pages/AnalystMyPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import RedirectHandlerPage from './pages/RedirectHandlerPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/mypage/analyst' element={<AnalystMyPage />} />
       </Route>
       <Route path='/login' element={<LogInPage />} />
+      <Route path='/redirect' element={<RedirectHandlerPage />} />
       <Route path='/signup' element={<SignUpPage />} />
       <Route path='/password-reset' element={<PasswordResetPage />} />
     </Routes>

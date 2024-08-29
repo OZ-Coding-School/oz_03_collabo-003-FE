@@ -77,11 +77,14 @@ const SiteRegistrationPage = () => {
 
   return (
     <div className='h-[calc(100vh-70px)] overflow-x-hidden'>
-      <h1 className='my-[44px] text-center text-[27px]'>직접 사이트를 등록할 수 있어요</h1>
+      <h1 className='my-[44px] text-center text-[23px] md:text-[27px]'>직접 사이트를 등록할 수 있어요</h1>
       <div className='flex flex-col items-center justify-center'>
-        <form className='flex w-[1039px] flex-col items-center gap-4' onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className='flex w-full flex-col items-center gap-4 px-10 lg:w-[1039px] lg:px-0'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className='w-full'>
-            <div className='mb-[30px] w-[65%]'>
+            <div className='mb-[30px] w-full lg:w-[65%]'>
               <p className='mb-[11px] text-[18px]'>카테고리 선택</p>
               <div className='flex'>
                 <select
@@ -89,7 +92,7 @@ const SiteRegistrationPage = () => {
                     required: '카테고리를 선택해주세요.',
                   })}
                   onChange={handleCategoryChange}
-                  className='mr-[15px] block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                  className='mr-[15px] block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[10px] text-[14px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary md:px-[15px] lg:text-[16px]'
                 >
                   <option value='default'>상위 카테고리를 선택해주세요</option>
                   {categoriesData.map((category) => (
@@ -98,11 +101,12 @@ const SiteRegistrationPage = () => {
                     </option>
                   ))}
                 </select>
+
                 <select
                   {...register('subCategory', {
                     required: '카테고리를 선택해주세요.',
                   })}
-                  className='block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+                  className='mr-[15px] block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[10px] text-[14px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary md:px-[15px] lg:text-[16px]'
                 >
                   <option value=''>하위 카테고리를 선택해주세요</option>
                   {subCategories.map((subCategory) => (
@@ -200,7 +204,7 @@ const SiteRegistrationPage = () => {
           </div>
           <button
             type='submit'
-            className='mb-[40px] h-[46px] w-[382px] rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover'
+            className='mb-[40px] h-[46px] w-full rounded-[10px] bg-blue-primary text-[16px] font-bold text-white duration-300 hover:bg-blue-hover sm:w-[382px]'
           >
             등록하기
           </button>

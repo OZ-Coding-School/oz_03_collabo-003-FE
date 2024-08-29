@@ -80,11 +80,11 @@ const CategoryPage: React.FC = () => {
         ) : (
           <>
             <div className='flex w-full justify-center px-4'>
-              <div className='grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+              <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm-md:grid-cols-1'>
                 {currentCards.map((item) => (
                   <div
                     key={item.id}
-                    className='w-full cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
+                    className='w-full max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
                     onClick={() => navigate(`/contents/${item.id}`)}
                   >
                     <img src={item.image} alt={item.title} className='h-48 w-full object-cover' />

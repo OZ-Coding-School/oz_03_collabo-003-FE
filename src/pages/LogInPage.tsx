@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/store';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface LogInInputs {
   email: string;
@@ -16,13 +17,14 @@ interface SocialLoginButtonProps {
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, logo, redirectUrl }) => (
-  <a href={redirectUrl} className='mx-6 inline-block'>
+  <a href={redirectUrl} className='mx-6 inline-block transform hover:scale-110'>
     <img src={logo} alt={`${provider} 로그인`} style={{ width: '50px', height: '50px' }} />
   </a>
 );
 
 const LogInPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // 비밀번호 시각화 상태
   const {
     register,
     handleSubmit,
@@ -112,22 +114,33 @@ const LogInPage: React.FC = () => {
           <label htmlFor='password' className='block text-sm font-medium'>
             비밀번호
           </label>
-          <input
-            className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
-            type='password'
-            id='password'
-            disabled={isLoading} // 로딩 중일 때 비활성화
-            placeholder='비밀번호를 입력하세요.'
-            {...register('password', {
-              required: '비밀번호를 입력하세요.',
-              pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-                message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
-              },
-            })}
-          />
+          <div className='relative'>
+            <input
+              className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
+              type={showPassword ? 'text' : 'password'} // 비밀번호 표시 여부
+              id='password'
+              disabled={isLoading} // 로딩 중일 때 비활성화
+              placeholder='비밀번호를 입력하세요.'
+              {...register('password', {
+                required: '비밀번호를 입력하세요.',
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
+                  message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
+                },
+              })}
+            />
+            <button
+              type='button'
+              className='absolute inset-y-0 right-0 flex items-center pr-3'
+              onClick={() => setShowPassword(!showPassword)} // 클릭 시 비밀번호 표시/숨김 전환
+            >
+              {/* 비밀번호 표시 상태에 따라 아이콘 변경 */}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
           {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}
         </div>
+
         <button
           className={`flex h-[50px] w-full items-center justify-center rounded-xl font-semibold text-white shadow-custom-light ${isLoading ? 'bg-blue-hover' : 'bg-blue-primary hover:bg-blue-hover'} `}
           type='submit'

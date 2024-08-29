@@ -22,17 +22,17 @@ const MypageAnalystApply = () => {
   const baseUrl = import.meta.env.VITE_API_URL;
 
   // 의뢰 목록 불러오기
-  const fetchAnalysisRequestData = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/request`, {
-        withCredentials: true,
-      });
-      console.log(response);
-      setContents(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchAnalysisRequestData = async () => {
+  //   try {
+  //     const response = await axios.get(`${baseUrl}/request`, {
+  //       withCredentials: true,
+  //     });
+  //     console.log(response);
+  //     setContents(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // 분석가가 분석 신청하기
   const applyAnalysisContent = async (id: number) => {

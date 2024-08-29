@@ -6,7 +6,7 @@ import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
 import BtnMypage from '../common/button/BtnMypage';
 import axios from 'axios';
-import analystInfo from '../../data/analystProfile.json';
+//import analystInfo from '../../data/analystProfile.json';
 import ModalContainer from '../common/ModalContainer';
 
 type AnalystProfile = {
@@ -56,17 +56,17 @@ const MyPageOwnerAnalysisRequest = () => {
   const baseUrl = import.meta.env.VITE_API_URL;
 
   // 분석 의뢰를 요청했던 사이트 리스트 불러오기
-  const fetchAnalysisRequestData = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/request/client`, {
-        withCredentials: true,
-      });
-      console.log('분석 의뢰를 요청한 목록 조회 성공', response.data);
-      setContents(response.data);
-    } catch (error) {
-      console.log('분석 의뢰를 요청한 목록 조회 실패', error);
-    }
-  };
+  // const fetchAnalysisRequestData = async () => {
+  //   try {
+  //     const response = await axios.get(`${baseUrl}/request/client`, {
+  //       withCredentials: true,
+  //     });
+  //     console.log('분석 의뢰를 요청한 목록 조회 성공', response.data);
+  //     setContents(response.data);
+  //   } catch (error) {
+  //     console.log('분석 의뢰를 요청한 목록 조회 실패', error);
+  //   }
+  // };
 
   // 분석가 프로필 열람
   const analystProfileHandler = async (analystId: number) => {

@@ -92,8 +92,8 @@ const AnalystRequestPage = () => {
 
   return (
     <div className='flex h-full flex-col items-center'>
-      <h1 className='my-[64px] text-center text-[27px]'>사이트분석 및 등록을 의뢰하세요</h1>
-      <div className='flex items-center justify-center gap-8'>
+      <h1 className='my-[64px] text-center text-[23px] md:text-[27px]'>사이트분석 및 등록을 의뢰하세요</h1>
+      <div className='flex w-full flex-col items-center justify-center gap-8 px-10 lg:flex-row'>
         <BasicInfoSection register={register} errors={errors} />
         <DiscountSection onSubmit={handleSubmit(handlePayment)} amount={amount} />
       </div>
@@ -103,7 +103,7 @@ const AnalystRequestPage = () => {
 
 const BasicInfoSection = ({ register, errors }: any) => {
   return (
-    <div className='h-[515px] w-[964px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'>
+    <div className='h-[535px] w-full rounded-[15px] bg-white px-[20px] py-[20px] shadow-custom-light xl:w-[964px]'>
       <h2 className='mb-[20px] text-[20px] font-bold'>기본 정보</h2>
       <div>
         <div className='mb-[25px]'>
@@ -150,7 +150,7 @@ const DiscountSection: React.FC<DiscountSectionProps> = ({ onSubmit, amount }) =
   return (
     <form
       onSubmit={onSubmit}
-      className='h-[515px] w-[366px] rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light'
+      className='h-[535px] w-full rounded-[15px] bg-white px-[30px] py-[31px] shadow-custom-light lg:w-[366px]'
     >
       <h2 className='mb-[20px] text-[20px] font-bold'>할인 수단</h2>
       <div className='flex h-[calc(100%-40px)] flex-col justify-between'>
@@ -164,12 +164,12 @@ const DiscountSection: React.FC<DiscountSectionProps> = ({ onSubmit, amount }) =
               </div>
             </div>
             <div className='flex'>
-              <div className='flex h-[44px] w-[199px] items-center justify-end rounded-[5px] border border-gray-c4 px-[10px]'>
+              <div className='flex h-[44px] w-full items-center justify-end rounded-[5px] border border-gray-c4 px-[10px] lg:w-[199px]'>
                 <p className='text-gray-db'>0</p>
               </div>
               <button
                 type='button'
-                className={`ml-[11px] h-[44px] w-[94px] rounded-[5px] border border-gray-db bg-white px-[10px] text-[16px] shadow-custom-light transition-colors duration-300 hover:bg-white-f9`}
+                className={`ml-[11px] h-[44px] w-[130px] rounded-[5px] border border-gray-db bg-white px-[10px] text-[14px] shadow-custom-light transition-colors duration-300 hover:bg-white-f9 sm:w-[100px] sm:text-[16px]`}
               >
                 쿠폰선택
               </button>
@@ -184,14 +184,14 @@ const DiscountSection: React.FC<DiscountSectionProps> = ({ onSubmit, amount }) =
               </div>
             </div>
             <div className='flex'>
-              <div className='flex h-[44px] w-[199px] items-center justify-end rounded-[5px] border border-gray-c4 px-[10px]'>
+              <div className='flex h-[44px] w-full items-center justify-end rounded-[5px] border border-gray-c4 px-[10px] lg:w-[199px]'>
                 <p className='text-gray-db'>0</p>
               </div>
               <button
                 type='button'
-                className={`ml-[11px] h-[44px] w-[94px] rounded-[5px] border border-gray-db bg-white px-[10px] text-[16px] shadow-custom-light transition-colors duration-300 hover:bg-white-f9`}
+                className={`ml-[11px] h-[44px] w-[130px] rounded-[5px] border border-gray-db bg-white px-[10px] text-[14px] shadow-custom-light transition-colors duration-300 hover:bg-white-f9 sm:w-[100px] sm:text-[16px]`}
               >
-                전액사용
+                쿠폰선택
               </button>
             </div>
           </div>

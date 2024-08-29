@@ -19,6 +19,7 @@ const MyPageUserInfo = () => {
 
   const inputBox = 'flex-1 placeholder:text-gray-c4';
   const grayRounded = 'rounded-lg border border-gray-dc bg-white px-6 py-4';
+  const fixedBtn = 'absolute right-0 px-3 py-1 text-sm font-semibold';
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
@@ -36,19 +37,22 @@ const MyPageUserInfo = () => {
             <div className='flex'>
               <div className='flex grow items-center'>
                 <div className='mr-4 text-5xl'>
-                  <img src='/images/point-icon.png' alt='point-icon'></img>
+                  <img src='/images/point-icon.png' alt='point-icon' className='ml-[-10px]'></img>
                 </div>
                 <div className='relative w-full'>
-                  <p className='absolute bottom-[1px] text-lg font-semibold'>포인트</p>
+                  <p className='absolute bottom-[10px] text-lg font-semibold'>포인트</p>
                   <p className='absolute right-6 text-xl font-bold text-gray-75'>
                     50,000<span className='font-medium'>원</span>
                   </p>
                 </div>
               </div>
               <hr className='h-auto w-[1px] flex-none border border-gray-dc' />
-              <div className='relative ml-7 grow'>
-                <p className='text-lg font-semibold'>포인트 적립 내역</p>
-                <BtnMypage onClick={() => {}} className='absolute right-0 px-3 py-2 text-sm font-semibold'>
+              <div className='relative mb-8 ml-7 grow'>
+                <p className='mb-4 text-lg font-semibold'>포인트 적립 내역</p>
+                <BtnMypage
+                  onClick={() => {}}
+                  className='absolute bottom-[-30px] right-0 mt-1 px-3 py-1 text-sm font-semibold'
+                >
                   적립내역 바로가기 &gt;
                 </BtnMypage>
               </div>
@@ -56,7 +60,18 @@ const MyPageUserInfo = () => {
           </div>
         </div>
         <div className={`${grayRounded} mt-8`}>
-          <h2 className='mb-4 text-xl font-bold'>내 정보</h2>
+          <div className='relative'>
+            <h2 className='mb-4 inline-block text-xl font-bold'>내 정보</h2>
+            {isEditing ? (
+              <BtnMypage onClick={handleSaveClick} className={fixedBtn}>
+                수정완료 &gt;
+              </BtnMypage>
+            ) : (
+              <BtnMypage onClick={handleEditClick} className={fixedBtn}>
+                수정 &gt;
+              </BtnMypage>
+            )}
+          </div>
           <div className='space-y-4'>
             <div className='flex items-center'>
               <p className='mr-10 text-lg font-semibold'>이메일</p>
@@ -76,15 +91,6 @@ const MyPageUserInfo = () => {
               ) : (
                 <span className='flex-1'>{name || '닉네임을 등록해주세요'}</span>
               )}
-              {isEditing ? (
-                <BtnMypage onClick={handleSaveClick} className='px-3 py-2 text-sm font-semibold'>
-                  수정완료 &gt;
-                </BtnMypage>
-              ) : (
-                <BtnMypage onClick={handleEditClick} className='px-3 py-2 text-sm font-semibold'>
-                  변경 &gt;
-                </BtnMypage>
-              )}
             </div>
             <div className='flex items-center'>
               <p className='mr-6 text-lg font-semibold'>패스워드</p>
@@ -98,15 +104,6 @@ const MyPageUserInfo = () => {
                 />
               ) : (
                 <span className='flex-1 text-gray-c4'>패스워드 변경을 원하시면 변경버튼을 눌러주세요</span>
-              )}
-              {isEditing ? (
-                <BtnMypage onClick={handleSaveClick} className='px-3 py-2 text-sm font-semibold'>
-                  수정완료 &gt;
-                </BtnMypage>
-              ) : (
-                <BtnMypage onClick={handleEditClick} className='px-3 py-2 text-sm font-semibold'>
-                  변경 &gt;
-                </BtnMypage>
               )}
             </div>
           </div>

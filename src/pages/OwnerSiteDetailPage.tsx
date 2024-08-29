@@ -10,9 +10,14 @@ const OwnerSiteDetailPage = () => {
   const [content, setContent] = useState<Content | null>(null);
   const contentId = Number(id);
 
+  //const baseUrl = import.meta.env.VITE_API_URL;
+
+  // 사이트 상세정보 조회
   // const fetchContentData = async () => {
   //   try {
-  //     const response = await axios.get(`/api/v1/contents/${contentId}`);
+  //     const response = await axios.get(`${baseUrl}/contents/${contentId}`, {
+  //       withCredentials: true,
+  //     });
   //     console.log('콘텐츠 정보 조회 성공', response);
   //     setContent(response.data);
   //   } catch (error) {

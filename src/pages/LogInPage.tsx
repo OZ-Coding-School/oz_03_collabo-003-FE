@@ -16,6 +16,8 @@ interface SocialLoginButtonProps {
   redirectUrl: string;
 }
 
+const baseUrl = import.meta.env.VITE_API_URL;
+
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider, logo, redirectUrl }) => (
   <a href={redirectUrl} className='mx-6 inline-block transform hover:scale-110'>
     <img src={logo} alt={`${provider} 로그인`} style={{ width: '50px', height: '50px' }} />
@@ -35,11 +37,11 @@ const LogInPage: React.FC = () => {
   const { logIn } = useAuthStore((state) => ({ logIn: state.logIn }));
 
   const loginUser = (data: LogInInputs) => {
-    return axios.post('http://223.130.128.216:8000/accounts/login/', data, { withCredentials: true });
+    return axios.post(`${baseUrl}/accounts/login/`, data, { withCredentials: true });
   };
 
-  const handleLoginSuccess = (userId: number, nickname: string, email: string) => {
-    logIn(userId, nickname, email);
+  const handleLoginSuccess = (userId: number, username: string, email: string) => {
+    logIn(userId, username, email);
     console.log('Login successful!');
     navigate('/');
   };
@@ -49,8 +51,8 @@ const LogInPage: React.FC = () => {
     try {
       const response = await loginUser(data);
       console.log('로그인 성공:', response.data);
-      const { userId, nickname, email } = response.data;
-      handleLoginSuccess(userId, nickname, email);
+      const { userId, username, email } = response.data;
+      handleLoginSuccess(userId, username, email);
     } catch (error: any) {
       if (error.response?.data?.message) {
         const errorMessage = error.response.data.message;
@@ -80,9 +82,10 @@ const LogInPage: React.FC = () => {
   };
 
   // 소셜 로그인 버튼의 리다이렉트 URL 설정
-  const googleLoginUrl = 'http://223.130.128.216:8000/accounts/google/login';
-  const kakaoLoginUrl = 'http://223.130.128.216:8000/accounts/kakao/login/';
-  const naverLoginUrl = 'http://223.130.128.216:8000/accounts/naver/login/';
+  const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
+  // const kakaoLoginUrl = 'http://127.0.0.1:8000/accounts/kakao/login';
+  const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
+  const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>

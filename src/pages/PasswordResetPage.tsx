@@ -21,30 +21,25 @@ const PasswordResetPage: React.FC = () => {
     formState: { errors },
   } = useForm<PasswordResetInputs>();
 
-  // const baseUrl = import.meta.env.VITE_API_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
 
-  // URL에서 token 쿼리 파라미터를 추출합니다.
+  // URL에서 token 쿼리 파라미터를 추출
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
 
   console.log('Token from URL:', token); // Token 확인용
 
   const sendPasswordResetEmail = async (email: string) => {
-    return axios.post('http://223.130.128.216:8000/accounts/password-reset/', { email });
-    // return axios.post(`${baseUrl}/api/v1/accounts/password-reset`, { email });
+    return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
   };
 
   const resetPassword = async (data: PasswordResetInputs) => {
-    return axios.post('http://223.130.128.216:8000/accounts/password-reset/confirm', {
+    return axios.post(`${baseUrl}/accounts/password-reset/confirm/`, {
       ...data,
       token, // token을 추가하여 서버에 전송
     });
-    // return axios.post(`${baseUrl}/api/v1/accounts/password-reset/confirm`, {
-    //   ...data,
-    //   token, // token을 추가하여 서버에 전송
-    // });
   };
 
   const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {

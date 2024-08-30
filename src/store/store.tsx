@@ -12,9 +12,9 @@ export const useAnalysisRequestSite = create<AnalysisRequestSiteState>((set) => 
 interface AuthState {
   isLoggedIn: boolean; // 로그인 상태
   userId: number | null; // 사용자 ID
-  nickname: string | null; // 닉네임
+  username: string | null; // 닉네임
   email: string | null; // 이메일
-  logIn: (userId: number, nickname: string, email: string) => void; // 로그인 함수
+  logIn: (userId: number, username: string, email: string) => void; // 로그인 함수
   logOut: () => void; // 로그아웃 함수
 }
 
@@ -24,15 +24,15 @@ export const useAuthStore = create(
     (set) => ({
       isLoggedIn: false, // 기본 로그인 상태는 false로 설정
       userId: null, // 초기 사용자 ID 값 null
-      nickname: null, // 초기 닉네임 값 null
+      username: null, // 초기 닉네임 값 null
       email: null, // 초기 이메일 값 null
 
       // 로그인 성공 시 실행될 함수
-      logIn: (userId, nickname, email) =>
+      logIn: (userId, username, email) =>
         set(() => ({
           isLoggedIn: true,
           userId,
-          nickname,
+          username,
           email,
         })),
 
@@ -41,7 +41,7 @@ export const useAuthStore = create(
         set(() => ({
           isLoggedIn: false,
           userId: null,
-          nickname: null,
+          username: null,
           email: null,
         })),
     }),

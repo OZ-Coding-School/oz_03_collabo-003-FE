@@ -4,14 +4,15 @@ import { categoryService } from '../services/categoryService';
 interface Content {
   id: number;
   title: string;
-  site_url: string;
   thumbnail: string;
   site_description: string;
-  category: string;
+  mainCategory_id: number;
+  semiCategory_id: number;
 }
 
 interface MainCategoryMappedContent {
   contentId: number;
+  mainCategoryId: number;
   mainCategorySlug: string | undefined;
   thumbnail: string;
   title: string;
@@ -20,6 +21,8 @@ interface MainCategoryMappedContent {
 
 interface SemiCategoryMappedContent {
   contentId: number;
+  mainCategoryId: number;
+  semiCategoryId: number;
   mainCategorySlug: string | undefined;
   semiCategorySlug: string | undefined;
   thumbnail: string;
@@ -30,18 +33,17 @@ interface SemiCategoryMappedContent {
 export const categoryContentService = {
   getMainCategoryContents: async (mainCategoryId: number): Promise<MainCategoryMappedContent[]> => {
     try {
-      const allStackData = await contentAPI.getAllContents();
+      const allContents = await contentAPI.getAllContents();
       const categories = await categoryService.getCategories();
 
       const mainCategoryMap = new Map(categories.map((cat) => [cat.id, cat.slug]));
 
-      const filteredContents = allStackData.filter(
-        (content: Content) => content.category === mainCategoryId.toString()
-      );
+      const filteredContents = allContents.filter((content: Content) => content.mainCategory_id === mainCategoryId);
 
       return filteredContents.map((content: Content) => ({
         contentId: content.id,
-        mainCategorySlug: mainCategoryMap.get(Number(content.category)),
+        mainCategoryId: content.mainCategory_id,
+        mainCategorySlug: mainCategoryMap.get(content.mainCategory_id),
         thumbnail: content.thumbnail,
         title: content.title,
         siteDescription: content.site_description,
@@ -54,30 +56,29 @@ export const categoryContentService = {
 
   getSemiCategoryContents: async (): Promise<SemiCategoryMappedContent[]> => {
     try {
-      const allStackData = await contentAPI.getAllContents();
+      const allContents = await contentAPI.getAllContents();
       const categories = await categoryService.getCategories();
 
       const mainCategoryMap = new Map(categories.map((cat) => [cat.id, cat.slug]));
+      const semiCategoryMap = new Map(
+        categories.flatMap((cat) =>
+          cat.semiCategories.map((semiCat) => [semiCat.id, { slug: semiCat.slug, parentId: cat.id }])
+        )
+      );
 
-      return allStackData
+      return allContents
         .map((content: Content) => {
-          // categories 배열에서 특정 semiCategory를 찾습니다.
-          const semiCategory = categories
-            .flatMap((cat) => cat.semiCategories)
-            .find((semiCat) => semiCat.id.toString() === content.category);
+          const semiCategory = semiCategoryMap.get(content.semiCategory_id);
 
           if (!semiCategory) {
             return null;
           }
 
-          // 메인 카테고리의 슬러그를 얻기 위해 semiCategory의 parent를 찾습니다.
-          const parentCategory = categories.find((cat) =>
-            cat.semiCategories.some((semiCat) => semiCat.id === semiCategory.id)
-          );
-
           return {
             contentId: content.id,
-            mainCategorySlug: parentCategory ? mainCategoryMap.get(parentCategory.id) : undefined,
+            mainCategoryId: content.mainCategory_id,
+            semiCategoryId: content.semiCategory_id,
+            mainCategorySlug: mainCategoryMap.get(semiCategory.parentId),
             semiCategorySlug: semiCategory.slug,
             thumbnail: content.thumbnail,
             title: content.title,

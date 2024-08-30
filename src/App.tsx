@@ -21,7 +21,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path='/contents/:contentId' element={<DetailedPage />} />
         <Route path='/category/:categorySlug' element={<CategoryPage />} />
-        <Route path='/category/:categorySlug/:subCategorySlug' element={<CategoryPage />} />
+        <Route path='/category/:categorySlug/:semiCategorySlug' element={<CategoryPage />} />
         {/* <Route path='/contents/:contentId' element={<DetailedPage />} /> */}
         <Route path='/mypage' element={<MyPage />} />.
         <Route path='/mypage/owner' element={<OwnerMyPage />} />

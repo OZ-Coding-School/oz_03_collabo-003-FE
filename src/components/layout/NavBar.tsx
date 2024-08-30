@@ -10,9 +10,9 @@ import categories from '../../data/categories.json';
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
-  const { isLoggedIn, nickname, logOut } = useAuthStore((state) => ({
+  const { isLoggedIn, username, logOut } = useAuthStore((state) => ({
     isLoggedIn: state.isLoggedIn,
-    nickname: state.nickname,
+    username: state.username,
     logOut: state.logOut,
   }));
 
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
                   onClick={() => navigate('/mypage')}
                   className='mr-1 cursor-pointer whitespace-nowrap text-[12px] hover:font-bold hover:text-blue-hover hover:underline sm:text-[16px]'
                 >
-                  {nickname}
+                  {username}
                 </p>
                 <NavBtn onClick={handleLogout} className='bg-white text-black hover:bg-white-f9'>
                   로그아웃

@@ -23,10 +23,10 @@
 // };
 
 // 테스트용
-import contents from '../../data/contents.json';
+import contents_v2 from '../../data/contents_v2.json';
 
 export const contentAPI = {
   getAllContents: async () => {
-    return contents;
+    return contents_v2;
   },
 };

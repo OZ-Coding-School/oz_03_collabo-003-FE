@@ -10,12 +10,12 @@ const RedirectHandlerPage: React.FC = () => {
     // URL에서 쿼리 파라미터 추출
     const params = new URLSearchParams(window.location.search);
     const userId = parseInt(params.get('userId') || '', 10);
-    const nickname = params.get('nickname') || '';
+    const username = params.get('username') || '';
     const email = params.get('email') || '';
 
-    if (userId && nickname && email) {
+    if (userId && username && email) {
       // Zustand 스토어에 사용자 데이터 저장
-      logIn(userId, nickname, email);
+      logIn(userId, username, email);
       // 로그인 성공 후 홈으로 리다이렉트
       navigate('/');
     } else {

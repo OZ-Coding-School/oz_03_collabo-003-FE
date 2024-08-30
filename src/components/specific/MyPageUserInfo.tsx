@@ -1,29 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import userData from '../../data/users.json';
 import BtnMypage from '../common/button/BtnMypage';
+import { useForm } from 'react-hook-form';
+import WhiteBtn from '../common/button/WhiteBtn';
 
-// 유효성 검사 추후 추가
+interface FormData {
+  nickName: string;
+  password: string;
+}
 
 const MyPageUserInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(userData.name);
+  const [naming, setNaming] = useState(userData.name);
   const [password, setPassword] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    clearErrors,
+  } = useForm<FormData>();
+
+  useEffect(() => {
+    if (!isEditing) {
+      clearErrors();
+    }
+  }, [isEditing, clearErrors]);
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    setNaming(data.nickName);
+    setPassword(data.password || '');
+    setIsEditing(false);
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
+    setValue('nickName', naming);
   };
 
-  const handleSaveClick = () => {
+  const handleCloseClick = () => {
     setIsEditing(false);
   };
 
   const inputBox = 'flex-1 placeholder:text-gray-c4';
   const grayRounded = 'rounded-lg border border-gray-dc bg-white px-6 py-4';
   const fixedBtn = 'absolute right-0 px-3 py-1 text-sm font-semibold';
+  const errorMessage = 'text-red text-sm ml-[90px]';
+  const nickNameExp = /^[가-힣a-zA-Z0-9]+$/;
+  const passwordExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$/;
 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
-      <div className='mx-auto my-24 flex min-h-[480px] w-[580px] flex-col p-6'>
+      <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
             환영합니다, <strong>{userData.name}</strong>님
@@ -60,53 +90,87 @@ const MyPageUserInfo = () => {
           </div>
         </div>
         <div className={`${grayRounded} mt-8`}>
-          <div className='relative'>
+          <div className='relative flex'>
             <h2 className='mb-4 inline-block text-xl font-bold'>내 정보</h2>
             {isEditing ? (
-              <BtnMypage onClick={handleSaveClick} className={fixedBtn}>
-                수정완료 &gt;
-              </BtnMypage>
+              <div>
+                <WhiteBtn onClick={handleCloseClick} className='absolute bottom-[13px] right-[90px]'>
+                  취소
+                </WhiteBtn>
+                <BtnMypage onClick={handleSubmit(onSubmit)} className={fixedBtn}>
+                  수정완료
+                </BtnMypage>
+              </div>
             ) : (
               <BtnMypage onClick={handleEditClick} className={fixedBtn}>
                 수정 &gt;
               </BtnMypage>
             )}
           </div>
-          <div className='space-y-4'>
-            <div className='flex items-center'>
-              <p className='mr-10 text-lg font-semibold'>이메일</p>
-              <span className='mr-10 flex-1'>example123@gmail.com</span>
-              <span></span>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='space-y-4'>
+              <div className='flex items-center'>
+                <p className='mr-10 text-lg font-semibold'>이메일</p>
+                <span className='mr-10 flex-1'>example123@gmail.com</span>
+                <span></span>
+              </div>
+              <div className='relative flex items-center'>
+                <p className='mr-10 text-lg font-semibold'>닉네임</p>
+                {isEditing ? (
+                  <input
+                    className={`${inputBox} font-bold placeholder:font-normal`}
+                    type='text'
+                    placeholder='특수문자, 공백을 제외한 6자 이내의 닉네임을 입력해주세요'
+                    {...register('nickName', {
+                      required: '닉네임은 필수 입력 항목입니다.',
+                      pattern: {
+                        value: nickNameExp,
+                        message: '특수문자 및 공백은 포함할 수 없습니다.',
+                      },
+                      minLength: {
+                        value: 2,
+                        message: '닉네임은 최소 2자 이상이어야 합니다.',
+                      },
+                      maxLength: {
+                        value: 6,
+                        message: '닉네임은 최대 6자 이내여야 합니다.',
+                      },
+                    })}
+                  />
+                ) : (
+                  <span className='flex-1'>{naming || '닉네임을 등록하시려면 수정 버튼을 눌러주세요'}</span>
+                )}
+              </div>
+              {isEditing && errors.nickName && <p className={`${errorMessage}`}>{errors.nickName.message}</p>}
+              <div className='flex items-center'>
+                <p className='mr-6 text-lg font-semibold'>패스워드</p>
+                {isEditing ? (
+                  <input
+                    className={inputBox}
+                    type='password'
+                    placeholder='숫자, 영어, 특수문자를 포함한 새 비밀번호를 입력해주세요'
+                    {...register('password', {
+                      pattern: {
+                        value: passwordExp,
+                        message: '숫자, 영어, 특수문자 모두 포함되어야 합니다.',
+                      },
+                      minLength: {
+                        value: 8,
+                        message: '비밀번호는 최소 8자 이상이어야 합니다.',
+                      },
+                      maxLength: {
+                        value: 15,
+                        message: '비밀번호는 최대 15자 이내여야 합니다.',
+                      },
+                    })}
+                  />
+                ) : (
+                  <span className='flex-1 text-gray-c4'>패스워드 변경을 원하시면 수정 버튼을 눌러주세요</span>
+                )}
+              </div>
+              {isEditing && errors.password && <p className={errorMessage}>{errors.password.message}</p>}
             </div>
-            <div className='flex items-center'>
-              <p className='mr-10 text-lg font-semibold'>닉네임</p>
-              {isEditing ? (
-                <input
-                  className={inputBox}
-                  type='text'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder='특수문자, 공백을 제외한 6자 이내의 새 닉네임을 입력해주세요'
-                />
-              ) : (
-                <span className='flex-1'>{name || '닉네임을 등록해주세요'}</span>
-              )}
-            </div>
-            <div className='flex items-center'>
-              <p className='mr-6 text-lg font-semibold'>패스워드</p>
-              {isEditing ? (
-                <input
-                  className={inputBox}
-                  type='password'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder='숫자, 영어를 포함한 새 비밀번호를 입력해주세요'
-                />
-              ) : (
-                <span className='flex-1 text-gray-c4'>패스워드 변경을 원하시면 변경버튼을 눌러주세요</span>
-              )}
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

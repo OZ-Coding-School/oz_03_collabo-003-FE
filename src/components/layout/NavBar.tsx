@@ -5,11 +5,11 @@ import NavBtn from '../common/button/NavBtn';
 import NavMenu from '../specific/NavMenu';
 import NavMobileMenu from '../specific/NavMobileMenu';
 import { FiMenu } from 'react-icons/fi';
-import categories from '../../data/categories.json';
+import { categoryService } from '../../apis/services/categoryService';
+import { Category } from '../../types/type';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-
   const { isLoggedIn, username, logOut } = useAuthStore((state) => ({
     isLoggedIn: state.isLoggedIn,
     username: state.username,
@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]); // 초기 상태를 빈 배열로 설정
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,6 +29,31 @@ const Navbar: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.documentElement.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const fetchedCategories = await categoryService.getCategories();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const handleLogout = () => {
@@ -107,7 +133,12 @@ const Navbar: React.FC = () => {
 
       {isMobileMenuOpen && (
         <div className='absolute left-0 top-0 z-50 h-full w-full bg-white'>
-          <NavMobileMenu categories={categories} setIsMobileMenuOpen={setIsMobileMenuOpen} isLoggedIn={isLoggedIn} />
+          <NavMobileMenu
+            categories={categories}
+            setIsMobileMenuOpen={setIsMobileMenuOpen}
+            isLoggedIn={isLoggedIn}
+            logOut={handleLogout}
+          />
         </div>
       )}
     </div>

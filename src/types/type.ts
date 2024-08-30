@@ -6,22 +6,6 @@ export interface ButtonProps {
   className?: string;
 }
 
-export interface CategoryItem {
-  label: string;
-  href: string;
-}
-export interface Category {
-  title: string;
-  href: string;
-  items: CategoryItem[];
-}
-export interface DropdownMenuProps {
-  data: Category[];
-  isVisible: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
-}
-
 export interface QnA {
   id: number;
   user_id: number;
@@ -87,4 +71,17 @@ export interface Analyst {
   link?: string;
   merit: string;
   oneWord: string;
+}
+
+export interface SemiCategory {
+  id: number;
+  label: string;
+  slug: string;
+}
+
+export interface Category {
+  id: number;
+  categories: string;
+  slug: string;
+  semiCategories: SemiCategory[];
 }

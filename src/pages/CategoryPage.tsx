@@ -34,6 +34,8 @@ const CategoryPage: React.FC = () => {
 
         setCategoryName(selectedCategory.categories);
 
+        console.log('mainCategoryId:', selectedCategory.id);
+
         if (semiCategorySlug) {
           const selectedSemiCategory = selectedCategory.semiCategories.find(
             (semiCategory) => semiCategory.slug === semiCategorySlug
@@ -48,13 +50,19 @@ const CategoryPage: React.FC = () => {
 
           setSemiCategoryName(selectedSemiCategory.label);
 
+          console.log('semiCategoryId:', selectedSemiCategory.id);
+
           const semiCategoryContents = await categoryContentService.getSemiCategoryContents();
 
           const filteredContents = semiCategoryContents.filter(
             (content) =>
               content.mainCategorySlug === selectedCategory.slug &&
-              content.semiCategorySlug === selectedSemiCategory.slug
+              content.semiCategorySlug === selectedSemiCategory.slug &&
+              content.mainCategoryId === selectedCategory.id &&
+              content.semiCategoryId === selectedSemiCategory.id
           );
+
+          console.log('Filtered Contents:', filteredContents);
 
           setContents(
             filteredContents.map((content) => ({
@@ -66,6 +74,8 @@ const CategoryPage: React.FC = () => {
           );
         } else {
           const mainCategoryContents = await categoryContentService.getMainCategoryContents(selectedCategory.id);
+
+          console.log('Main Category Contents:', mainCategoryContents);
 
           setContents(
             mainCategoryContents.map((content) => ({

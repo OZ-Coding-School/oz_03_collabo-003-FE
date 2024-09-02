@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface SubCategory {
+interface SemiCategory {
   id: number;
   label: string;
   slug: string;
@@ -10,7 +10,7 @@ interface Category {
   id: number;
   categories: string;
   slug: string;
-  subCategories: SubCategory[];
+  semiCategories: SemiCategory[];
 }
 
 interface NavMenuProps {
@@ -26,13 +26,13 @@ const NavMenu: React.FC<NavMenuProps> = ({ categories }) => {
             <a href={`/category/${category.slug}`} className='font-semibold text-black hover:text-blue-hover'>
               <h3>{category.categories}</h3>
             </a>
-            {category.subCategories.map((subCategory) => (
+            {category.semiCategories.map((semiCategory) => (
               <a
-                key={subCategory.id}
-                href={`/category/${category.slug}/${subCategory.slug}`}
+                key={semiCategory.id}
+                href={`/category/${category.slug}/${semiCategory.slug}`}
                 className='block px-1 py-1 text-sm text-black hover:font-bold hover:text-blue-hover'
               >
-                {subCategory.label}
+                {semiCategory.label}
               </a>
             ))}
           </div>

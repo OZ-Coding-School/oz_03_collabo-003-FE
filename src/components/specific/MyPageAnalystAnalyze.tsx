@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BtnMypage from '../common/button/BtnMypage';
 import Pagination from '../common/Pagination';
 import AnalystReportModal from './AnalystReportModal';
@@ -28,16 +28,21 @@ const MyPageAnalystAnalyze = () => {
   const totalPages = Math.ceil(contents.length / cardsPerPage);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const navigate = useNavigate();
+  //const baseUrl = import.meta.env.VITE_API_URL;
+
   // 분석가가 분석할 사이트 목록 불러오기
   // const fetchAnalysisContentsData = async () => {
   //   try {
-  //     const response = await axios.get('/request/analysis')
+  //     const response = await axios.get(`${baseUrl}/request/analyst`, {
+  //       withCredentials: true,
+  //     });
   //     console.log('분석가가 분석할 사이트 조회 성공', response.data);
   //     setContents(response.data);
   //   } catch (error) {
-  //     console.log("분석가가 분석할 사이트 조회 실패",error);
+  //     console.log('분석가가 분석할 사이트 조회 실패', error);
   //   }
-  // }
+  // };
 
   const openReportModal = () => {
     setIsOpen(true);
@@ -69,8 +74,18 @@ const MyPageAnalystAnalyze = () => {
                 <li className='flex gap-2 rounded-md bg-white p-4 hover:scale-105' key={content.contentId}>
                   <img src={content.image} alt={content.title} className='h-[120px] w-[150px] rounded-sm' />
                   <div className='flex max-w-[450px] grow flex-col gap-1'>
-                    <span className='truncate text-lg font-semibold'>{content.title}</span>
-                    <span className='truncate'>{content.description}</span>
+                    <span
+                      className='cursor-pointer truncate text-lg font-semibold'
+                      onClick={() => navigate(`/contents/${content.contentId}`)}
+                    >
+                      {content.title}
+                    </span>
+                    <span
+                      className='cursor-pointer truncate'
+                      onClick={() => navigate(`/contents/${content.contentId}`)}
+                    >
+                      {content.description}
+                    </span>
                     <span className='truncate text-sm text-gray-46'>{content.link}</span>
                     <div className='my-1 flex gap-2'>
                       <Link

@@ -6,7 +6,7 @@ import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
 import BtnMypage from '../common/button/BtnMypage';
 import axios from 'axios';
-import analystInfo from '../../data/analystProfile.json';
+//import analystInfo from '../../data/analystProfile.json';
 import ModalContainer from '../common/ModalContainer';
 
 type AnalystProfile = {
@@ -53,30 +53,34 @@ const MyPageOwnerAnalysisRequest = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const baseUrl = import.meta.env.VITE_API_URL;
+
   // 분석 의뢰를 요청했던 사이트 리스트 불러오기
   // const fetchAnalysisRequestData = async () => {
-  // try {
-  //       const response = await axios.get('/request')
-  //       console.log('분석 의뢰를 요청한 목록 조회 성공', response.data);
-  //       setContents(response.data);
-  //     } catch (error) {
-  //       console.log("분석 의뢰를 요청한 목록 조회 실패",error);
-  //     }
-  // }
+  //   try {
+  //     const response = await axios.get(`${baseUrl}/request/client`, {
+  //       withCredentials: true,
+  //     });
+  //     console.log('분석 의뢰를 요청한 목록 조회 성공', response.data);
+  //     setContents(response.data);
+  //   } catch (error) {
+  //     console.log('분석 의뢰를 요청한 목록 조회 실패', error);
+  //   }
+  // };
 
+  // 분석가 프로필 열람
   const analystProfileHandler = async (analystId: number) => {
     console.log('분석가 프로필 열람', analystId);
-    setAnalystProfile(analystInfo);
-    setProfileModalOpen(true);
-    // 분석가 프로필 열람
-    // try {
-    //   const response = await axios.get(`/analysts/${analystId}`)
-    //   console.log('분석가 프로필 열람 성공', response.data);
-    //   setAnalystProfile(response.data);
-    //   setProfileModalOpen(true)
-    // } catch (error) {
-    //   console.log("분석가 프로필 열람 실패",error);
-    // }
+    try {
+      const response = await axios.get(`${baseUrl}/analysts/${analystId}`, {
+        withCredentials: true,
+      });
+      console.log('분석가 프로필 열람 성공', response.data);
+      setAnalystProfile(response.data);
+      setProfileModalOpen(true);
+    } catch (error) {
+      console.log('분석가 프로필 열람 실패', error);
+    }
   };
 
   const closedAnalystProfileHandler = () => {
@@ -84,36 +88,39 @@ const MyPageOwnerAnalysisRequest = () => {
     setProfileModalOpen(false);
   };
 
-  const selectedAnalystHandler = async (analystId: number) => {
+  // 분석가 선택하기
+  const selectedAnalystHandler = async (analystId: number, contentId: number) => {
     console.log('분석가 선택', analystId);
     const result = confirm(
       '사이트 분석은 단 한 명의 분석가만 진행할 수 있습니다. 이 분석가를 선택하여 분석을 진행하시겠습니까?'
     );
     if (result) {
-      setSelectedAnalyst(true);
+      try {
+        const response = await axios.post(
+          `${baseUrl}/request/select/${contentId}`,
+          {
+            analyst_id: analystId,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(response.data);
+        setSelectedAnalyst(true);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      return;
     }
-    // const result = confirm(
-    //   '사이트 분석은 단 한 명의 분석가만 진행할 수 있습니다. 이 분석가를 선택하여 분석을 진행하시겠습니까?'
-    // );
-    // if (result) {
-    //   try {
-    //     const response = await axios.post('/request/select', {
-    //       analyst_id: analystId,
-    //     });
-    //     console.log(response.data);
-    //     setSelectedAnalyst(true)
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // } else {
-    //   return;
-    // }
   };
 
   // 분석 보고서 조회
-  const fetchReportData = async () => {
+  const fetchReportData = async (contentId: number) => {
     try {
-      const response = await axios.get('/analysts/reports');
+      const response = await axios.get(`${baseUrl}/request/report/${contentId}`, {
+        withCredentials: true,
+      });
       console.log(response.data);
       setReportUrl(response.data.reportUrl);
     } catch (error) {
@@ -121,9 +128,9 @@ const MyPageOwnerAnalysisRequest = () => {
     }
   };
 
-  const downloadReport = async () => {
+  const downloadReport = async (contentId: number) => {
     try {
-      await fetchReportData();
+      await fetchReportData(contentId);
       const link = document.createElement('a');
       link.href = reportUrl;
       link.setAttribute('download', reportUrl);
@@ -188,7 +195,7 @@ const MyPageOwnerAnalysisRequest = () => {
                         ) : (
                           <DisabledBtn
                             className={'px-2 py-1 text-center text-sm font-medium'}
-                            onClick={() => selectedAnalystHandler(acceptedAnalyst.analystId)}
+                            onClick={() => selectedAnalystHandler(acceptedAnalyst.analystId, content.contentId)}
                             disabled={selectedAnalyst}
                           >
                             {selectedAnalyst ? '수락종료' : '수락하기'}
@@ -208,7 +215,7 @@ const MyPageOwnerAnalysisRequest = () => {
                     <span className='grow'>{`분석가 ${content.selected?.analystName} 님의 분석 보고서`}</span>
                     <BtnMypage
                       className='max-h-[28px] min-w-[70px] px-2 py-1 text-sm font-medium'
-                      onClick={() => downloadReport()}
+                      onClick={() => downloadReport(content.contentId)}
                     >
                       다운로드
                     </BtnMypage>

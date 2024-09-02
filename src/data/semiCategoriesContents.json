@@ -1,7 +1,7 @@
 [
   {
     "categoryId": 1,
-    "subCategoryId": 1,
+    "semiCategoryId": 1,
     "content": [
       {
         "id": 2,
@@ -21,7 +21,7 @@
   },
   {
     "categoryId": 1,
-    "subCategoryId": 2,
+    "semiCategoryId": 2,
     "content": [
       {
         "id": 4,
@@ -41,7 +41,7 @@
   },
   {
     "categoryId": 1,
-    "subCategoryId": 3,
+    "semiCategoryId": 3,
     "content": [
       {
         "id": 6,
@@ -68,7 +68,7 @@
   },
   {
     "categoryId": 2,
-    "subCategoryId": 4,
+    "semiCategoryId": 4,
     "content": [
       {
         "id": 9,
@@ -88,7 +88,7 @@
   },
   {
     "categoryId": 2,
-    "subCategoryId": 5,
+    "semiCategoryId": 5,
     "content": [
       {
         "id": 11,
@@ -101,7 +101,7 @@
   },
   {
     "categoryId": 3,
-    "subCategoryId": 6,
+    "semiCategoryId": 6,
     "content": [
       {
         "id": 12,
@@ -121,7 +121,7 @@
   },
   {
     "categoryId": 3,
-    "subCategoryId": 7,
+    "semiCategoryId": 7,
     "content": [
       {
         "id": 14,
@@ -148,7 +148,7 @@
   },
   {
     "categoryId": 4,
-    "subCategoryId": 8,
+    "semiCategoryId": 8,
     "content": [
       {
         "id": 17,
@@ -168,7 +168,7 @@
   },
   {
     "categoryId": 4,
-    "subCategoryId": 9,
+    "semiCategoryId": 9,
     "content": [
       {
         "id": 19,

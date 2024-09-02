@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Pagination from '../common/Pagination';
 import WhiteBtn from '../common/button/WhiteBtn';
 import BtnMypage from '../common/button/BtnMypage';
-//import axios from 'axios';
+import axios from 'axios';
 
 const MypageAnalystApply = () => {
   const navigate = useNavigate();
@@ -19,28 +19,36 @@ const MypageAnalystApply = () => {
   const totalPages = Math.ceil(contents.length / cardsPerPage);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const baseUrl = import.meta.env.VITE_API_URL;
+
   // 의뢰 목록 불러오기
   // const fetchAnalysisRequestData = async () => {
-  //     try {
-  //         const response = await axios.get("/request");
-  //         console.log(response);
-  //         setContents(response.data);
-  //     } catch (error) {
-  //         console.log(error);
-  //     }
-  // }
+  //   try {
+  //     const response = await axios.get(`${baseUrl}/request`, {
+  //       withCredentials: true,
+  //     });
+  //     console.log(response);
+  //     setContents(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // 분석가가 분석 신청하기
   const applyAnalysisContent = async (id: number) => {
     console.log(id);
-    // try {
-    //   const response = await axios.post(`/request/accept/${id}`);
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const response = await axios.post(`${baseUrl}/request/accept/${id}`, {
+        'Content-Type': 'application/json',
+        withCredentials: true,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  // 사이트 분석 신청하기 버튼 클릭시
   const applyBtnHandler = (id: number) => {
     const result = confirm(
       `해당 사이트에 대한 분석을 신청하시겠습니까? 사이트 의뢰자가 수락 시 '분석 진행하기' 에서 확인하실 수 있습니다.`
@@ -52,6 +60,7 @@ const MypageAnalystApply = () => {
     }
   };
 
+  // 사이트 상세보기 버튼 클릭시
   const detailBtnHandler = (id: number) => {
     navigate(`/contents/${id}`);
   };
@@ -73,14 +82,14 @@ const MypageAnalystApply = () => {
               <div className='flex min-w-[500px] gap-2 rounded-md bg-white p-4 hover:scale-105' key={content.id}>
                 <img
                   className='h-[150px] w-[150px] self-center rounded-sm object-cover'
-                  src={content.image}
+                  src={content.thumbnail}
                   alt={content.title}
                 />
                 <div className='flex min-w-[330px] grow flex-col gap-1'>
                   <span className='truncate text-lg font-semibold'>{content.title}</span>
-                  <span className='truncate text-justify'>{content.description}</span>
-                  <Link className='truncate hover:text-blue-primary hover:underline' to={content.link}>
-                    {content.link}
+                  <span className='truncate text-justify'>{content.site_description}</span>
+                  <Link className='truncate hover:text-blue-primary hover:underline' to={content.site_url}>
+                    {content.site_url}
                   </Link>
                   <span className='text-sm text-gray-75'>{`카테고리: ${content.category}`}</span>
                   <div className='flex items-center gap-2'>

@@ -3,7 +3,12 @@
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'sm-md': { min: '641px', max: '767px' },
+        '2xl': '1450px',
+      },
+    },
     colors: {
       white: {
         DEFAULT: '#fff',

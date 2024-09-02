@@ -24,7 +24,7 @@ const DeleteAccountPage: React.FC = () => {
         setIsDeleting(true);
 
         try {
-          await axios.delete(`${baseUrl}/api/v1/accounts/account-delete`);
+          await axios.delete(`${baseUrl}/accounts/account-delete/`);
           alert('탈퇴가 완료되었습니다.');
           // 토큰 삭제 후 홈으로 리다이렉트
           useAuthStore.getState().logOut();

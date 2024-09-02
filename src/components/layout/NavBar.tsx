@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]); // 초기 상태를 빈 배열로 설정
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     const handleResize = () => {

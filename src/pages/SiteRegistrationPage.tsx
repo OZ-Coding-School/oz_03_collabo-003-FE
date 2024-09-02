@@ -12,7 +12,7 @@ interface RegisterInputs {
   image: FileList;
   content: string;
   category: string;
-  subCategory: string;
+  semiCategory: string;
 }
 
 const SiteRegistrationPage = () => {
@@ -23,14 +23,16 @@ const SiteRegistrationPage = () => {
     formState: { errors },
   } = useForm<RegisterInputs>();
 
-  const [subCategories, setSubCategories] = useState<{ id: number; label: string; slug: string }[]>([]);
+  const [semiCategories, setSemiCategories] = useState<{ id: number; label: string; slug: string }[]>([]);
   const [contentImages, setContentImages] = useState<File[]>([]);
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
     const selectedCategory = categoriesData.find((category) => category.id.toString() === data.category);
-    const selectedSubCategory = selectedCategory?.subCategories.find((sub) => sub.id.toString() === data.subCategory);
+    const selectedSemiCategory = selectedCategory?.semiCategories.find(
+      (sub) => sub.id.toString() === data.semiCategory
+    );
 
-    if (!selectedCategory || !selectedSubCategory) {
+    if (!selectedCategory || !selectedSemiCategory) {
       console.error('카테고리 또는 서브 카테고리를 찾을 수 없습니다.');
       return;
     }
@@ -41,7 +43,7 @@ const SiteRegistrationPage = () => {
     formData.append('point', data.point);
     formData.append('content', data.content);
     formData.append('categoryId', selectedCategory.id.toString());
-    formData.append('subCategoryId', selectedSubCategory.id.toString());
+    formData.append('semiCategoryId', selectedSemiCategory.id.toString());
 
     if (data.image.length > 0) {
       formData.append('image', data.image[0]);
@@ -72,7 +74,7 @@ const SiteRegistrationPage = () => {
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategoryId = parseInt(event.target.value);
     const selectedCategory = categoriesData.find((category) => category.id === selectedCategoryId);
-    setSubCategories(selectedCategory ? selectedCategory.subCategories : []);
+    setSemiCategories(selectedCategory ? selectedCategory.semiCategories : []);
   };
 
   return (
@@ -103,20 +105,20 @@ const SiteRegistrationPage = () => {
                 </select>
 
                 <select
-                  {...register('subCategory', {
+                  {...register('semiCategory', {
                     required: '카테고리를 선택해주세요.',
                   })}
                   className='mr-[15px] block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[10px] text-[14px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary md:px-[15px] lg:text-[16px]'
                 >
                   <option value=''>하위 카테고리를 선택해주세요</option>
-                  {subCategories.map((subCategory) => (
-                    <option key={subCategory.id} value={subCategory.id.toString()}>
-                      {subCategory.label}
+                  {semiCategories.map((semiCategory) => (
+                    <option key={semiCategory.id} value={semiCategory.id.toString()}>
+                      {semiCategory.label}
                     </option>
                   ))}
                 </select>
               </div>
-              {(errors.category || errors.subCategory) && (
+              {(errors.category || errors.semiCategory) && (
                 <p className='ml-1 text-red'>상위 및 하위 카테고리를 모두 선택해주세요.</p>
               )}
             </div>

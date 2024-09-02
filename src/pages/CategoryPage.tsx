@@ -1,61 +1,99 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Pagination from '../components/common/Pagination';
-import categoriesData from '../data/categories.json';
-import categoriesContentsData from '../data/categoriesContents.json';
-import subCategoriesContentsData from '../data/subCategoriesContents.json';
+import { categoryContentService } from '../apis/services/categoryContentService';
+import { categoryService } from '../apis/services/categoryService';
 
 interface ContentItem {
   id: number;
   title: string;
-  link: string;
-  image: string;
-  summary: string;
+  thumbnail: string;
+  siteDescription: string;
 }
 
 const CategoryPage: React.FC = () => {
-  const { categorySlug, subCategorySlug } = useParams<{ categorySlug: string; subCategorySlug?: string }>();
+  const { categorySlug, semiCategorySlug } = useParams<{ categorySlug: string; semiCategorySlug?: string }>();
   const navigate = useNavigate();
   const [contents, setContents] = useState<ContentItem[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
-  const [subCategoryName, setSubCategoryName] = useState<string>('');
+  const [semiCategoryName, setSemiCategoryName] = useState<string>('');
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const cardsPerPage = 8;
 
   useEffect(() => {
-    const selectedCategory = categoriesData.find((category) => category.slug === categorySlug);
+    const fetchCategoryData = async () => {
+      try {
+        const categories = await categoryService.getCategories();
+        const selectedCategory = categories.find((category) => category.slug === categorySlug);
 
-    if (!selectedCategory) {
-      navigate('/404');
-      return;
-    }
+        if (!selectedCategory) {
+          navigate('/404');
+          return;
+        }
 
-    setCategoryName(selectedCategory.categories);
+        setCategoryName(selectedCategory.categories);
 
-    if (subCategorySlug) {
-      const selectedSubCategory = selectedCategory.subCategories.find(
-        (subCategory) => subCategory.slug === subCategorySlug
-      );
+        console.log('mainCategoryId:', selectedCategory.id);
 
-      if (!selectedSubCategory) {
+        if (semiCategorySlug) {
+          const selectedSemiCategory = selectedCategory.semiCategories.find(
+            (semiCategory) => semiCategory.slug === semiCategorySlug
+          );
+
+          console.log('Selected semi-category:', selectedSemiCategory);
+
+          if (!selectedSemiCategory) {
+            navigate('/404');
+            return;
+          }
+
+          setSemiCategoryName(selectedSemiCategory.label);
+
+          console.log('semiCategoryId:', selectedSemiCategory.id);
+
+          const semiCategoryContents = await categoryContentService.getSemiCategoryContents();
+
+          const filteredContents = semiCategoryContents.filter(
+            (content) =>
+              content.mainCategorySlug === selectedCategory.slug &&
+              content.semiCategorySlug === selectedSemiCategory.slug &&
+              content.mainCategoryId === selectedCategory.id &&
+              content.semiCategoryId === selectedSemiCategory.id
+          );
+
+          console.log('Filtered Contents:', filteredContents);
+
+          setContents(
+            filteredContents.map((content) => ({
+              id: content.contentId,
+              title: content.title,
+              thumbnail: content.thumbnail,
+              siteDescription: content.siteDescription,
+            }))
+          );
+        } else {
+          const mainCategoryContents = await categoryContentService.getMainCategoryContents(selectedCategory.id);
+
+          console.log('Main Category Contents:', mainCategoryContents);
+
+          setContents(
+            mainCategoryContents.map((content) => ({
+              id: content.contentId,
+              title: content.title,
+              thumbnail: content.thumbnail,
+              siteDescription: content.siteDescription,
+            }))
+          );
+        }
+      } catch (error) {
+        console.error('카테고리 데이터를 가져오는 동안 오류가 발생했습니다:', error);
         navigate('/404');
-        return;
       }
+    };
 
-      setSubCategoryName(selectedSubCategory.label);
-
-      const subCategoryContent = subCategoriesContentsData.find(
-        (content) => content.categoryId === selectedCategory.id && content.subCategoryId === selectedSubCategory.id
-      );
-
-      setContents(subCategoryContent ? subCategoryContent.content : []);
-    } else {
-      const categoryContent = categoriesContentsData.find((content) => content.categoryId === selectedCategory.id);
-
-      setContents(categoryContent ? categoryContent.content : []);
-    }
-  }, [categorySlug, subCategorySlug, navigate]);
+    fetchCategoryData();
+  }, [categorySlug, semiCategorySlug, navigate]);
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -69,13 +107,14 @@ const CategoryPage: React.FC = () => {
     <div className='flex min-h-[calc(100vh-70px)] flex-col'>
       <div className='container mx-auto px-4'>
         <div className='flex justify-center'>
-          <h2 className='my-[50px] text-[28px]'>
-            {subCategoryName || categoryName}에 도움을 주는 사이트를 소개합니다.
+          <h2 className='my-[50px] text-center text-[20px] md:text-[28px]'>
+            <span className='block sm:inline'>{semiCategoryName || categoryName}에</span>
+            <span className='block sm:inline'>도움을 주는 사이트를 소개합니다.</span>
           </h2>
         </div>
         {contents.length === 0 ? (
           <div className='flex items-center justify-center'>
-            <p className='mt-[50px] text-center text-gray-75'>해당 카테고리에 대한 컨텐츠가 없습니다.</p>
+            <p className='mt-[50px] text-center text-gray-75'>해당 카테고리에 대한 콘텐츠가 없습니다.</p>
           </div>
         ) : (
           <>
@@ -87,10 +126,10 @@ const CategoryPage: React.FC = () => {
                     className='w-full max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
                     onClick={() => navigate(`/contents/${item.id}`)}
                   >
-                    <img src={item.image} alt={item.title} className='h-48 w-full object-cover' />
+                    <img src={item.thumbnail} alt={item.title} className='h-48 w-full object-cover' />
                     <div className='p-4'>
                       <h3 className='mb-2 text-center text-[20px] font-semibold'>{item.title}</h3>
-                      <p className='text-gray-75'>{item.summary}</p>
+                      <p className='text-gray-75'>{item.siteDescription}</p>
                     </div>
                   </div>
                 ))}

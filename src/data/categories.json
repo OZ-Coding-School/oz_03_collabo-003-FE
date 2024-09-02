@@ -3,7 +3,7 @@
     "id": 1,
     "categories": "업무 툴",
     "slug": "business-tools",
-    "subCategories": [
+    "semiCategories": [
       { "id": 1, "label": "업무효율화", "slug": "efficiency" },
       { "id": 2, "label": "디자인 협업", "slug": "design-collaboration" },
       { "id": 3, "label": "마케팅 분석", "slug": "marketing-analysis" },
@@ -22,7 +22,7 @@
     "id": 2,
     "categories": "AI 툴",
     "slug": "ai-tools",
-    "subCategories": [
+    "semiCategories": [
       { "id": 13, "label": "검색", "slug": "search" },
       { "id": 14, "label": "이미지", "slug": "image" },
       { "id": 15, "label": "네이밍", "slug": "naming" },
@@ -36,7 +36,7 @@
     "id": 3,
     "categories": "정보 플랫폼",
     "slug": "information-platforms",
-    "subCategories": [
+    "semiCategories": [
       { "id": 20, "label": "스타트업", "slug": "startups" },
       { "id": 21, "label": "쇼핑", "slug": "shopping" },
       { "id": 22, "label": "저작물 & 특허", "slug": "copyrights-patents" },
@@ -54,7 +54,7 @@
     "id": 4,
     "categories": "정부지원",
     "slug": "government-support",
-    "subCategories": [
+    "semiCategories": [
       { "id": 31, "label": "창업지원", "slug": "startup-support" },
       { "id": 32, "label": "청년 · 청소년 지원", "slug": "youth-support" },
       { "id": 33, "label": "금융 · 의료 지원", "slug": "financial-medical-support" },

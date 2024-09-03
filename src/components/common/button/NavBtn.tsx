@@ -5,7 +5,7 @@ const NavBtn = ({ onClick, children, className = '' }: ButtonProps) => {
     <button
       type='button'
       onClick={onClick}
-      className={`h-[35px] w-[80px] rounded-[5px] px-[10px] text-[14px] shadow-custom-light transition-colors duration-300 ${className}`}
+      className={`h-[35px] w-[60px] whitespace-nowrap rounded-[5px] px-[5px] text-[12px] shadow-custom-light transition-colors duration-300 sm:w-[80px] sm:px-[10px] sm:text-[14px] ${className}`}
     >
       {children}
     </button>

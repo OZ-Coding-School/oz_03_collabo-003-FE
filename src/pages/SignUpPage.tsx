@@ -11,7 +11,7 @@ interface SignUpFormInputs {
   verificationCode: string;
 }
 
-// const baseUrl = import.meta.env.VITE_API_URL;
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const SignUpPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,13 +39,13 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/accounts/check-username/', { username });
-      // const response = await axios.post(`${baseUrl}/api/v1/accounts/check-username`, { username });
+      const response = await axios.post(`${baseUrl}/accounts/check-username/`, { username });
       if (response.data.message === '사용 가능한 닉네임입니다.') {
         setIsUsernameVerified(true);
         alert('닉네임 인증이 완료되었습니다.');
       } else {
         setIsUsernameVerified(false);
+        console.log(response.data.message);
         alert('이미 사용 중인 닉네임입니다.');
       }
     } catch (error) {
@@ -62,9 +62,19 @@ const SignUpPage: React.FC = () => {
       return;
     }
 
+    // try {
+    //   // 1. 이메일 중복 여부 확인
+    //   const emailCheckResponse = await axios.post(`${baseUrl}/accounts/check-email/`, { email });
+
+    //   if (emailCheckResponse.data.message === '이미 존재하는 이메일입니다.') {
+    //     // 2. 이메일이 이미 존재할 경우 오류 메시지 표시
+    //     setError('email', { type: 'manual', message: '이미 존재하는 이메일입니다. 다른 이메일을 입력하세요.' });
+    //     return;
+    //   }
+
+    // 3. 이메일이 중복되지 않을 경우 인증 코드 요청
     try {
-      const response = await axios.post('http://127.0.0.1:8000/accounts/send-verification-code/', { email });
-      // const response = await axios.post(`${baseUrl}/api/v1/accounts/send-verification-code`, { email });
+      const response = await axios.post(`${baseUrl}/accounts/send-verification-code/`, { email });
       if (response.data.detail === '인증 코드가 이메일로 전송되었습니다.') {
         setIsVerificationCodeSent(true);
         alert('인증 코드가 이메일로 전송되었습니다.');
@@ -87,8 +97,7 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/accounts/verify-code/', {
-        // const response = await axios.post(`${baseUrl}/api/v1/accounts/verify-code`, {
+      const response = await axios.post(`${baseUrl}/accounts/verify-code/`, {
         email,
         verification_code: verificationCode,
       });
@@ -117,11 +126,12 @@ const SignUpPage: React.FC = () => {
     }
 
     setIsLoading(true);
+
     try {
-      const response = await axios.post('http://127.0.0.1:8000/accounts/register/', {
-        // const response = await axios.post(`${baseUrl}/api/v1/accounts/register-final`, {
+      const response = await axios.post(`${baseUrl}/accounts/register/`, {
         email: data.email,
         username: data.username,
+        verification_code: data.verificationCode,
         password: data.password,
       });
       console.log(response.data);
@@ -154,7 +164,7 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isUsernameVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isUsernameVerified ? 'bg-gray-db' : 'bg-blue-primary hover:bg-blue-hover'}`}
               onClick={verifyUsername}
               disabled={isUsernameVerified}
             >
@@ -183,7 +193,7 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isVerificationCodeSent ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+              className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isVerificationCodeSent ? 'bg-gray-db' : 'bg-blue-primary hover:bg-blue-hover'}`}
               onClick={requestVerificationCode}
               disabled={isVerificationCodeSent}
             >
@@ -207,7 +217,7 @@ const SignUpPage: React.FC = () => {
               />
               <button
                 type='button'
-                className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-c4' : 'bg-blue-primary hover:bg-blue-hover'}`}
+                className={`ml-2 mt-2 flex h-[50px] items-center justify-center whitespace-nowrap rounded-xl px-4 py-2 font-semibold text-white shadow-custom-light ${isEmailVerified ? 'bg-gray-db' : 'bg-blue-primary hover:bg-blue-hover'}`}
                 onClick={verifyCode}
                 disabled={isEmailVerified}
               >

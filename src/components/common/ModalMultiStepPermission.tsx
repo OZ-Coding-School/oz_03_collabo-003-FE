@@ -4,7 +4,7 @@ import BtnMypage from '../common/button/BtnMypage';
 
 interface StepProps {
   content: ReactNode;
-  buttonText: string;
+  buttonText?: string;
   onButtonClick?: () => void;
 }
 

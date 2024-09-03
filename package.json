@@ -23,6 +23,7 @@
     "react-router-dom": "^6.26.0",
     "tiptap": "^0.15.0",
     "tiptap-extensions": "^0.17.0",
+    "vite-plugin-mkcert": "^1.17.6",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

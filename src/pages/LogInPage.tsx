@@ -83,7 +83,6 @@ const LogInPage: React.FC = () => {
 
   // 소셜 로그인 버튼의 리다이렉트 URL 설정
   const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
-  // const kakaoLoginUrl = 'http://127.0.0.1:8000/accounts/kakao/login';
   const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
   const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
 

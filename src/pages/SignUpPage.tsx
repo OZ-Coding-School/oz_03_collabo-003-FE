@@ -28,6 +28,7 @@ const SignUpPage: React.FC = () => {
     watch,
     getValues,
     setError,
+    clearErrors,
   } = useForm<SignUpFormInputs>();
 
   const verifyUsername = async () => {
@@ -65,6 +66,8 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
+      clearErrors('email');
+
       const emailCheckResponse = await axios.post(`${baseUrl}/accounts/check-email/`, { email });
 
       if (emailCheckResponse.status === 200) {
@@ -161,6 +164,7 @@ const SignUpPage: React.FC = () => {
               className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               placeholder='닉네임을 입력하세요.'
               {...register('username', { required: '닉네임을 입력하세요.' })}
+              disabled={isUsernameVerified}
             />
             <button
               type='button'
@@ -190,6 +194,7 @@ const SignUpPage: React.FC = () => {
                   message: '잘못된 이메일 주소입니다.',
                 },
               })}
+              disabled={isVerificationCodeSent}
             />
             <button
               type='button'
@@ -214,6 +219,7 @@ const SignUpPage: React.FC = () => {
                 className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 placeholder='이메일로 받은 인증 코드를 입력하세요.'
                 {...register('verificationCode', { required: '인증 코드를 입력하세요.' })}
+                disabled={isEmailVerified}
               />
               <button
                 type='button'

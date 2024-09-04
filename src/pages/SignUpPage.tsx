@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface SignUpFormInputs {
@@ -28,6 +28,7 @@ const SignUpPage: React.FC = () => {
     watch,
     getValues,
     setError,
+    clearErrors,
   } = useForm<SignUpFormInputs>();
 
   const verifyUsername = async () => {
@@ -40,17 +41,19 @@ const SignUpPage: React.FC = () => {
 
     try {
       const response = await axios.post(`${baseUrl}/accounts/check-username/`, { username });
-      if (response.data.message === '사용 가능한 닉네임입니다.') {
+
+      if (response.status === 200) {
         setIsUsernameVerified(true);
         alert('닉네임 인증이 완료되었습니다.');
-      } else {
-        setIsUsernameVerified(false);
-        console.log(response.data.message);
-        alert('이미 사용 중인 닉네임입니다.');
       }
     } catch (error) {
-      console.error('닉네임 인증 실패:', error);
-      alert('닉네임 인증에 실패했습니다. 다시 시도해주세요.');
+      if (isAxiosError(error) && error.response?.status === 400) {
+        setIsUsernameVerified(false);
+        alert('이미 사용 중인 닉네임입니다.');
+      } else {
+        console.error('닉네임 인증 실패:', error);
+        alert('닉네임 인증에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
@@ -62,28 +65,26 @@ const SignUpPage: React.FC = () => {
       return;
     }
 
-    // try {
-    //   // 1. 이메일 중복 여부 확인
-    //   const emailCheckResponse = await axios.post(`${baseUrl}/accounts/check-email/`, { email });
-
-    //   if (emailCheckResponse.data.message === '이미 존재하는 이메일입니다.') {
-    //     // 2. 이메일이 이미 존재할 경우 오류 메시지 표시
-    //     setError('email', { type: 'manual', message: '이미 존재하는 이메일입니다. 다른 이메일을 입력하세요.' });
-    //     return;
-    //   }
-
-    // 3. 이메일이 중복되지 않을 경우 인증 코드 요청
     try {
-      const response = await axios.post(`${baseUrl}/accounts/send-verification-code/`, { email });
-      if (response.data.detail === '인증 코드가 이메일로 전송되었습니다.') {
-        setIsVerificationCodeSent(true);
-        alert('인증 코드가 이메일로 전송되었습니다.');
-      } else {
-        alert('인증 코드 전송에 실패했습니다.');
+      clearErrors('email');
+
+      const emailCheckResponse = await axios.post(`${baseUrl}/accounts/check-email/`, { email });
+
+      if (emailCheckResponse.status === 200) {
+        const response = await axios.post(`${baseUrl}/accounts/send-verification-code/`, { email });
+
+        if (response.status === 200) {
+          setIsVerificationCodeSent(true);
+          alert('인증 코드가 이메일로 전송되었습니다.');
+        }
       }
     } catch (error) {
-      console.error('인증 코드 요청 실패:', error);
-      alert('인증 코드 요청에 실패했습니다. 다시 시도해주세요.');
+      if (isAxiosError(error) && error.response?.status === 400) {
+        setError('email', { type: 'manual', message: '이미 존재하는 이메일입니다. 다른 이메일을 입력하세요.' });
+      } else {
+        console.error('이메일 확인 또는 인증 코드 요청 실패:', error);
+        alert('이메일 확인 또는 인증 코드 요청에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
@@ -101,16 +102,18 @@ const SignUpPage: React.FC = () => {
         email,
         verification_code: verificationCode,
       });
-      if (response.data.detail === '인증 코드가 확인되었습니다.') {
+
+      if (response.status === 200) {
         setIsEmailVerified(true);
         alert('이메일 인증이 완료되었습니다.');
-      } else {
-        setIsEmailVerified(false);
-        alert('인증 코드가 일치하지 않습니다.');
       }
     } catch (error) {
-      console.error('이메일 인증 실패:', error);
-      alert('이메일 인증에 실패했습니다. 다시 시도해주세요.');
+      if (isAxiosError(error) && error.response?.status === 400) {
+        alert('인증 코드가 일치하지 않거나 만료되었습니다.');
+      } else {
+        console.error('이메일 인증 실패:', error);
+        alert('이메일 인증에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
@@ -161,6 +164,7 @@ const SignUpPage: React.FC = () => {
               className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               placeholder='닉네임을 입력하세요.'
               {...register('username', { required: '닉네임을 입력하세요.' })}
+              disabled={isUsernameVerified}
             />
             <button
               type='button'
@@ -190,6 +194,7 @@ const SignUpPage: React.FC = () => {
                   message: '잘못된 이메일 주소입니다.',
                 },
               })}
+              disabled={isVerificationCodeSent}
             />
             <button
               type='button'
@@ -214,6 +219,7 @@ const SignUpPage: React.FC = () => {
                 className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 placeholder='이메일로 받은 인증 코드를 입력하세요.'
                 {...register('verificationCode', { required: '인증 코드를 입력하세요.' })}
+                disabled={isEmailVerified}
               />
               <button
                 type='button'

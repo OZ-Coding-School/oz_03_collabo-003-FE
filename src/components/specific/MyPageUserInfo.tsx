@@ -11,7 +11,7 @@ interface UserFormData {
 
 const MyPageUserInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [naming, setNaming] = useState(userData.name);
+  const [naming, setNaming] = useState(userData.username);
   const [password, setPassword] = useState('');
 
   const {
@@ -57,7 +57,7 @@ const MyPageUserInfo = () => {
       <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
-            환영합니다, <strong>{userData.name}</strong>님
+            환영합니다, <strong>{userData.username}</strong>님
           </span>
           <span className='text-lg'>
             권한: <strong>이용자</strong>

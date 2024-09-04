@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // 아이콘 임포트
 
 interface PasswordResetInputs {
   email: string;
-  password?: string;
+  password: string;
 }
 
 const PasswordResetPage: React.FC = () => {
@@ -17,8 +17,9 @@ const PasswordResetPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    getValues, // 이메일 값을 가져오기 위해 추가
+    watch,
     formState: { errors },
+    setValue,
   } = useForm<PasswordResetInputs>();
 
   const baseUrl = import.meta.env.VITE_API_URL;
@@ -29,7 +30,16 @@ const PasswordResetPage: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
 
-  console.log('Token from URL:', token); // Token 확인용
+  // console.log('Token from URL:', token); // Token 확인용
+
+  useEffect(() => {
+    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채웁니다.
+    const storedEmail = localStorage.getItem('email');
+    if (token && storedEmail) {
+      setValue('email', storedEmail);
+      setIsEmailSent(true);
+    }
+  }, [token, setValue]);
 
   const sendPasswordResetEmail = async (email: string) => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
@@ -49,16 +59,33 @@ const PasswordResetPage: React.FC = () => {
         // Step 1: 이메일 전송
         await sendPasswordResetEmail(data.email);
         setIsEmailSent(true); // 이메일 전송 성공 시, 다음 단계로 진행
+        localStorage.setItem('email', data.email); // 이메일을 localStorage에 저장
         alert('비밀번호 재설정 이메일이 발송되었습니다.');
       } else {
         // Step 2: 비밀번호 재설정
         await resetPassword(data);
         alert('비밀번호 재설정이 완료되었습니다.');
+        localStorage.removeItem('email'); // 비밀번호 재설정 후 이메일 삭제
         navigate('/login'); // 비밀번호 재설정 완료 후 로그인 페이지로 이동
       }
     } catch (error: any) {
-      console.error('오류 발생:', error);
-      alert('처리 중 오류가 발생했습니다.');
+      if (isAxiosError(error)) {
+        const status = error.response?.status;
+        const detail = error.response?.data.detail;
+
+        if (status === 404 && detail === '해당 이메일을 가진 사용자가 존재하지 않습니다.') {
+          alert('입력한 이메일 주소를 가진 사용자가 존재하지 않습니다.');
+        } else if (status === 400 && detail === '토큰이 만료되었습니다.') {
+          alert('비밀번호 재설정 링크가 만료되었습니다. 다시 요청해주세요.');
+        } else if (status === 400 && detail === '유효하지 않은 토큰입니다.') {
+          alert('유효하지 않은 토큰입니다. 다시 요청해주세요.');
+        } else {
+          alert('처리 중 오류가 발생했습니다.');
+        }
+      } else {
+        console.error('오류 발생:', error);
+        alert('처리 중 오류가 발생했습니다.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -89,6 +116,7 @@ const PasswordResetPage: React.FC = () => {
                     message: '잘못된 이메일 주소입니다.',
                   },
                 })}
+                value={watch('email') || ''}
               />
               {errors.email && <p className='mt-2 text-sm text-red'>{errors.email.message}</p>}
             </div>
@@ -109,10 +137,10 @@ const PasswordResetPage: React.FC = () => {
                 이메일
               </label>
               <input
-                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary sm:text-sm'
+                className='mt-2 block h-[50px] w-full rounded-sm border border-gray-c4 px-4 py-[15px] shadow-custom-light focus:outline-none focus:ring-blue-primary sm:text-sm'
                 type='email'
                 id='email'
-                value={getValues('email')} // react-hook-form의 getValues로 이메일 값 가져오기
+                value={watch('email')} // react-hook-form의 getValues로 이메일 값 가져오기
                 readOnly
               />
             </div>
@@ -134,6 +162,7 @@ const PasswordResetPage: React.FC = () => {
                       message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
                     },
                   })}
+                  value={watch('password') || ''}
                 />
                 <button
                   type='button'

@@ -39,6 +39,17 @@ const SignUpPage: React.FC = () => {
       return;
     }
 
+    // 프론트엔드에서 추가 검증, 제출 시가 아닌 인증 시 유효성 검사를 할 수 있도록
+    if (username.length < 2 || username.length > 6) {
+      setError('username', { type: 'manual', message: '닉네임은 2자 이상 6자 이내여야 합니다.' });
+      return;
+    }
+
+    if (!/^[가-힣a-zA-Z0-9]+$/.test(username)) {
+      setError('username', { type: 'manual', message: '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.' });
+      return;
+    }
+
     try {
       const response = await axios.post(`${baseUrl}/accounts/check-username/`, { username });
 
@@ -156,14 +167,28 @@ const SignUpPage: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-lg rounded-lg p-8'>
         {/* Username Field */}
         <div className='mb-6'>
-          <label htmlFor='nickname' className='block text-sm font-medium'>
+          <label htmlFor='username' className='block text-sm font-medium'>
             닉네임
           </label>
           <div className='flex'>
             <input
               className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
               placeholder='닉네임을 입력하세요.'
-              {...register('username', { required: '닉네임을 입력하세요.' })}
+              {...register('username', {
+                required: '닉네임을 입력하세요.',
+                pattern: {
+                  value: /^[가-힣a-zA-Z0-9]+$/,
+                  message: '닉네임은 한글, 영문, 숫자만 사용할 수 있습니다.',
+                },
+                minLength: {
+                  value: 2,
+                  message: '닉네임은 최소 2자 이상이어야 합니다.',
+                },
+                maxLength: {
+                  value: 6,
+                  message: '닉네임은 최대 6자 이내여야 합니다.',
+                },
+              })}
               disabled={isUsernameVerified}
             />
             <button
@@ -246,9 +271,17 @@ const SignUpPage: React.FC = () => {
               placeholder='비밀번호를 입력하세요.'
               {...register('password', {
                 required: '비밀번호를 입력하세요.',
+                minLength: {
+                  value: 8,
+                  message: '비밀번호는 최소 8자 이상이어야 합니다.',
+                },
+                maxLength: {
+                  value: 15,
+                  message: '비밀번호는 최대 15자 이내여야 합니다.',
+                },
                 pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/,
-                  message: '비밀번호는 8-15자 영문/숫자 또는 특수문자 조합이어야 합니다.',
+                  value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
+                  message: '비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.',
                 },
               })}
             />

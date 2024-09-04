@@ -18,13 +18,17 @@ const RedirectHandlerPage: React.FC = () => {
       logIn(userId, username, email);
 
       window.alert('소셜로그인에 성공하였습니다. 홈으로 이동합니다.');
-      // 홈으로 리다이렉트
-      navigate('/');
+      // alert이 사용자의 화면에 표시된 후에 홈으로 리다이렉트
+      setTimeout(() => {
+        navigate('/');
+      }, 100); // 짧은 지연시간을 주어 alert이 화면에 표시될 시간을 확보
     } else {
       console.error('로그인 데이터가 부족합니다.');
       window.alert('소셜로그인에 실패하였습니다. 로그인 페이지로 이동합니다.');
-      // 로그인 페이지로 리다이렉트
-      navigate('/login');
+      // alert이 사용자의 화면에 표시된 후에 로그인 페이지로 리다이렉트
+      setTimeout(() => {
+        navigate('/login');
+      }, 100); // 짧은 지연시간을 주어 alert이 화면에 표시될 시간을 확보
     }
   }, [navigate, logIn]);
 

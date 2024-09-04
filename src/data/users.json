@@ -2,7 +2,7 @@
   "id": 1,
   "email": "user1@gmail.com",
   "username": "유저1",
-  "role": "client",
+  "role": "user",
   "business_name": "(주)올디",
   "business_number": 1231212345,
   "phone_number": 11112345678,

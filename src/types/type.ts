@@ -37,6 +37,7 @@ export interface Content {
   qna?: QnA;
   viewCount?: number;
   likeCount?: number;
+  is_analyzed?: boolean;
 }
 
 export interface User {
@@ -66,7 +67,7 @@ export type AnalysisRequestSiteState = {
 
 export interface Analyst {
   id: number;
-  name: string;
+  username: string;
   image: string;
   intro: string;
   link?: string;
@@ -86,3 +87,14 @@ export interface Category {
   slug: string;
   semiCategories: SemiCategory[];
 }
+
+export type AnalysisContent = {
+  contentId: number;
+  clientId: number;
+  title: string;
+  link: string;
+  image: string;
+  description: string;
+  category: string;
+  status: string;
+};

@@ -5,7 +5,8 @@
     "site_url": "https://www.figma.com/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": true
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "site_url": "https://pixabay.com/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": true
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "site_url": "https://gamma.app/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "프레젠테이션, 웹사이트 등을 몇 초만에 무제한으로 만들 수 있습니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": false
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "site_url": "https://www.airtable.com/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "팀과 협업하여 제작이 가능한 웹 사이트입니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": true
   },
   {
     "id": 5,
@@ -37,7 +41,8 @@
     "site_url": "https://www.figma.com/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": false
   },
   {
     "id": 6,
@@ -53,7 +58,8 @@
     "site_url": "https://gamma.app/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "프레젠테이션, 웹사이트 등을 몇 초만에 무제한으로 만들 수 있습니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": false
   },
   {
     "id": 8,
@@ -61,7 +67,8 @@
     "site_url": "https://www.airtable.com/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "팀과 협업하여 제작이 가능한 웹 사이트입니다.",
-    "main_category": "업무"
+    "main_category": "업무",
+    "is_analyzed": false
   },
   {
     "id": 9,
@@ -69,7 +76,8 @@
     "site_url": "https://www.perplexity.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "컨텐츠 검색 및 요약, 다양한 컨텐츠 링크 제시",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": true
   },
   {
     "id": 10,
@@ -77,7 +85,8 @@
     "site_url": "https://naimy.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "각종 제품, 서비스명, 상호명, 채널명 등 이름 짓기 가능. 기존에 있는지 확인도 가능",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": true
   },
   {
     "id": 11,
@@ -85,7 +94,8 @@
     "site_url": "https://aness.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "각종 AI 툴 및 정보를 한 눈에!!!",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 12,
@@ -93,7 +103,8 @@
     "site_url": "https://www.startup-plus.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "서울 창업의 모든 것",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": true
   },
   {
     "id": 13,
@@ -101,7 +112,8 @@
     "site_url": "https://dacon.io/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "개발자 공모전, 경진대회 플랫폼",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": false
   },
   {
     "id": 14,
@@ -109,7 +121,8 @@
     "site_url": "https://bonusjob.co.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "취업하면 보너스 축하금을 주는 채용 사이트",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": true
   },
   {
     "id": 15,
@@ -117,7 +130,8 @@
     "site_url": "https://www.all-con.co.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "한국경제신문이 운영하는 각종 공모전 사이트",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": false
   },
   {
     "id": 16,
@@ -125,7 +139,8 @@
     "site_url": "https://www.wanted.co.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "채용정보 플랫폼",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": true
   },
   {
     "id": 17,
@@ -133,7 +148,8 @@
     "site_url": "https://www.kua.go.kr/uaptm010/selectMain.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": true
   },
   {
     "id": 18,
@@ -141,7 +157,8 @@
     "site_url": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": true
   },
   {
     "id": 19,
@@ -149,7 +166,8 @@
     "site_url": "https://idolbom.go.kr/front/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "시간제, 양아종일제 돌봄 등 아이돌봄서비스 온라인 신청",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   },
   {
     "id": 20,
@@ -157,7 +175,8 @@
     "site_url": "https://www.bojo.go.kr/bojo.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "보조금 소개, 맞춤형보조사업, 공모사업 찾기, 사용자매뉴얼 안내",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   },
   {
     "id": 21,
@@ -165,7 +184,8 @@
     "site_url": "https://www.kua.go.kr/uaptm010/selectMain.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   },
   {
     "id": 22,
@@ -173,7 +193,8 @@
     "site_url": "https://www.perplexity.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "컨텐츠 검색 및 요약, 다양한 컨텐츠 링크 제시",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 23,
@@ -181,7 +202,8 @@
     "site_url": "https://naimy.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "각종 제품, 서비스명, 상호명, 채널명 등 이름 짓기 가능. 기존에 있는지 확인도 가능",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 24,
@@ -189,7 +211,8 @@
     "site_url": "https://aness.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "각종 AI 툴 및 정보를 한 눈에!!!",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 25,
@@ -197,7 +220,8 @@
     "site_url": "https://www.perplexity.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "컨텐츠 검색 및 요약, 다양한 컨텐츠 링크 제시",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 26,
@@ -205,7 +229,8 @@
     "site_url": "https://naimy.ai/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "각종 제품, 서비스명, 상호명, 채널명 등 이름 짓기 가능. 기존에 있는지 확인도 가능",
-    "main_category": "ai"
+    "main_category": "ai",
+    "is_analyzed": false
   },
   {
     "id": 27,
@@ -213,7 +238,8 @@
     "site_url": "https://www.startup-plus.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "서울 창업의 모든 것",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": false
   },
   {
     "id": 28,
@@ -221,7 +247,8 @@
     "site_url": "https://dacon.io/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "개발자 공모전, 경진대회 플랫폼",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": false
   },
   {
     "id": 29,
@@ -229,7 +256,8 @@
     "site_url": "https://bonusjob.co.kr/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "취업하면 보너스 축하금을 주는 채용 사이트",
-    "main_category": "정보 플랫폼"
+    "main_category": "정보 플랫폼",
+    "is_analyzed": false
   },
   {
     "id": 30,
@@ -237,7 +265,8 @@
     "site_url": "https://www.kua.go.kr/uaptm010/selectMain.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "국민취업지원제도 신청, 취업 지원 프로그램, 생계안전 지원 등 소개",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   },
   {
     "id": 31,
@@ -245,7 +274,8 @@
     "site_url": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   },
   {
     "id": 32,
@@ -253,6 +283,7 @@
     "site_url": "https://idolbom.go.kr/front/",
     "thumbnail": "https://via.placeholder.com/330x220",
     "site_description": "시간제, 양아종일제 돌봄 등 아이돌봄서비스 온라인 신청",
-    "main_category": "정부지원"
+    "main_category": "정부지원",
+    "is_analyzed": false
   }
 ]

@@ -82,7 +82,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
           </div>
           <div className='flex gap-1'>
             <span className='text-[20px] text-gray-46'>권한:</span>
-            {user?.role === 'client' && <span className='text-[20px] font-semibold'>의뢰자</span>}
+            <span className='text-[20px] font-semibold'>의뢰자</span>
           </div>
         </div>
         <div className='min-h-[150px] rounded-xl border border-gray-dc bg-white'>
@@ -91,7 +91,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
               <span className='text-center text-[18px] font-semibold'>등록한 웹</span>
               <div className='flex items-center justify-center gap-1'>
                 <span className={stateNumber} onClick={() => onSelectedItem('사이트 관리')}>
-                  0
+                  10
                 </span>
                 <span className='text-center text-[18px] text-gray-46'>건</span>
               </div>
@@ -99,8 +99,8 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
             <div className='grid grid-cols-1 grid-rows-2 items-center border-r border-r-gray-dc'>
               <span className='text-center text-[18px] font-semibold'>분석 의뢰</span>
               <div className='flex items-center justify-center gap-1'>
-                <span className={stateNumber} onClick={() => alert('서비스 준비중입니다.')}>
-                  0
+                <span className={stateNumber} onClick={() => onSelectedItem('분석 의뢰 사이트')}>
+                  4
                 </span>
                 <span className='text-center text-[18px] text-gray-46'>건</span>
               </div>

@@ -5,6 +5,7 @@ import NavBtn from '../common/button/NavBtn';
 import NavMenu from '../specific/NavMenu';
 import NavMobileMenu from '../specific/NavMobileMenu';
 import { FiMenu } from 'react-icons/fi';
+import Loading from '../common/Loading';
 import { categoryService } from '../../apis/services/categoryService';
 import { Category } from '../../types/type';
 
@@ -18,7 +19,8 @@ const Navbar: React.FC = () => {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]); // 초기 상태를 빈 배열로 설정
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,10 +30,6 @@ const Navbar: React.FC = () => {
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
     if (isMobileMenuOpen) {
       document.documentElement.style.overflow = 'hidden';
     } else {
@@ -39,6 +37,7 @@ const Navbar: React.FC = () => {
     }
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       document.documentElement.style.overflow = 'auto';
     };
   }, [isMobileMenuOpen]);
@@ -46,10 +45,13 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        setIsLoading(true);
         const fetchedCategories = await categoryService.getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error('Failed to fetch categories:', error);
+        console.error('카테고리 fetch에러', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -61,32 +63,36 @@ const Navbar: React.FC = () => {
     document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     navigate('/');
+    window.location.reload();
   };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const onLoading = (path: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      navigate(path);
+      setIsLoading(false);
+    }, 500);
+  };
+
   return (
     <div className='relative'>
+      {isLoading && <Loading />}
       <nav className='z-40 flex h-[70px] w-full items-center justify-between border-b border-gray-dc bg-white px-[30px] sm:px-[50px] lg:px-[100px]'>
         <div className='flex items-center'>
-          <div
-            onClick={() => navigate('/')}
-            onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
-            role='button'
-            tabIndex={0}
-            className='flex cursor-pointer items-center'
-          >
+          <button onClick={() => navigate('/')} tabIndex={0} className='flex cursor-pointer items-center'>
             <h1 className='text-[25px] font-bold text-blue-primary'>ALLTHE</h1>
-          </div>
+          </button>
 
           {!isMobile && (
             <div className='group relative ml-5 flex h-[70px] space-x-5 sm:ml-10'>
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => navigate(`/category/${category.slug}`)}
+                  onClick={() => onLoading(`/category/${category.slug}`)}
                   className='font-semibold text-black hover:text-blue-hover'
                 >
                   {category.categories}
@@ -102,10 +108,10 @@ const Navbar: React.FC = () => {
             {isLoggedIn ? (
               <>
                 <p
-                  onClick={() => navigate('/mypage')}
+                  onClick={() => onLoading('/mypage')}
                   className='mr-1 cursor-pointer whitespace-nowrap text-[12px] hover:font-bold hover:text-blue-hover hover:underline sm:text-[16px]'
                 >
-                  {username}
+                  {username ?? '올디유저001'}
                 </p>
                 <NavBtn onClick={handleLogout} className='bg-white text-black hover:bg-white-f9'>
                   로그아웃
@@ -130,7 +136,6 @@ const Navbar: React.FC = () => {
           </div>
         )}
       </nav>
-
       {isMobileMenuOpen && (
         <div className='absolute left-0 top-0 z-50 h-full w-full bg-white'>
           <NavMobileMenu

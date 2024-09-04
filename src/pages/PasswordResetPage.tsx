@@ -13,7 +13,6 @@ const PasswordResetPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 시각화 상태
-
   const {
     register,
     handleSubmit,
@@ -25,33 +24,30 @@ const PasswordResetPage: React.FC = () => {
   const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
-
-  // URL에서 token과 email 쿼리 파라미터를 추출
+  // URL에서 token 쿼리 파라미터를 추출
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
-  const emailFromQuery = queryParams.get('email');
 
   // console.log('Token from URL:', token); // Token 확인용
 
   useEffect(() => {
-    // 만약 토큰이 있고 이메일이 쿼리 파라미터로 있으면 이메일 필드를 채웁니다.
-    if (token && emailFromQuery) {
-      setValue('email', emailFromQuery);
+    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채웁니다.
+    const storedEmail = localStorage.getItem('email');
+    if (token && storedEmail) {
+      setValue('email', storedEmail);
       setIsEmailSent(true);
     }
-  }, [token, emailFromQuery, setValue]);
+  }, [token, setValue]);
 
   const sendPasswordResetEmail = async (email: string) => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
   };
-
   const resetPassword = async (data: PasswordResetInputs) => {
     return axios.post(`${baseUrl}/accounts/password-reset/confirm/`, {
       ...data,
       token, // token을 추가하여 서버에 전송
     });
   };
-
   const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {
     setIsLoading(true);
     try {
@@ -90,7 +86,6 @@ const PasswordResetPage: React.FC = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
       <a href='/' className='mb-6 h-[50px] w-[150px] text-[40px] font-bold text-blue-primary'>
@@ -195,5 +190,4 @@ const PasswordResetPage: React.FC = () => {
     </div>
   );
 };
-
 export default PasswordResetPage;

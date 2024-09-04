@@ -91,9 +91,12 @@ const LogInPage: React.FC = () => {
   };
 
   // 소셜 로그인 버튼의 리다이렉트 URL 설정
-  const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
-  const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
-  const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
+  const googleLoginUrl = 'https://api.allthe.store/accounts/google/login/';
+  const kakaoLoginUrl = 'https://api.allthe.store/accounts/kakao/login/';
+  const naverLoginUrl = 'https://api.allthe.store/accounts/naver/login/';
+  // const googleLoginUrl = `${baseUrl}/accounts/google/login/`;
+  // const kakaoLoginUrl = `${baseUrl}/accounts/kakao/login/`;
+  // const naverLoginUrl = `${baseUrl}/accounts/naver/login/`;
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>

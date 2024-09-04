@@ -16,10 +16,12 @@ const RedirectHandlerPage: React.FC = () => {
     if (userId && username && email) {
       // Zustand 스토어에 사용자 데이터 저장
       logIn(userId, username, email);
+      alert('소셜로그인에 성공하였습니다. 홈으로 이동하시겠습니까?');
       // 로그인 성공 후 홈으로 리다이렉트
       navigate('/');
     } else {
       console.error('로그인 데이터가 부족합니다.');
+      alert('소셜로그인에 실패하였습니다. 로그인 페이지로 이동합니다.');
       navigate('/login'); // 로그인 페이지로 리다이렉트
     }
   }, [navigate, logIn]);

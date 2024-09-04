@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import FileUpload from '../components/specific/FileUpload';
 import AutoResizeTextarea from '../components/common/AutoResizeTextarea';
 import categoriesData from '../data/categories.json';
+// import { contentAPI } from '../apis/api/content';
 
 interface RegisterInputs {
   title: string;
@@ -43,7 +44,7 @@ const SiteRegistrationPage = () => {
     formData.append('point', data.point);
     formData.append('content', data.content);
     formData.append('categoryId', selectedCategory.id.toString());
-    formData.append('semiCategoryId', selectedSemiCategory.id.toString());
+    formData.append('semi_category', selectedSemiCategory.id.toString());
 
     if (data.image.length > 0) {
       formData.append('image', data.image[0]);
@@ -123,7 +124,7 @@ const SiteRegistrationPage = () => {
               )}
             </div>
             <div className='mb-[30px]'>
-              <p className='mb-[11px] text-[18px]'>페이지 대표 이미지</p>
+              <p className='mb-[11px] text-[18px]'>사이트 대표 이미지</p>
               <input
                 type='file'
                 accept='.jpg, .jpeg, .png'
@@ -137,36 +138,36 @@ const SiteRegistrationPage = () => {
               {errors.image && <p className='ml-1 text-red'>{errors.image.message}</p>}
             </div>
             <div className='mb-[30px]'>
-              <p className='mb-[11px] text-[18px]'>페이지 타이틀</p>
+              <p className='mb-[11px] text-[18px]'>사이트 타이틀</p>
               <input
                 type='text'
-                placeholder='페이지 타이틀 명을 입력해주세요'
+                placeholder='사이트 타이틀 명을 입력해주세요'
                 className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 {...register('title', {
-                  required: '페이지 타이틀을 입력해주세요.',
+                  required: '사이트 타이틀을 입력해주세요.',
                   maxLength: {
                     value: 30,
-                    message: '페이지 타이틀은 최대 30자까지 입력할 수 있습니다.',
+                    message: '사이트 타이틀은 최대 30자까지 입력할 수 있습니다.',
                   },
                 })}
               />
               {errors.title && <p className='ml-1 text-red'>{errors.title.message}</p>}
             </div>
             <div className='mb-[30px]'>
-              <p className='mb-[11px] text-[18px]'>페이지 링크</p>
+              <p className='mb-[11px] text-[18px]'>사이트 링크</p>
               <input
                 type='text'
-                placeholder='페이지 링크를 입력해주세요'
+                placeholder='사이트 링크를 입력해주세요'
                 className='mt-2 block h-[50px] w-full rounded-[5px] border border-gray-c4 px-[15px] py-4 text-[16px] shadow-custom-light focus:border-blue-primary focus:outline-none focus:ring-blue-primary'
                 {...register('link', {
-                  required: '페이지 링크를 입력해주세요.',
+                  required: '사이트 링크를 입력해주세요.',
                   pattern: {
                     value: /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})+\/?/,
                     message: '유효한 링크를 입력해주세요.',
                   },
                   maxLength: {
                     value: 100,
-                    message: '페이지 링크는 최대 100자까지 입력할 수 있습니다.',
+                    message: '사이트 링크는 최대 100자까지 입력할 수 있습니다.',
                   },
                 })}
               />

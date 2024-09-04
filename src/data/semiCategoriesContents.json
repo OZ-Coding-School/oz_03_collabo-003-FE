@@ -1,7 +1,7 @@
 [
   {
     "categoryId": 1,
-    "semiCategoryId": 1,
+    "semi_category": 1,
     "content": [
       {
         "id": 2,
@@ -21,7 +21,7 @@
   },
   {
     "categoryId": 1,
-    "semiCategoryId": 2,
+    "semi_category": 2,
     "content": [
       {
         "id": 4,
@@ -41,7 +41,7 @@
   },
   {
     "categoryId": 1,
-    "semiCategoryId": 3,
+    "semi_category": 3,
     "content": [
       {
         "id": 6,
@@ -68,7 +68,7 @@
   },
   {
     "categoryId": 2,
-    "semiCategoryId": 4,
+    "semi_category": 4,
     "content": [
       {
         "id": 9,
@@ -88,7 +88,7 @@
   },
   {
     "categoryId": 2,
-    "semiCategoryId": 5,
+    "semi_category": 5,
     "content": [
       {
         "id": 11,
@@ -101,7 +101,7 @@
   },
   {
     "categoryId": 3,
-    "semiCategoryId": 6,
+    "semi_category": 6,
     "content": [
       {
         "id": 12,
@@ -121,7 +121,7 @@
   },
   {
     "categoryId": 3,
-    "semiCategoryId": 7,
+    "semi_category": 7,
     "content": [
       {
         "id": 14,
@@ -148,7 +148,7 @@
   },
   {
     "categoryId": 4,
-    "semiCategoryId": 8,
+    "semi_category": 8,
     "content": [
       {
         "id": 17,
@@ -168,7 +168,7 @@
   },
   {
     "categoryId": 4,
-    "semiCategoryId": 9,
+    "semi_category": 9,
     "content": [
       {
         "id": 19,

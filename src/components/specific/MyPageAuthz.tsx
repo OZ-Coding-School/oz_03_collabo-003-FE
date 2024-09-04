@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import BtnMypage from '../common/button/BtnMypage';
 import { useNavigate } from 'react-router-dom';
-import MultiStepModal from './../common/ModalMultiStepPermission';
+import MultiStepModal from '../common/ModalMultiStep';
 
 interface IFormInputs {
   businessName: string;
@@ -24,7 +24,6 @@ const MyPageAuthz = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<IFormInputs>();
 
   const handleClientClick = () => {
@@ -87,6 +86,7 @@ const MyPageAuthz = () => {
   const completeIcon = 'size-32 m-auto';
 
   const BtnStyle = 'px-4 py-2 h-[40px]';
+
   const ownerStep = [
     {
       content: (
@@ -139,9 +139,6 @@ const MyPageAuthz = () => {
             {errors.representativeNumber && <p className='text-red'>대표 전화는 숫자만 입력할 수 있습니다.</p>}
           </div>
           {errorMessage && <p className='mt-4 text-red'>{errorMessage}</p>}
-          <button type='submit' className='btn-submit'>
-            신청하기
-          </button>
         </form>
       ),
       buttonText: '신청하기',
@@ -155,7 +152,7 @@ const MyPageAuthz = () => {
         </div>
       ),
       buttonText: '이동',
-      onButtonClick: () => navigate('/mypage/owner'),
+      onButtonClick: goHandleClientClick,
     },
   ];
 
@@ -180,7 +177,7 @@ const MyPageAuthz = () => {
         </div>
       ),
       buttonText: '이동',
-      onButtonClick: () => navigate('/mypage/analyst'),
+      onButtonClick: goHandleAnalystClick,
     },
   ];
 
@@ -204,7 +201,7 @@ const MyPageAuthz = () => {
             onClose={closeModal}
             initialTitle='의뢰자 신청하기'
             steps={ownerStep}
-          ></MultiStepModal>
+          />
         </div>
         <div className='provider flex justify-between'>
           <div>
@@ -226,7 +223,7 @@ const MyPageAuthz = () => {
             onClose={() => setIsAnalystModalOpen(false)}
             initialTitle='분석가 신청'
             steps={analystStep}
-          ></MultiStepModal>
+          />
         </div>
       </div>
     </div>

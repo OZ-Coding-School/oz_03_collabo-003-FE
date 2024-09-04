@@ -22,7 +22,7 @@ const MyPageAnalystInfo = () => {
       <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <p className='text-xl'>
-            환영합니다, <span className='font-bold'>{userData.name}</span>님
+            환영합니다, <span className='font-bold'>{userData.username}</span>님
           </p>
           <p className='text-lg'>
             권한: <span className='font-bold'>분석가</span>

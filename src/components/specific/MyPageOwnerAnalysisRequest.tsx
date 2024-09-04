@@ -6,12 +6,12 @@ import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
 import BtnMypage from '../common/button/BtnMypage';
 import axios from 'axios';
-//import analystInfo from '../../data/analystProfile.json';
+import analystInfo from '../../data/analystProfile.json';
 import ModalContainer from '../common/ModalContainer';
 
 type AnalystProfile = {
   id: number;
-  name: string;
+  username: string;
   image: string;
   intro: string;
   link: string;
@@ -71,16 +71,18 @@ const MyPageOwnerAnalysisRequest = () => {
   // 분석가 프로필 열람
   const analystProfileHandler = async (analystId: number) => {
     console.log('분석가 프로필 열람', analystId);
-    try {
-      const response = await axios.get(`${baseUrl}/analysts/${analystId}`, {
-        withCredentials: true,
-      });
-      console.log('분석가 프로필 열람 성공', response.data);
-      setAnalystProfile(response.data);
-      setProfileModalOpen(true);
-    } catch (error) {
-      console.log('분석가 프로필 열람 실패', error);
-    }
+    setAnalystProfile(analystInfo);
+    setProfileModalOpen(true);
+    // try {
+    //   const response = await axios.get(`${baseUrl}/analysts/${analystId}`, {
+    //     withCredentials: true,
+    //   });
+    //   console.log('분석가 프로필 열람 성공', response.data);
+    //   setAnalystProfile(response.data);
+    //   setProfileModalOpen(true);
+    // } catch (error) {
+    //   console.log('분석가 프로필 열람 실패', error);
+    // }
   };
 
   const closedAnalystProfileHandler = () => {
@@ -90,29 +92,34 @@ const MyPageOwnerAnalysisRequest = () => {
 
   // 분석가 선택하기
   const selectedAnalystHandler = async (analystId: number, contentId: number) => {
-    console.log('분석가 선택', analystId);
+    console.log('분석가 선택', analystId, contentId);
     const result = confirm(
       '사이트 분석은 단 한 명의 분석가만 진행할 수 있습니다. 이 분석가를 선택하여 분석을 진행하시겠습니까?'
     );
     if (result) {
-      try {
-        const response = await axios.post(
-          `${baseUrl}/request/select/${contentId}`,
-          {
-            analyst_id: analystId,
-          },
-          {
-            withCredentials: true,
-          }
-        );
-        console.log(response.data);
-        setSelectedAnalyst(true);
-      } catch (error) {
-        console.error(error);
-      }
+      setSelectedAnalyst(true);
     } else {
       return;
     }
+    // if (result) {
+    //   try {
+    //     const response = await axios.post(
+    //       `${baseUrl}/request/select/${contentId}`,
+    //       {
+    //         analyst_id: analystId,
+    //       },
+    //       {
+    //         withCredentials: true,
+    //       }
+    //     );
+    //     console.log(response.data);
+    //     setSelectedAnalyst(true);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // } else {
+    //   return;
+    // }
   };
 
   // 분석 보고서 조회
@@ -240,11 +247,11 @@ const MyPageOwnerAnalysisRequest = () => {
         <ModalContainer
           isOpen={profileModalOpen}
           onClose={closedAnalystProfileHandler}
-          title={`분석가 ${analystProfile.name} 님의 프로필`}
+          title={`분석가 ${analystProfile.username} 님의 프로필`}
         >
           <section className='mb-4 flex flex-col gap-4 px-2'>
             <div className='flex items-center justify-center'>
-              <img className='m-auto size-20' src={analystProfile.image} alt={analystProfile.name} />
+              <img className='m-auto size-20' src={analystProfile.image} alt={analystProfile.username} />
             </div>
             <div className='flex flex-col gap-1'>
               <span className='font-semibold'>소개</span>

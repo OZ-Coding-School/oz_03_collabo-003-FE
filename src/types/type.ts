@@ -24,7 +24,8 @@ export interface Content {
   site_url: string;
   thumbnail: string;
   site_description: string;
-  category: string;
+  main_category: string;
+  semi_category?: string;
   detailedInfo?: string;
   review?: {
     id: number;
@@ -36,16 +37,17 @@ export interface Content {
   qna?: QnA;
   viewCount?: number;
   likeCount?: number;
+  is_analyzed?: boolean;
 }
 
 export interface User {
   id: number;
   email: string;
-  name: string;
+  username: string;
   role: string;
-  businessName: string | null;
-  businessNumber: number | null;
-  phoneNumber: number | null;
+  business_name: string | null;
+  business_number: number | null;
+  phone_number: number | null;
   points: number;
 }
 
@@ -65,7 +67,7 @@ export type AnalysisRequestSiteState = {
 
 export interface Analyst {
   id: number;
-  name: string;
+  username: string;
   image: string;
   intro: string;
   link?: string;
@@ -85,3 +87,14 @@ export interface Category {
   slug: string;
   semiCategories: SemiCategory[];
 }
+
+export type AnalysisContent = {
+  contentId: number;
+  clientId: number;
+  title: string;
+  link: string;
+  image: string;
+  description: string;
+  category: string;
+  status: string;
+};

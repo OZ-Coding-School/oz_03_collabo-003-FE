@@ -26,20 +26,20 @@ const PasswordResetPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // URL에서 token 쿼리 파라미터를 추출
+  // URL에서 token과 email 쿼리 파라미터를 추출
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
+  const emailFromQuery = queryParams.get('email');
 
   // console.log('Token from URL:', token); // Token 확인용
 
   useEffect(() => {
-    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채웁니다.
-    const storedEmail = localStorage.getItem('email');
-    if (token && storedEmail) {
-      setValue('email', storedEmail);
+    // 만약 토큰이 있고 이메일이 쿼리 파라미터로 있으면 이메일 필드를 채웁니다.
+    if (token && emailFromQuery) {
+      setValue('email', emailFromQuery);
       setIsEmailSent(true);
     }
-  }, [token, setValue]);
+  }, [token, emailFromQuery, setValue]);
 
   const sendPasswordResetEmail = async (email: string) => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });

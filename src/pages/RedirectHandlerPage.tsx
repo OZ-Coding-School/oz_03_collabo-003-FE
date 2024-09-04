@@ -16,7 +16,7 @@ const RedirectHandlerPage: React.FC = () => {
     if (userId && username && email) {
       // Zustand 스토어에 사용자 데이터 저장
       logIn(userId, username, email);
-      alert('소셜로그인이 성공하였습니다. 홈으로 이동하시겠습니까?');
+      alert('소셜로그인에 성공하였습니다. 홈으로 이동하시겠습니까?');
       // 로그인 성공 후 홈으로 리다이렉트
       navigate('/');
     } else {

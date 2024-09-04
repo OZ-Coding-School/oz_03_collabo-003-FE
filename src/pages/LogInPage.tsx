@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/store';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -50,31 +50,40 @@ const LogInPage: React.FC = () => {
     setIsLoading(true);
     try {
       const response = await loginUser(data);
-      console.log('로그인 성공:', response.data);
-      const { userId, username, email } = response.data;
-      handleLoginSuccess(userId, username, email);
-    } catch (error: any) {
-      if (error.response?.data?.message) {
-        const errorMessage = error.response.data.message;
+      if (response.status === 200) {
+        console.log('로그인 성공:', response.data);
+        const { userId, username, email } = response.data;
+        handleLoginSuccess(userId, username, email);
+      }
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 401) {
+        const errorMessage = error.response.data.error;
         switch (errorMessage) {
-          case 'Invalid email':
+          case '존재하지 않는 사용자입니다.':
             setError('email', {
               type: 'manual',
-              message: '잘못된 이메일 주소입니다.',
+              message: '존재하지 않는 사용자입니다.',
             });
             break;
-          case 'Invalid password':
+          case '비밀번호가 일치하지 않습니다.':
             setError('password', {
               type: 'manual',
-              message: '잘못된 비밀번호입니다.',
+              message: '비밀번호가 일치하지 않습니다.',
             });
             break;
           default:
             console.error('알 수 없는 에러:', errorMessage);
+            alert(`알 수 없는 에러가 발생했습니다: ${errorMessage}`);
             break;
         }
       } else {
-        console.error('로그인 에러:', error.message || '알 수 없는 에러');
+        if (error instanceof Error) {
+          console.error('로그인 에러:', error.message);
+          alert(`로그인 중 오류가 발생했습니다: ${error.message}`);
+        } else {
+          console.error('로그인 에러:', error);
+          alert('로그인 중 알 수 없는 오류가 발생했습니다.');
+        }
       }
     } finally {
       setIsLoading(false);

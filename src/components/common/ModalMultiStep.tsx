@@ -4,7 +4,7 @@ import BtnMypage from '../common/button/BtnMypage';
 
 interface StepProps {
   content: ReactNode;
-  buttonText: string;
+  buttonText?: string;
   onButtonClick?: () => void;
 }
 
@@ -29,8 +29,18 @@ const ModalMultiStep: React.FC<ModalMultiStepProps> = ({ isOpen, onClose, initia
   const goToNextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
-    } else {
-      setTitle('');
+    }
+  };
+
+  const handleButtonClick = () => {
+    // 현재 스텝의 onButtonClick을 호출합니다.
+    if (steps[currentStep].onButtonClick) {
+      steps[currentStep].onButtonClick();
+
+      // 유효성 검사가 성공적이면 다음 스텝으로 이동
+      if (currentStep < steps.length - 1) {
+        goToNextStep();
+      }
     }
   };
 
@@ -38,15 +48,7 @@ const ModalMultiStep: React.FC<ModalMultiStepProps> = ({ isOpen, onClose, initia
     <ModalContainer isOpen={isOpen} onClose={onClose} title={title} className={`size-auto ${className}`}>
       <div className='step size-auto'>{steps[currentStep].content}</div>
       <div className='flex justify-center'>
-        <BtnMypage
-          onClick={() => {
-            if (steps[currentStep].onButtonClick) {
-              steps[currentStep].onButtonClick();
-            }
-            goToNextStep();
-          }}
-          className='mt-4 px-7 py-1'
-        >
+        <BtnMypage onClick={handleButtonClick} className='mt-4 px-7 py-1'>
           {steps[currentStep].buttonText}
         </BtnMypage>
       </div>

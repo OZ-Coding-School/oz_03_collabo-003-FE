@@ -24,7 +24,8 @@ export interface Content {
   site_url: string;
   thumbnail: string;
   site_description: string;
-  category: string;
+  main_category: string;
+  semi_category?: string;
   detailedInfo?: string;
   review?: {
     id: number;
@@ -41,11 +42,11 @@ export interface Content {
 export interface User {
   id: number;
   email: string;
-  name: string;
+  username: string;
   role: string;
-  businessName: string | null;
-  businessNumber: number | null;
-  phoneNumber: number | null;
+  business_name: string | null;
+  business_number: number | null;
+  phone_number: number | null;
   points: number;
 }
 

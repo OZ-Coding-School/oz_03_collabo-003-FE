@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import userData from '../../data/users.json';
 import BtnMypage from '../common/button/BtnMypage';
+import { User } from '../../types/type';
+//import { auth } from '../../apis/api/auth';
 
 interface MypageOwnerInfoProps {
   onSelectedItem: (item: string) => void;
 }
 
 const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => {
-  const user = userData;
+  const [user, setUser] = useState<User | null>(null);
+
+  const fetchUserData = async () => {
+    setUser(userData);
+    // try {
+    //   const response = await auth.getProfile();
+    //   console.log('유저프로필 조회 성공', response);
+    //   setUser(response);
+    // } catch (error) {
+    //   console.log('유저프로필 조회 실패', error);
+    // }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  });
 
   const businessNumberHandler = (businessNumber: number) => {
     const numStr = businessNumber.toString();
@@ -61,11 +78,11 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
         <div className='flex items-end justify-between border-b-2 border-b-gray-75 p-1'>
           <div className='flex gap-2'>
             <span className='text-[20px] text-gray-46'>환영합니다,</span>
-            <span className='text-[20px] font-semibold'>{user.name} 님</span>
+            <span className='text-[20px] font-semibold'>{user?.username} 님</span>
           </div>
           <div className='flex gap-1'>
             <span className='text-[20px] text-gray-46'>권한:</span>
-            {user.role === 'client' && <span className='text-[20px] font-semibold'>의뢰자</span>}
+            {user?.role === 'client' && <span className='text-[20px] font-semibold'>의뢰자</span>}
           </div>
         </div>
         <div className='min-h-[150px] rounded-xl border border-gray-dc bg-white'>
@@ -103,15 +120,15 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
           <span className='text-[20px] font-semibold'>의뢰자 정보</span>
           <div className={infoBox}>
             <span className={infoKey}>사업자명</span>
-            <span className={infoValue}>{user.businessName}</span>
+            {user?.business_name && <span className={infoValue}>{user.business_name}</span>}
           </div>
           <div className={infoBox}>
             <span className={infoKey}>사업자등록번호</span>
-            <span className={infoValue}>{businessNumberHandler(user.businessNumber)}</span>
+            {user?.business_number && <span className={infoValue}>{businessNumberHandler(user.business_number)}</span>}
           </div>
           <div className={infoBox}>
             <span className={infoKey}>대표전화</span>
-            <span className={infoValue}>{phoneNumberHandler(user.phoneNumber)}</span>
+            {user?.phone_number && <span className={infoValue}>{phoneNumberHandler(user.phone_number)}</span>}
           </div>
         </div>
       </div>

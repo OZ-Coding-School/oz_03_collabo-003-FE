@@ -1,3 +1,4 @@
+import { User } from '../../types/type';
 import { baseInstance } from '../utils/instance';
 
 interface LoginCredentials {
@@ -63,7 +64,7 @@ export const auth = {
   },
 
   // 프로필 조회
-  getProfile: async (): Promise<any> => {
+  getProfile: async (): Promise<User> => {
     const { data } = await baseInstance.get('/accounts/profile/');
     return data;
   },

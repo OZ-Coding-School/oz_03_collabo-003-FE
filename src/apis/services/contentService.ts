@@ -5,8 +5,8 @@ interface Content {
   title: string;
   thumbnail: string;
   site_description: string;
-  mainCategory_id: number;
-  semiCategory_id: number;
+  main_category: number;
+  semi_category: number;
 }
 
 export const contentService = {
@@ -16,8 +16,8 @@ export const contentService = {
 
       return allStackData.map((content: Content) => ({
         id: content.id,
-        mainCategory_id: content.mainCategory_id,
-        semiCategory_id: content.semiCategory_id,
+        main_category: content.main_category,
+        semi_category: content.semi_category,
         thumbnail: content.thumbnail,
         title: content.title,
         site_description: content.site_description,

@@ -4,7 +4,7 @@ import BtnMypage from '../common/button/BtnMypage';
 import { useForm } from 'react-hook-form';
 import WhiteBtn from '../common/button/WhiteBtn';
 
-interface FormData {
+interface UserFormData {
   nickName: string;
   password: string;
 }
@@ -20,7 +20,7 @@ const MyPageUserInfo = () => {
     setValue,
     formState: { errors },
     clearErrors,
-  } = useForm<FormData>();
+  } = useForm<UserFormData>();
 
   useEffect(() => {
     if (!isEditing) {
@@ -28,11 +28,12 @@ const MyPageUserInfo = () => {
     }
   }, [isEditing, clearErrors]);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: UserFormData) => {
     console.log(data);
     setNaming(data.nickName);
     setPassword(data.password || '');
     setIsEditing(false);
+    console.log(password); // 임시 코드
   };
 
   const handleEditClick = () => {

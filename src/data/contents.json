@@ -7,7 +7,7 @@
     "main_category": "업무 툴",
     "semi_category": "업무효율화",
     "site_url": "https://www.figma.com/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "main_category": "업무 툴",
     "semi_category": "무료 이미지 & 영상",
     "site_url": "https://pixabay.com/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 3,
@@ -77,7 +77,7 @@
     "main_category": "정보 플랫폼",
     "semi_category": "스타트업",
     "site_url": "https://startupplus.kr/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 9,
@@ -97,7 +97,7 @@
     "main_category": "정보 플랫폼",
     "semi_category": "취업",
     "site_url": "https://www.bonusjob.co.kr/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "main_category": "정보 플랫폼",
     "semi_category": "자격증",
     "site_url": "https://www.allcon.co.kr/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 12,
@@ -137,7 +137,7 @@
     "main_category": "정부지원",
     "semi_category": "금융 · 의료 지원",
     "site_url": "https://www.hrd.go.kr/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 15,
@@ -167,7 +167,7 @@
     "main_category": "업무 툴",
     "semi_category": "문서 작성",
     "site_url": "https://www.notion.so/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 18,
@@ -187,7 +187,7 @@
     "main_category": "업무 툴",
     "semi_category": "이모티콘",
     "site_url": "https://trello.com/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 20,
@@ -207,7 +207,7 @@
     "main_category": "AI 툴",
     "semi_category": "앱 제작",
     "site_url": "https://chat.openai.com/",
-    "is_analyzed": false
+    "is_analyzed": true
   },
   {
     "id": 22,

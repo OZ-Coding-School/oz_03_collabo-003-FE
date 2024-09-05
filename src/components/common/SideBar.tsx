@@ -40,8 +40,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
               </li>
             ))}
           </ul>
-          {((user.role === 'client' && pathname === '/mypage/owner') ||
-            (user.role === 'analyst' && pathname === '/mypage/analyst')) && (
+          {(pathname === '/mypage/owner' || pathname === '/mypage/analyst') && (
             <BtnMypage
               onClick={() => navigate('/mypage')}
               className='absolute bottom-[60px] min-h-[40px] min-w-[160px] self-center text-[14px] font-semibold'

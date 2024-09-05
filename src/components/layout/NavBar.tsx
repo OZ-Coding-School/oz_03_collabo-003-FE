@@ -55,7 +55,6 @@ const Navbar: React.FC = () => {
     fetchCategories();
   }, []);
 
-  // 스크롤 이벤트
   useEffect(() => {
     let lastScrollTop = 0;
     const handleScroll = () => {
@@ -71,7 +70,6 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-  // URL 변경 시 NavMenu를 사라지게 함
   useEffect(() => {
     setIsNavMenuVisible(false);
   }, [location]);

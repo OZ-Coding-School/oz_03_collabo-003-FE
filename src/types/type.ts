@@ -24,8 +24,8 @@ export interface Content {
   site_url: string;
   thumbnail: string;
   site_description: string;
-  main_category: number;
-  semi_category?: number;
+  main_category: string;
+  semi_category?: string;
   detailedInfo?: string;
   review?: {
     id: number;

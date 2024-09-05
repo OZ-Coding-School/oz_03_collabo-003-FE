@@ -6,7 +6,6 @@ export default {
     extend: {
       screens: {
         'sm-md': { min: '641px', max: '767px' },
-        // 'md-lg': { min: '768px', max: '1023px' },
         'md-lg': { min: '1024px', max: '1279px' },
         'lg-xl': { min: '1280px', max: '1449px' },
         '2xl': '1450px',

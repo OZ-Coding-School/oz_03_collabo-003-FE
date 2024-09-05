@@ -12,16 +12,21 @@ interface ContentItem {
 }
 
 const CategoryPage: React.FC = () => {
-  const { categorySlug, semiCategorySlug } = useParams<{ categorySlug: string; semiCategorySlug?: string }>();
   const navigate = useNavigate();
+  const { categorySlug, semiCategorySlug } = useParams<{ categorySlug: string; semiCategorySlug?: string }>();
+
   const [contents, setContents] = useState<ContentItem[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
   const [semiCategoryName, setSemiCategoryName] = useState<string>('');
-
   const [currentPage, setCurrentPage] = useState<number>(1);
+
   const cardsPerPage = 8;
 
   useEffect(() => {
+    setCategoryName('');
+    setSemiCategoryName('');
+    setContents([]);
+
     const fetchCategoryData = async () => {
       try {
         const categories = await categoryService.getCategories();
@@ -47,7 +52,6 @@ const CategoryPage: React.FC = () => {
           setSemiCategoryName(selectedSemiCategory.label);
 
           const semiCategoryContents = await categoryContentService.getSemiCategoryContents();
-
           const filteredContents = semiCategoryContents.filter(
             (content) =>
               content.main_category === selectedCategory.id && content.semi_category === selectedSemiCategory.id
@@ -92,7 +96,7 @@ const CategoryPage: React.FC = () => {
 
   return (
     <div className='flex min-h-[calc(100vh-70px)] flex-col'>
-      <div className='container mx-auto px-4'>
+      <div className='container mx-auto w-full px-4'>
         <div className='flex justify-center'>
           <h2 className='my-[50px] text-center text-[20px] md:text-[28px]'>
             <span className='block sm:inline'>{semiCategoryName || categoryName}에</span>
@@ -106,14 +110,12 @@ const CategoryPage: React.FC = () => {
         ) : (
           <>
             <div className='flex w-full justify-center px-4'>
-              <div className='grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm-md:grid-cols-1'>
+              <div className='md-lg:w-[710px] lg-xl:grid-cols-3 md-lg:grid-cols-2 container grid max-w-full gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm-md:grid-cols-1'>
                 {currentCards.map((item) => (
                   <div
                     key={item.id}
-                    className='w-full max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
-                    onClick={() => {
-                      navigate(`/contents/${item.id}`);
-                    }}
+                    className='w-full min-w-[330px] max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
+                    onClick={() => navigate(`/contents/${item.id}`)}
                   >
                     <img src={item.thumbnail} alt={item.title} className='h-48 w-full object-cover' />
                     <div className='p-4'>
@@ -124,7 +126,6 @@ const CategoryPage: React.FC = () => {
                 ))}
               </div>
             </div>
-
             {totalPages > 0 && <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} />}
             <div className='h-5'></div>
           </>

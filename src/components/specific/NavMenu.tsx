@@ -37,7 +37,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ categories }) => {
       <div className='fixed left-[-20px] top-[66px] z-40 hidden w-screen animate-slideDown bg-white py-4 shadow-custom-light group-hover:block'>
         <div className='flex overflow-x-auto px-[110px]'>
           {categories.map((category) => (
-            <div key={category.id} className='mr-[50px] flex flex-col space-y-1'>
+            <div key={category.id} className='mr-[50px] flex flex-col items-start space-y-1'>
               <button
                 onClick={() => onLoading(`/category/${category.slug}`)}
                 className='bg-transparent cursor-pointer border-none font-semibold text-black hover:text-blue-hover'

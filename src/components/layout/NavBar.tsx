@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNavMenuVisible, setIsNavMenuVisible] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]); // 초기 상태를 빈 배열로 설정
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [scrollingDown, setScrollingDown] = useState(false);
 

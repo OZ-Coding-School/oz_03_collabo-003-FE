@@ -1,5 +1,5 @@
 import MainPopularCard from './MainPopularCard';
-import contentsData from '../../data/contents_V2.json';
+import contentsData from '../../data/contents.json';
 import { Content } from '../../types/type';
 import { useState, useEffect } from 'react';
 import LoadingSkeleton from '../common/LoadingSkeleton';

@@ -32,7 +32,7 @@
 // };
 
 // 테스트용
-import contents from '../../data/contents.json';
+import contents from '../../data/contents_V2.json';
 
 export const contentAPI = {
   getAllContents: async () => {

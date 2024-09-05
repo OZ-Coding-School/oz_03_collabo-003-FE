@@ -28,10 +28,10 @@ const PasswordResetPage: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
 
-  // console.log('Token from URL:', token); // Token 확인용
+  console.log('Token from URL:', token); // Token 확인용
 
   useEffect(() => {
-    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채웁니다.
+    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채움
     const storedEmail = localStorage.getItem('email');
     if (token && storedEmail) {
       setValue('email', storedEmail);
@@ -161,11 +161,11 @@ const PasswordResetPage: React.FC = () => {
                 />
                 <button
                   type='button'
-                  className='absolute inset-y-0 right-0 flex items-center pr-3'
+                  className='absolute inset-y-0 right-0 flex items-center pr-4'
                   onClick={() => setShowPassword(!showPassword)} // 클릭 시 비밀번호 표시/숨김 전환
                 >
                   {/* 비밀번호 표시 상태에 따라 아이콘 변경 */}
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </button>
               </div>
               {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}

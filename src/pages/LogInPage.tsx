@@ -145,11 +145,11 @@ const LogInPage: React.FC = () => {
             />
             <button
               type='button'
-              className='absolute inset-y-0 right-0 flex items-center pr-3'
+              className='absolute inset-y-0 right-0 flex items-center pr-4'
               onClick={() => setShowPassword(!showPassword)} // 클릭 시 비밀번호 표시/숨김 전환
             >
               {/* 비밀번호 표시 상태에 따라 아이콘 변경 */}
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
           {errors.password && <p className='mt-2 text-sm text-red'>{errors.password.message}</p>}

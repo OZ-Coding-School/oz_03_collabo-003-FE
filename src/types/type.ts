@@ -95,6 +95,6 @@ export type AnalysisContent = {
   link: string;
   image: string;
   description: string;
-  category: string;
+  main_category: string;
   status: string;
 };

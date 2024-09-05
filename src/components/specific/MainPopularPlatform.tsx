@@ -7,7 +7,7 @@ import LoadingSkeleton from '../common/LoadingSkeleton';
 
 const MainPopularPlatform = () => {
   const [contents, setContents] = useState<Content[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState('업무');
+  const [selectedCategory, setSelectedCategory] = useState('업무 툴');
   const [isLoading, setIsLoading] = useState(false);
 
   //전체 컨텐츠 조회
@@ -28,7 +28,7 @@ const MainPopularPlatform = () => {
   };
 
   useEffect(() => {
-    const categories = ['업무', 'ai', '정보 플랫폼', '정부지원'];
+    const categories = ['업무 툴', 'AI 툴', '정보 플랫폼', '정부지원'];
     const currentIndex = categories.indexOf(selectedCategory);
     const nextIndex = (currentIndex + 1) % categories.length;
 
@@ -64,16 +64,16 @@ const MainPopularPlatform = () => {
       <div className='flex flex-col items-center justify-center gap-4 md:gap-6 xl:gap-8'>
         <div className='flex'>
           <button
-            className={`${tabStyle} ${selectedCategory === '업무' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('업무')}
+            className={`${tabStyle} ${selectedCategory === '업무 툴' ? activeTabStyle : inactiveTabStyle}`}
+            onClick={() => setSelectedCategory('업무 툴')}
           >
-            업무
+            업무 툴
           </button>
           <button
-            className={`${tabStyle} ${selectedCategory === 'ai' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('ai')}
+            className={`${tabStyle} ${selectedCategory === 'AI 툴' ? activeTabStyle : inactiveTabStyle}`}
+            onClick={() => setSelectedCategory('AI 툴')}
           >
-            AI
+            AI 툴
           </button>
           <button
             className={`${tabStyle} ${selectedCategory === '정보 플랫폼' ? activeTabStyle : inactiveTabStyle}`}

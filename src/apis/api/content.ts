@@ -1,32 +1,41 @@
-// import { baseInstance } from '../utils/instance';
+//import { Content } from '../../types/type';
+//import { baseInstance } from '../utils/instance';
 
 // export const contentAPI = {
-//   getAllContents: async () => {
-//     const { data } = await baseInstance.get('/contents/upload-contents/');
+//   getAllContents: async (): Promise<Content[]> => {
+//     const { data } = await baseInstance.get('/contents/upload-content/',{
+//       withCredentials: true,
+//     });
 //     return data;
 //   },
 
-//   createContent: async () => {
-//     const { data } = await baseInstance.post('/potatoes/collection/');
+//   createContent: async (): Promise<Content[]> => {
+//     const { data } = await baseInstance.post('/contents/upload-content/',{
+//       withCredentials: true,
+//     });
 //     return data;
 //   },
 
-//   updateContent: async (contentId: string) => {
-//     const { data } = await baseInstance.patch(`/stacks/delete/${contentId}/`);
+//   updateContent: async (contentId: string): Promise<Content[]> => {
+//     const { data } = await baseInstance.patch(`/contents/update-content/${contentId}/`,{
+//       withCredentials: true,
+//     });
 //     return data;
 //   },
 
-//   deleteContent: async (contentId: string) => {
-//     const { data } = await baseInstance.delete(`/stacks/delete/${contentId}/`);
+//   deleteContent: async (contentId: string): Promise<Content[]> => {
+//     const { data } = await baseInstance.delete(`/contents/delete-content/${contentId}/`,{
+//       withCredentials: true,
+//     });
 //     return data;
 //   },
 // };
 
 // 테스트용
-import contents_v2 from '../../data/contents_v2.json';
+import contents from '../../data/contents_V2.json';
 
 export const contentAPI = {
   getAllContents: async () => {
-    return contents_v2;
+    return contents;
   },
 };

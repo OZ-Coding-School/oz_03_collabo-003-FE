@@ -11,7 +11,7 @@ interface UserFormData {
 
 const MyPageUserInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [naming, setNaming] = useState(userData.name);
+  const [naming, setNaming] = useState(userData.username);
   const [password, setPassword] = useState('');
 
   const {
@@ -45,6 +45,10 @@ const MyPageUserInfo = () => {
     setIsEditing(false);
   };
 
+  const showAlert = () => {
+    alert('서비스 준비 중입니다.');
+  };
+
   const inputBox = 'flex-1 placeholder:text-gray-c4';
   const grayRounded = 'rounded-lg border border-gray-dc bg-white px-6 py-4';
   const fixedBtn = 'absolute right-0 px-3 py-1 text-sm font-semibold';
@@ -57,7 +61,7 @@ const MyPageUserInfo = () => {
       <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
-            환영합니다, <strong>{userData.name}</strong>님
+            환영합니다, <strong>{userData.username}</strong>님
           </span>
           <span className='text-lg'>
             권한: <strong>이용자</strong>
@@ -81,7 +85,7 @@ const MyPageUserInfo = () => {
               <div className='relative mb-8 ml-7 grow'>
                 <p className='mb-4 text-lg font-semibold'>포인트 적립 내역</p>
                 <BtnMypage
-                  onClick={() => {}}
+                  onClick={showAlert}
                   className='absolute bottom-[-30px] right-0 mt-1 px-3 py-1 text-sm font-semibold'
                 >
                   적립내역 바로가기 &gt;

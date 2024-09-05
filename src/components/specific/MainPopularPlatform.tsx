@@ -3,14 +3,12 @@ import contentsData from '../../data/contents.json';
 import { Content } from '../../types/type';
 import { useState, useEffect } from 'react';
 import LoadingSkeleton from '../common/LoadingSkeleton';
-//import axios from 'axios';
+//import { contentAPI } from '../../apis/api/content';
 
 const MainPopularPlatform = () => {
   const [contents, setContents] = useState<Content[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState('업무');
+  const [selectedCategory, setSelectedCategory] = useState('업무 툴');
   const [isLoading, setIsLoading] = useState(false);
-
-  //const baseUrl = import.meta.env.VITE_API_URL;
 
   //전체 컨텐츠 조회
   const fetchContentsData = async () => {
@@ -19,9 +17,9 @@ const MainPopularPlatform = () => {
     // if (isLoading) return;
     // setIsLoading(true);
     // try {
-    //   const response = await axios.get(`${baseUrl}/contents`);
-    //   console.log('메인 플랫폼 컨텐츠 데이터 성공', response.data);
-    //   setContents(response.data);
+    //   const response = await contentAPI.getAllContents();
+    //   console.log('메인 플랫폼 컨텐츠 데이터 성공', response);
+    //   setContents(response);
     // } catch (error) {
     //   console.error(error);
     // } finally {
@@ -30,7 +28,7 @@ const MainPopularPlatform = () => {
   };
 
   useEffect(() => {
-    const categories = ['업무', 'ai', '정보 플랫폼', '정부지원'];
+    const categories = ['업무 툴', 'AI 툴', '정보 플랫폼', '정부지원'];
     const currentIndex = categories.indexOf(selectedCategory);
     const nextIndex = (currentIndex + 1) % categories.length;
 
@@ -45,7 +43,7 @@ const MainPopularPlatform = () => {
     fetchContentsData();
   }, []);
 
-  const filteredContents = contents.filter((content) => content.category === selectedCategory);
+  const filteredContents = contents.filter((content) => content.main_category === selectedCategory);
   const sortedContents = filteredContents.sort((a, b) => b.id - a.id);
   const popularContents = sortedContents.slice(0, 8);
 
@@ -66,16 +64,16 @@ const MainPopularPlatform = () => {
       <div className='flex flex-col items-center justify-center gap-4 md:gap-6 xl:gap-8'>
         <div className='flex'>
           <button
-            className={`${tabStyle} ${selectedCategory === '업무' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('업무')}
+            className={`${tabStyle} ${selectedCategory === '업무 툴' ? activeTabStyle : inactiveTabStyle}`}
+            onClick={() => setSelectedCategory('업무 툴')}
           >
-            업무
+            업무 툴
           </button>
           <button
-            className={`${tabStyle} ${selectedCategory === 'ai' ? activeTabStyle : inactiveTabStyle}`}
-            onClick={() => setSelectedCategory('ai')}
+            className={`${tabStyle} ${selectedCategory === 'AI 툴' ? activeTabStyle : inactiveTabStyle}`}
+            onClick={() => setSelectedCategory('AI 툴')}
           >
-            AI
+            AI 툴
           </button>
           <button
             className={`${tabStyle} ${selectedCategory === '정보 플랫폼' ? activeTabStyle : inactiveTabStyle}`}

@@ -34,14 +34,10 @@ const CategoryPage: React.FC = () => {
 
         setCategoryName(selectedCategory.categories);
 
-        console.log('mainCategoryId:', selectedCategory.id);
-
         if (semiCategorySlug) {
           const selectedSemiCategory = selectedCategory.semiCategories.find(
             (semiCategory) => semiCategory.slug === semiCategorySlug
           );
-
-          console.log('Selected semi-category:', selectedSemiCategory);
 
           if (!selectedSemiCategory) {
             navigate('/404');
@@ -50,39 +46,30 @@ const CategoryPage: React.FC = () => {
 
           setSemiCategoryName(selectedSemiCategory.label);
 
-          console.log('semiCategoryId:', selectedSemiCategory.id);
-
           const semiCategoryContents = await categoryContentService.getSemiCategoryContents();
 
           const filteredContents = semiCategoryContents.filter(
             (content) =>
-              content.mainCategorySlug === selectedCategory.slug &&
-              content.semiCategorySlug === selectedSemiCategory.slug &&
-              content.mainCategoryId === selectedCategory.id &&
-              content.semiCategoryId === selectedSemiCategory.id
+              content.main_category === selectedCategory.id && content.semi_category === selectedSemiCategory.id
           );
-
-          console.log('Filtered Contents:', filteredContents);
 
           setContents(
             filteredContents.map((content) => ({
               id: content.contentId,
               title: content.title,
               thumbnail: content.thumbnail,
-              siteDescription: content.siteDescription,
+              siteDescription: content.siteDescription || '',
             }))
           );
         } else {
           const mainCategoryContents = await categoryContentService.getMainCategoryContents(selectedCategory.id);
-
-          console.log('Main Category Contents:', mainCategoryContents);
 
           setContents(
             mainCategoryContents.map((content) => ({
               id: content.contentId,
               title: content.title,
               thumbnail: content.thumbnail,
-              siteDescription: content.siteDescription,
+              siteDescription: content.siteDescription || '',
             }))
           );
         }
@@ -124,7 +111,9 @@ const CategoryPage: React.FC = () => {
                   <div
                     key={item.id}
                     className='w-full max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
-                    onClick={() => navigate(`/contents/${item.id}`)}
+                    onClick={() => {
+                      navigate(`/contents/${item.id}`);
+                    }}
                   >
                     <img src={item.thumbnail} alt={item.title} className='h-48 w-full object-cover' />
                     <div className='p-4'>

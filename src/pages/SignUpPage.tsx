@@ -287,10 +287,10 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'
+              className='absolute inset-y-0 right-0 flex items-center pr-4'
               onClick={() => setShowPassword(!showPassword)} // 클릭 시 상태 변경
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />} {/* 아이콘 표시 */}
+              {showPassword ? <FaEye /> : <FaEyeSlash />} {/* 아이콘 표시 */}
             </button>
           </div>
           {errors.password && <p className='mt-2 text-sm text-red'>{errors.password?.message}</p>}
@@ -312,10 +312,10 @@ const SignUpPage: React.FC = () => {
             />
             <button
               type='button'
-              className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'
+              className='absolute inset-y-0 right-0 flex items-center pr-4'
               onClick={() => setShowConfirmPassword(!showConfirmPassword)} // 클릭 시 상태 변경
             >
-              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />} {/* 아이콘 표시 */}
+              {showConfirmPassword ? <FaEye /> : <FaEyeSlash />} {/* 아이콘 표시 */}
             </button>
           </div>
           {errors.confirmPassword && <p className='mt-2 text-sm text-red'>{errors.confirmPassword?.message}</p>}

@@ -10,7 +10,7 @@ interface Content {
   semi_category: number;
 }
 
-interface MainCategoryMappedContent {
+interface MainCategoryContent {
   contentId: number;
   main_category: number;
   mainCategorySlug: string | undefined;
@@ -20,7 +20,7 @@ interface MainCategoryMappedContent {
   siteDescription: string | null;
 }
 
-interface SemiCategoryMappedContent {
+interface SemiCategoryContent {
   contentId: number;
   main_category: number;
   semi_category: number;
@@ -34,7 +34,7 @@ interface SemiCategoryMappedContent {
 }
 
 export const categoryContentService = {
-  getMainCategoryContents: async (main_category: number): Promise<MainCategoryMappedContent[]> => {
+  getMainCategoryContents: async (main_category: number): Promise<MainCategoryContent[]> => {
     try {
       const allContents = await contentAPI.getAllContents();
       const categories = await categoryService.getCategories();
@@ -58,7 +58,7 @@ export const categoryContentService = {
     }
   },
 
-  getSemiCategoryContents: async (): Promise<SemiCategoryMappedContent[]> => {
+  getSemiCategoryContents: async (): Promise<SemiCategoryContent[]> => {
     try {
       const allContents = await contentAPI.getAllContents();
       const categories = await categoryService.getCategories();
@@ -94,7 +94,7 @@ export const categoryContentService = {
             siteDescription: content.site_description,
           };
         })
-        .filter((item) => item !== null) as SemiCategoryMappedContent[];
+        .filter((item) => item !== null) as SemiCategoryContent[];
     } catch (error) {
       console.error('세미 카테고리 콘텐츠 가져오기 오류:', error);
       throw error;

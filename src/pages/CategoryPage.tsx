@@ -111,7 +111,9 @@ const CategoryPage: React.FC = () => {
                   <div
                     key={item.id}
                     className='w-full max-w-[330px] cursor-pointer overflow-hidden bg-white shadow-custom-light transition-shadow duration-300 hover:scale-105'
-                    onClick={() => navigate(`/contents/${item.id}`)}
+                    onClick={() => {
+                      navigate(`/contents/${item.id}`);
+                    }}
                   >
                     <img src={item.thumbnail} alt={item.title} className='h-48 w-full object-cover' />
                     <div className='p-4'>

@@ -110,7 +110,7 @@ const CategoryPage: React.FC = () => {
         ) : (
           <>
             <div className='flex w-full justify-center px-4'>
-              <div className='md-lg:w-[710px] lg-xl:grid-cols-3 md-lg:grid-cols-2 container grid max-w-full gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm-md:grid-cols-1'>
+              <div className='md-lg:w-[710px] md-lg:grid-cols-2 lg-xl:grid-cols-3 container grid max-w-full gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm-md:grid-cols-1'>
                 {currentCards.map((item) => (
                   <div
                     key={item.id}

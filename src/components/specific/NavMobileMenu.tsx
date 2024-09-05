@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IoMdClose } from 'react-icons/io';
 import Loading from '../common/Loading';
 
 interface SemiCategory {
@@ -56,11 +55,6 @@ const NavMobileMenu: React.FC<NavMenuProps> = ({ categories, setIsMobileMenuOpen
     }, 300);
   };
 
-  const handleLogoClick = () => {
-    navigate('/');
-    handleMobileMenu();
-  };
-
   const handleCategoryClick = (categoryId: number) => {
     setSelectedCategoryId(categoryId);
   };
@@ -95,19 +89,11 @@ const NavMobileMenu: React.FC<NavMenuProps> = ({ categories, setIsMobileMenuOpen
   return (
     <>
       {isLoading && <Loading />}
-      <div
+      <nav
         className={`h-screen transform bg-white transition-transform duration-300 ${
           isAnimating ? 'translate-x-full' : isClosing ? 'translate-x-full' : 'translate-x-0'
         }`}
       >
-        <nav className='flex h-[70px] w-full items-center justify-between border-b border-gray-dc px-[30px] sm:px-[50px]'>
-          <button onClick={handleLogoClick} className='flex cursor-pointer items-center'>
-            <h1 className='text-[25px] font-bold text-blue-primary'>ALLTHE</h1>
-          </button>
-          <div>
-            <IoMdClose className='cursor-pointer text-[25px]' onClick={handleMobileMenu} />
-          </div>
-        </nav>
         <div className='flex h-[calc(100%-70px)] max-w-[820px]'>
           <div className='flex w-[240px] flex-col justify-between border-r border-gray-dc bg-white-f9'>
             <div>
@@ -162,7 +148,7 @@ const NavMobileMenu: React.FC<NavMenuProps> = ({ categories, setIsMobileMenuOpen
             )}
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };

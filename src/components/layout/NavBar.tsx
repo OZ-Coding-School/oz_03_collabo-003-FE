@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/store';
 import NavBtn from '../common/button/NavBtn';
 import NavMenu from '../specific/NavMenu';
 import NavMobileMenu from '../specific/NavMobileMenu';
 import { FiMenu } from 'react-icons/fi';
+import { IoMdClose } from 'react-icons/io';
 import Loading from '../common/Loading';
 import { categoryService } from '../../apis/services/categoryService';
 import { Category } from '../../types/type';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isLoggedIn, username, logOut } = useAuthStore((state) => ({
     isLoggedIn: state.isLoggedIn,
     username: state.username,
@@ -19,8 +21,10 @@ const Navbar: React.FC = () => {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isNavMenuVisible, setIsNavMenuVisible] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrollingDown, setScrollingDown] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,17 +34,10 @@ const Navbar: React.FC = () => {
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    if (isMobileMenuOpen) {
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.documentElement.style.overflow = 'auto';
-    }
-
     return () => {
       window.removeEventListener('resize', handleResize);
-      document.documentElement.style.overflow = 'auto';
     };
-  }, [isMobileMenuOpen]);
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -49,7 +46,7 @@ const Navbar: React.FC = () => {
         const fetchedCategories = await categoryService.getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error('카테고리 fetch에러', error);
+        console.error('카테고리 fetch 에러', error);
       } finally {
         setIsLoading(false);
       }
@@ -57,6 +54,27 @@ const Navbar: React.FC = () => {
 
     fetchCategories();
   }, []);
+
+  // 스크롤 이벤트
+  useEffect(() => {
+    let lastScrollTop = 0;
+    const handleScroll = () => {
+      const currentScrollTop = window.scrollY;
+      setScrollingDown(currentScrollTop > lastScrollTop);
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // URL 변경 시 NavMenu를 사라지게 함
+  useEffect(() => {
+    setIsNavMenuVisible(false);
+  }, [location]);
 
   const handleLogout = () => {
     logOut();
@@ -81,14 +99,20 @@ const Navbar: React.FC = () => {
   return (
     <div className='relative'>
       {isLoading && <Loading />}
-      <nav className='z-40 flex h-[70px] w-full items-center justify-between border-b border-gray-dc bg-white px-[30px] sm:px-[50px] lg:px-[100px]'>
+      <nav
+        className={`z-40 flex h-[70px] w-full items-center justify-between border-b border-gray-dc bg-white px-[30px] sm:px-[50px] lg:px-[100px] ${scrollingDown ? 'hidden' : ''}`}
+      >
         <div className='flex items-center'>
           <button onClick={() => navigate('/')} tabIndex={0} className='flex cursor-pointer items-center'>
             <h1 className='text-[25px] font-bold text-blue-primary'>ALLTHE</h1>
           </button>
 
           {!isMobile && (
-            <div className='group relative ml-5 flex h-[70px] space-x-5 sm:ml-10'>
+            <div
+              className='group relative ml-5 flex h-[70px] space-x-5 sm:ml-10'
+              onMouseEnter={() => setIsNavMenuVisible(true)}
+              onMouseLeave={() => setIsNavMenuVisible(false)}
+            >
               {categories.map((category) => (
                 <button
                   key={category.id}
@@ -98,7 +122,7 @@ const Navbar: React.FC = () => {
                   {category.categories}
                 </button>
               ))}
-              <NavMenu categories={categories} />
+              {isNavMenuVisible && <NavMenu categories={categories} />}
             </div>
           )}
         </div>
@@ -132,12 +156,16 @@ const Navbar: React.FC = () => {
 
         {isMobile && (
           <div className='ml-auto'>
-            <FiMenu className='cursor-pointer text-[30px]' onClick={toggleMobileMenu} />
+            {isMobileMenuOpen ? (
+              <IoMdClose className='cursor-pointer text-[30px]' onClick={toggleMobileMenu} />
+            ) : (
+              <FiMenu className='cursor-pointer text-[30px]' onClick={toggleMobileMenu} />
+            )}
           </div>
         )}
       </nav>
       {isMobileMenuOpen && (
-        <div className='absolute left-0 top-0 z-50 h-full w-full bg-white'>
+        <div className='fixed left-0 top-[70px] z-50 h-full w-full bg-white'>
           <NavMobileMenu
             categories={categories}
             setIsMobileMenuOpen={setIsMobileMenuOpen}

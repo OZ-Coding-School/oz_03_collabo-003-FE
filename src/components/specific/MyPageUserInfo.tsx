@@ -45,6 +45,10 @@ const MyPageUserInfo = () => {
     setIsEditing(false);
   };
 
+  const showAlert = () => {
+    alert('서비스 준비 중입니다.');
+  };
+
   const inputBox = 'flex-1 placeholder:text-gray-c4';
   const grayRounded = 'rounded-lg border border-gray-dc bg-white px-6 py-4';
   const fixedBtn = 'absolute right-0 px-3 py-1 text-sm font-semibold';
@@ -81,7 +85,7 @@ const MyPageUserInfo = () => {
               <div className='relative mb-8 ml-7 grow'>
                 <p className='mb-4 text-lg font-semibold'>포인트 적립 내역</p>
                 <BtnMypage
-                  onClick={() => {}}
+                  onClick={showAlert}
                   className='absolute bottom-[-30px] right-0 mt-1 px-3 py-1 text-sm font-semibold'
                 >
                   적립내역 바로가기 &gt;

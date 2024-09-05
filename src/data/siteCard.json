@@ -7,7 +7,8 @@
     "link": "https://www.figma.com/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "link": "https://pixabay.com/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "link": "https://gamma.app/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@
     "link": "https://www.airtable.com/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 5,
@@ -47,7 +51,8 @@
     "link": "https://www.startup-plus.kr/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "link": "https://dacon.io/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 7,
@@ -67,7 +73,8 @@
     "link": "https://bonusjob.co.kr/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 8,
@@ -77,7 +84,8 @@
     "link": "https://www.perplexity.ai/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 9,
@@ -87,7 +95,8 @@
     "link": "https://naimy.ai/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   },
   {
     "id": 10,
@@ -97,6 +106,7 @@
     "link": "https://aness.ai/",
     "rating": 4.5,
     "ratingParticipation": 100,
-    "viewer": 200
+    "viewer": 200,
+    "isBookmarked": true
   }
 ]

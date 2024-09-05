@@ -12,6 +12,7 @@ interface MyPageImgCardProps {
   ratingParticipation?: number;
   viewer?: number;
   layout: 'user' | 'client'; // user = 찜 하트 활성화, client = 찜 하트 비활성화
+  isBookmarked?: boolean;
 }
 
 const MyPageImgCard: React.FC<MyPageImgCardProps> = ({
@@ -24,6 +25,7 @@ const MyPageImgCard: React.FC<MyPageImgCardProps> = ({
   ratingParticipation,
   viewer,
   layout,
+  isBookmarked,
 }) => {
   const navigate = useNavigate();
 
@@ -56,7 +58,7 @@ const MyPageImgCard: React.FC<MyPageImgCardProps> = ({
         </div>
         {layout === 'user' && (
           <div className='absolute right-8 top-8 text-2xl'>
-            <BtnHeart />
+            <BtnHeart isBookmarked={isBookmarked ?? false} />
           </div>
         )}
       </div>

@@ -85,7 +85,7 @@ const MyPageAuthz = () => {
 
   const completeIcon = 'size-32 m-auto';
 
-  const BtnStyle = 'px-4 py-2 h-[40px]';
+  const BtnStyle = 'px-4 py-2 max-h-[40px] min-h-[40px] max-w-[144px] min-w-[144px] text-sm';
 
   const ownerStep = [
     {
@@ -183,9 +183,11 @@ const MyPageAuthz = () => {
 
   return (
     <div className='h-[calc(100vh-70px)] w-1/2 overflow-auto'>
-      <div className='container my-24'>
-        <div className='client mb-10 flex justify-between'>
-          <p>사이트 정보를 간편하게 등록하고, 자신의 서비스 분석을 의뢰하세요</p>
+      <div className='container my-24 min-w-[360px]'>
+        <div className='client mb-16 flex justify-between'>
+          <p className='custom mb-4 lg:w-[300px] xl:w-full sm-md:w-[150px]'>
+            사이트 정보를 간편하게 등록하고, 자신의 서비스 분석을 의뢰하세요
+          </p>
           {!hasClientAuth && (
             <BtnMypage onClick={handleClientClick} className={BtnStyle}>
               의뢰자 신청하기
@@ -204,7 +206,7 @@ const MyPageAuthz = () => {
           />
         </div>
         <div className='provider flex justify-between'>
-          <div>
+          <div className='mb-4 lg:w-[300px] xl:w-full sm-md:w-[150px]'>
             <p>사이트 오너의 등록된 정보를 분석하여 짜임새 있는 구조로 사이트를 등록해요.</p>
             <p> 이 과정에서 수익 창출이 가능해요.</p>
           </div>

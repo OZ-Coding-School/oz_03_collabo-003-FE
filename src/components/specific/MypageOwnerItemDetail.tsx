@@ -27,7 +27,7 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const deletedContent = async () => {
     console.log(contentId);
     try {
-      const response = await axios.delete(`${baseUrl}/contents/${contentId}`, {
+      const response = await axios.delete(`${baseUrl}/contents/delete-content/${contentId}`, {
         withCredentials: true,
       });
       console.log(response);
@@ -35,12 +35,10 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
       console.error(error);
       if (error instanceof AxiosError && error.response) {
         switch (error.response.status) {
-          case 500:
-            return console.error('server error', error);
           case 403:
-            return console.error('not authenticated', error);
-          case 400:
-            return console.error('bad request', error);
+            return console.error('Forbidden', error);
+          case 404:
+            return console.error('Content Not Found', error);
           default:
             return console.error(error);
         }

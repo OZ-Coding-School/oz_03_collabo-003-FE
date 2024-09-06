@@ -24,20 +24,21 @@ const PasswordResetPage: React.FC = () => {
   const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const location = useLocation();
-  // URL에서 token 쿼리 파라미터를 추출
+
+  // URL에서 token과 email 쿼리 파라미터를 추출
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
+  const emailFromQuery = queryParams.get('email');
 
-  console.log('Token from URL:', token); // Token 확인용
+  // console.log('Token from URL:', token); // Token 확인용
 
   useEffect(() => {
-    // 만약 토큰이 있고 localStorage에 이메일이 있으면 이메일 필드를 채움
-    const storedEmail = localStorage.getItem('email');
-    if (token && storedEmail) {
-      setValue('email', storedEmail);
+    // 만약 토큰이 있고 이메일이 쿼리 파라미터로 있으면 이메일 필드를 채움
+    if (token && emailFromQuery) {
+      setValue('email', emailFromQuery);
       setIsEmailSent(true);
     }
-  }, [token, setValue]);
+  }, [token, emailFromQuery, setValue]);
 
   const sendPasswordResetEmail = async (email: string) => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
@@ -55,19 +56,17 @@ const PasswordResetPage: React.FC = () => {
         // Step 1: 이메일 전송
         await sendPasswordResetEmail(data.email);
         setIsEmailSent(true); // 이메일 전송 성공 시, 다음 단계로 진행
-        localStorage.setItem('email', data.email); // 이메일을 localStorage에 저장
         alert('비밀번호 재설정 이메일이 발송되었습니다.');
       } else {
         // Step 2: 비밀번호 재설정
         await resetPassword(data);
         alert('비밀번호 재설정이 완료되었습니다.');
-        localStorage.removeItem('email'); // 비밀번호 재설정 후 이메일 삭제
         navigate('/login'); // 비밀번호 재설정 완료 후 로그인 페이지로 이동
       }
     } catch (error: any) {
-      if (isAxiosError(error)) {
-        const status = error.response?.status;
-        const detail = error.response?.data.detail;
+      if (isAxiosError(error) && error.response) {
+        const status = error.response.status;
+        const detail = error.response.data.detail;
 
         if (status === 404 && detail === '해당 이메일을 가진 사용자가 존재하지 않습니다.') {
           alert('입력한 이메일 주소를 가진 사용자가 존재하지 않습니다.');

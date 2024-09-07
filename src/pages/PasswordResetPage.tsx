@@ -44,9 +44,8 @@ const PasswordResetPage: React.FC = () => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
   };
   const resetPassword = async (data: PasswordResetInputs) => {
-    return axios.post(`${baseUrl}/accounts/password-reset/confirm/`, {
+    return axios.post(`${baseUrl}/accounts/password-reset/confirm/?token=${token}`, {
       password: data.password,
-      token, // token을 추가하여 서버에 전송
     });
   };
   const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {

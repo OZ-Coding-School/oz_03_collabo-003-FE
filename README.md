@@ -139,39 +139,32 @@
 ```
 
 ## 5. 프로젝트
-<div align="left">
-  <div>
-    <h3>[Home Page]</h3>
-    <img src='https://github.com/user-attachments/assets/b36dd103-b3f2-4334-8812-5c288189959f'/>
-  </div>
-  <br/>
-  <div>
-    <h3>[Login/SignIn Page]</h3>
-    <img src='https://github.com/user-attachments/assets/10c7afb8-23a3-4291-bd08-a1bdfcb12842'/>
-  </div>
-    <br/>
-  <div>
-    <h3>[Detail Page]</h3>
-    <img src='https://github.com/user-attachments/assets/af11a314-ddaa-408e-8271-5dd54039bb4e'/>
-  </div>
-  <br/>
-  <div>
-    <h3>[User-Mypage]</h3>
-    <img src='https://github.com/user-attachments/assets/864cb2ae-6e67-4891-9ecf-d8f1350cc0b5'/>
-  </div>
-  <br/>  
-    <div>
-    <h3>[Owner-Mypage]</h3>
-    <img src='https://github.com/user-attachments/assets/639bffbb-88b8-489d-85de-4d69baaaef49'/>
-  </div>
-  <br/>  
-    <div>
-    <h3>[Provider-Mypage]</h3>
-    <img src='https://github.com/user-attachments/assets/c7701344-102f-4bbe-a42e-0d95ca47918d'/>
-  </div>
-  <br/>  
-</div>
+### Home Page
+![home](https://github.com/user-attachments/assets/e4162863-9b6f-439f-902d-8c8d889d80e4)
 
+
+### Login/SignIn Page
+![회원가입 로그인](https://github.com/user-attachments/assets/6e8dec40-4d42-47d9-83ed-a7a1c1a6f1c7)
+
+
+### Detail Page
+![페이지상세](https://github.com/user-attachments/assets/dab6be61-d415-4a13-8a7f-49678babee8e)
+
+
+### User- Mypage
+![이용자-마이페이지](https://github.com/user-attachments/assets/b56b27d9-63be-45e6-bf29-9eedbdc1a6ff)
+
+
+### Owner- Mypage
+![의뢰자 마이페이지](https://github.com/user-attachments/assets/30804aa5-292e-4654-bd7d-2cbf7715c272)
+
+
+### Provider- Mypage
+![분석가 마이페이지](https://github.com/user-attachments/assets/485aca91-93f4-4a70-a9a6-fb8ad6e05edf)
+
+
+
+<br/>
 
 ## 6. Architecture 및 ERD
 ### Architecture

@@ -20,7 +20,7 @@
 ### 팀원 구성
 | **강승혜** | **김예림** | **이민주** | **이희주** |
 |:---------:|:---------:|:---------:|:---------:|
-| <img src="https://avatars.githubusercontent.com/u/82866220?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/162017639?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/97680688?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/164333745?v=4" width="150"> |
+| <img src="https://avatars.githubusercontent.com/u/107114225?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/162017639?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/97680688?v=4" width="150"> | <img src="https://avatars.githubusercontent.com/u/164333745?v=4" width="150"> |
 | [Watnu03](https://github.com/Watnu03) | [Yerim1234](https://github.com/Yerim1234) | [Yiminju](https://github.com/Yiminju) | [h22jul22](https://github.com/h22jul22) |
 
 <br/>

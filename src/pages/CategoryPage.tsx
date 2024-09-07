@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Pagination from '../components/common/Pagination';
 import { categoryContentService } from '../apis/services/categoryContentService';
-import { categoryService } from '../apis/services/categoryService';
+import { categoriesAPI } from '../apis/api/categories';
 
 interface ContentItem {
   id: number;
@@ -17,14 +17,13 @@ const CategoryPage: React.FC = () => {
   const [contents, setContents] = useState<ContentItem[]>([]);
   const [categoryName, setCategoryName] = useState<string>('');
   const [semiCategoryName, setSemiCategoryName] = useState<string>('');
-
   const [currentPage, setCurrentPage] = useState<number>(1);
   const cardsPerPage = 8;
 
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const categories = await categoryService.getCategories();
+        const categories = await categoriesAPI.getAllCategories();
         const selectedCategory = categories.find((category) => category.slug === categorySlug);
 
         if (!selectedCategory) {
@@ -50,7 +49,7 @@ const CategoryPage: React.FC = () => {
 
           const filteredContents = semiCategoryContents.filter(
             (content) =>
-              content.main_category === selectedCategory.id && content.semi_category === selectedSemiCategory.id
+              content.mainCategoryId === selectedCategory.id && content.semiCategoryId === selectedSemiCategory.id
           );
 
           setContents(
@@ -62,10 +61,14 @@ const CategoryPage: React.FC = () => {
             }))
           );
         } else {
-          const mainCategoryContents = await categoryContentService.getMainCategoryContents(selectedCategory.id);
+          const mainCategoryContents = await categoryContentService.getMainCategoryContents();
+
+          const filteredContents = mainCategoryContents.filter(
+            (content) => content.mainCategoryId === selectedCategory.id
+          );
 
           setContents(
-            mainCategoryContents.map((content) => ({
+            filteredContents.map((content) => ({
               id: content.contentId,
               title: content.title,
               thumbnail: content.thumbnail,

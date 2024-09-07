@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MyPageImgCard from './MyPageImgCard';
 import Pagination from '../common/Pagination';
-import allCards from '../../data/siteCard.json';
+import allCards from '../../data/contents.json';
 import BtnMypage from '../common/button/BtnMypage';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,19 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
                 </div>
               )}
               {currentCards.map((card) => (
-                <MyPageImgCard key={card.id} {...card} layout={layout} />
+                <MyPageImgCard
+                  key={card.id}
+                  id={card.id}
+                  title={card.title}
+                  description={card.site_description}
+                  image={card.thumbnail}
+                  link={card.site_url}
+                  rating={card.rating}
+                  ratingParticipation={card.ratingParticipation}
+                  viewer={card.viewer}
+                  layout={layout}
+                  isBookmarked={card.isBookmarked}
+                />
               ))}
             </div>
           </>

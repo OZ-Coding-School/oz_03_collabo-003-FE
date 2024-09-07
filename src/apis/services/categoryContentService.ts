@@ -1,57 +1,75 @@
 import { contentAPI } from '../api/content';
-import { categoryService } from '../services/categoryService';
+import { categoriesAPI } from '../api/categories';
+import { Content } from '../../types/type';
 
-interface Content {
-  id: number;
-  title: string;
-  thumbnail: string;
-  site_description: string | null;
-  main_category: number;
-  semi_category: number;
-}
+// export interface Content {
+//   id: number;
+//   title: string;
+//   site_url: string;
+//   thumbnail: string;
+//   site_description: string;
+//   main_category: string;
+//   semi_category?: string;
+//   main_category_id: number;
+//   semi_category_id?: number;
+//   detailedInfo?: string;
+//   review?: {
+//     id: number;
+//     user_id: number;
+//     user_name?: string;
+//     comment: string;
+//     rating: number;
+//   };
+//   qna?: QnA;
+//   viewCount?: number;
+//   likeCount?: number;
+//   is_analyzed?: boolean;
+//   rating?: number;
+//   ratingParticipation?: number;
+//   isBookmarked?: boolean;
+// }
 
 interface MainCategoryContent {
   contentId: number;
-  main_category: number;
-  mainCategorySlug: string | undefined;
-  mainCategoryName: string | undefined;
-  thumbnail: string;
   title: string;
-  siteDescription: string | null;
+  mainCategoryId: number;
+  mainCategoryName: string;
+  thumbnail: string;
+  siteDescription: string;
 }
 
 interface SemiCategoryContent {
   contentId: number;
-  main_category: number;
-  semi_category: number;
-  mainCategorySlug: string | undefined;
-  semiCategorySlug: string | undefined;
-  mainCategoryName: string | undefined;
-  semiCategoryName: string | undefined;
-  thumbnail: string;
   title: string;
-  siteDescription: string | null;
+  mainCategoryId: number;
+  semiCategoryId: number;
+  mainCategorySlug: string;
+  semiCategorySlug: string;
+  mainCategoryName: string;
+  semiCategoryName: string;
+  thumbnail: string;
+  siteDescription: string;
 }
 
 export const categoryContentService = {
-  getMainCategoryContents: async (main_category: number): Promise<MainCategoryContent[]> => {
+  getMainCategoryContents: async (): Promise<MainCategoryContent[]> => {
     try {
       const allContents = await contentAPI.getAllContents();
-      const categories = await categoryService.getCategories();
+      const categories = await categoriesAPI.getAllCategories();
 
-      const mainCategoryMap = new Map(categories.map((cat) => [cat.id, { slug: cat.slug, name: cat.categories }]));
+      return allContents.map((content) => {
+        const matchedCategoryId = categories.find((category) => category.id === content.main_category_id);
 
-      const filteredContents = allContents.filter((content: Content) => content.main_category === main_category);
-
-      return filteredContents.map((content: Content) => ({
-        contentId: content.id,
-        main_category: content.main_category,
-        mainCategorySlug: mainCategoryMap.get(content.main_category)?.slug,
-        mainCategoryName: mainCategoryMap.get(content.main_category)?.name,
-        thumbnail: content.thumbnail,
-        title: content.title,
-        siteDescription: content.site_description,
-      }));
+        return {
+          contentId: content.id,
+          title: content.title,
+          mainCategoryId: content.main_category_id,
+          mainCategoryName: content.main_category,
+          thumbnail: content.thumbnail,
+          siteDescription: content.site_description,
+          mainSlug: matchedCategoryId ? matchedCategoryId.slug : '',
+        };
+      });
     } catch (error) {
       console.error('메인 카테고리 콘텐츠 가져오기 오류:', error);
       throw error;
@@ -61,7 +79,7 @@ export const categoryContentService = {
   getSemiCategoryContents: async (): Promise<SemiCategoryContent[]> => {
     try {
       const allContents = await contentAPI.getAllContents();
-      const categories = await categoryService.getCategories();
+      const categories = await categoriesAPI.getAllCategories();
 
       const mainCategoryMap = new Map(categories.map((cat) => [cat.id, { slug: cat.slug, name: cat.categories }]));
       const semiCategoryMap = new Map(
@@ -75,19 +93,25 @@ export const categoryContentService = {
 
       return allContents
         .map((content: Content) => {
-          const semiCategory = semiCategoryMap.get(content.semi_category);
+          if (content.semi_category_id === undefined) {
+            return null;
+          }
+
+          const semiCategory = semiCategoryMap.get(content.semi_category_id);
 
           if (!semiCategory) {
             return null;
           }
 
+          const mainCategory = mainCategoryMap.get(semiCategory.parentId);
+
           return {
             contentId: content.id,
-            main_category: content.main_category,
-            semi_category: content.semi_category,
-            mainCategorySlug: mainCategoryMap.get(semiCategory.parentId)?.slug,
+            mainCategoryId: content.main_category_id,
+            semiCategoryId: content.semi_category_id,
+            mainCategorySlug: mainCategory?.slug || '',
             semiCategorySlug: semiCategory.slug,
-            mainCategoryName: mainCategoryMap.get(semiCategory.parentId)?.name,
+            mainCategoryName: mainCategory?.name || '',
             semiCategoryName: semiCategory.name,
             thumbnail: content.thumbnail,
             title: content.title,

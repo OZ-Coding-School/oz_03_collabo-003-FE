@@ -2,33 +2,6 @@ import { contentAPI } from '../api/content';
 import { categoriesAPI } from '../api/categories';
 import { Content } from '../../types/type';
 
-// export interface Content {
-//   id: number;
-//   title: string;
-//   site_url: string;
-//   thumbnail: string;
-//   site_description: string;
-//   main_category: string;
-//   semi_category?: string;
-//   main_category_id: number;
-//   semi_category_id?: number;
-//   detailedInfo?: string;
-//   review?: {
-//     id: number;
-//     user_id: number;
-//     user_name?: string;
-//     comment: string;
-//     rating: number;
-//   };
-//   qna?: QnA;
-//   viewCount?: number;
-//   likeCount?: number;
-//   is_analyzed?: boolean;
-//   rating?: number;
-//   ratingParticipation?: number;
-//   isBookmarked?: boolean;
-// }
-
 interface MainCategoryContent {
   contentId: number;
   title: string;

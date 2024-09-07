@@ -30,7 +30,7 @@ const PasswordResetPage: React.FC = () => {
   const token = queryParams.get('token');
   const emailFromQuery = queryParams.get('email');
 
-  // console.log('Token from URL:', token); // Token 확인용
+  console.log('Token from URL:', token); // Token 확인용
 
   useEffect(() => {
     // 만약 토큰이 있고 이메일이 쿼리 파라미터로 있으면 이메일 필드를 채움
@@ -44,9 +44,8 @@ const PasswordResetPage: React.FC = () => {
     return axios.post(`${baseUrl}/accounts/password-reset/`, { email });
   };
   const resetPassword = async (data: PasswordResetInputs) => {
-    return axios.post(`${baseUrl}/accounts/password-reset/confirm/`, {
-      ...data,
-      token, // token을 추가하여 서버에 전송
+    return axios.post(`${baseUrl}/accounts/password-reset/confirm/?token=${token}`, {
+      password: data.password,
     });
   };
   const onSubmit: SubmitHandler<PasswordResetInputs> = async (data) => {
@@ -68,8 +67,10 @@ const PasswordResetPage: React.FC = () => {
         const status = error.response.status;
         const detail = error.response.data.detail;
 
-        if (status === 404 && detail === '해당 이메일을 가진 사용자가 존재하지 않습니다.') {
-          alert('입력한 이메일 주소를 가진 사용자가 존재하지 않습니다.');
+        if (status === 404 && detail === '해당 사용자를 찾을 수 없습니다.') {
+          alert('해당 사용자를 찾을 수 없습니다.');
+        } else if (status === 400 && detail === '토큰과 새 비밀번호가 필요합니다.') {
+          alert('토큰과 새 비밀번호가 필요합니다.');
         } else if (status === 400 && detail === '토큰이 만료되었습니다.') {
           alert('비밀번호 재설정 링크가 만료되었습니다. 다시 요청해주세요.');
         } else if (status === 400 && detail === '유효하지 않은 토큰입니다.') {

@@ -14,7 +14,7 @@ const MyPageAnalystAnalyze = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 2;
+  const cardsPerPage = 1;
   const indexOfLastContent = currentPage * cardsPerPage;
   const indexOfFirstContent = indexOfLastContent - cardsPerPage;
   const currentContents = contents.slice(indexOfFirstContent, indexOfLastContent);
@@ -34,7 +34,7 @@ const MyPageAnalystAnalyze = () => {
 
   // 분석가가 분석할 사이트 목록 불러오기
   const fetchAnalysisContentsData = async () => {
-    const analysisContents = analysisContentsData.filter((analysisContent) => analysisContent.status !== 'Completed');
+    const analysisContents = analysisContentsData.filter((analysisContent) => analysisContent.status === 'Accepted');
     const completedContents = analysisContentsData.filter((analysisContent) => analysisContent.status === 'Completed');
     setContents(analysisContents);
     setCompletedContents(completedContents);
@@ -102,12 +102,12 @@ const MyPageAnalystAnalyze = () => {
             )}
           </div>
           {contents.length > 0 ? (
-            <ul className='grid grid-cols-1 grid-rows-2 gap-4'>
+            <ul className='grid grid-cols-1 grid-rows-1 gap-4'>
               {currentContents.map(
                 (content) =>
-                  content.status !== 'Completed' && (
+                  content.status === 'Accepted' && (
                     <li className='flex gap-2 rounded-md bg-white p-4 hover:scale-105' key={content.contentId}>
-                      <img src={content.image} alt={content.title} className='h-[120px] w-[150px] rounded-sm' />
+                      <img src={content.thumbnail} alt={content.title} className='h-[120px] w-[150px] rounded-sm' />
                       <div className='flex max-w-[450px] grow flex-col gap-1'>
                         <span
                           className='cursor-pointer truncate text-lg font-semibold'
@@ -119,13 +119,13 @@ const MyPageAnalystAnalyze = () => {
                           className='cursor-pointer truncate'
                           onClick={() => navigate(`/contents/${content.contentId}`)}
                         >
-                          {content.description}
+                          {content.site_description}
                         </span>
-                        <span className='truncate text-sm text-gray-46'>{content.link}</span>
+                        <span className='truncate text-sm text-gray-46'>{content.site_url}</span>
                         <div className='my-1 flex gap-2'>
                           <Link
                             className='rounded-md bg-white px-3 py-1 text-sm shadow-custom-dark transition-colors duration-300 hover:bg-white-f9'
-                            to={content.link}
+                            to={content.site_url}
                           >
                             바로가기
                           </Link>
@@ -159,7 +159,7 @@ const MyPageAnalystAnalyze = () => {
                 (content) =>
                   content.status === 'Completed' && (
                     <li className='flex gap-2 rounded-md bg-white p-4 hover:scale-105' key={content.contentId}>
-                      <img src={content.image} alt={content.title} className='h-[120px] w-[150px] rounded-sm' />
+                      <img src={content.thumbnail} alt={content.title} className='h-[120px] w-[150px] rounded-sm' />
                       <div className='flex max-w-[450px] grow flex-col gap-1'>
                         <span
                           className='cursor-pointer truncate text-lg font-semibold'
@@ -171,13 +171,13 @@ const MyPageAnalystAnalyze = () => {
                           className='cursor-pointer truncate'
                           onClick={() => navigate(`/contents/${content.contentId}`)}
                         >
-                          {content.description}
+                          {content.site_description}
                         </span>
-                        <span className='truncate text-sm text-gray-46'>{content.link}</span>
+                        <span className='truncate text-sm text-gray-46'>{content.thumbnail}</span>
                         <div className='my-1 flex gap-2'>
                           <Link
                             className='rounded-md bg-white px-3 py-1 text-sm shadow-custom-dark transition-colors duration-300 hover:bg-white-f9'
-                            to={content.link}
+                            to={content.site_url}
                           >
                             바로가기
                           </Link>

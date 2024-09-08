@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import BtnMypage from '../common/button/BtnMypage';
-import userData from '../../data/analystProfile.json';
+import analystData from '../../data/analystProfile.json';
+import { Analyst } from '../../types/type';
 
 type MyPageAnalystInfoEditProps = {
   onSave: () => void;
@@ -13,13 +14,15 @@ type FormValues = {
   summary: string;
 };
 
+const analyst = analystData.find((analyst) => analyst.id === 1) as Analyst;
+
 const MyPageAnalystInfoEdit: React.FC<MyPageAnalystInfoEditProps> = ({ onSave }) => {
-  const [profileImage, setProfileImage] = useState(userData.image || '');
+  const [profileImage, setProfileImage] = useState(analyst.image || '');
   const { register, handleSubmit } = useForm<FormValues>({
     defaultValues: {
-      intro: userData.intro,
-      merit: userData.merit,
-      summary: userData.summary,
+      intro: analyst.intro,
+      merit: analyst.merit,
+      summary: analyst.summary,
     },
   });
 

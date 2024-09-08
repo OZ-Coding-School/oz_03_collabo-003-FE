@@ -4,7 +4,7 @@ import { Content } from '../../types/type';
 import { useNavigate } from 'react-router-dom';
 import { useAnalysisRequestSite } from '../../store/store';
 import WhiteBtn from '../common/button/WhiteBtn';
-import axios, { AxiosError } from 'axios';
+//import axios, { AxiosError } from 'axios';
 
 interface MypageOwnerItemDetailProps {
   contentId: number;
@@ -21,33 +21,32 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
   const navigate = useNavigate();
   const setContent = useAnalysisRequestSite((state) => state.setContent);
 
-  const baseUrl = import.meta.env.VITE_API_URL;
+  //const baseUrl = import.meta.env.VITE_API_URL;
 
   // 사이트 삭제하기
   const deletedContent = async () => {
     console.log(contentId);
-    try {
-      const response = await axios.delete(`${baseUrl}/contents/${contentId}`, {
-        withCredentials: true,
-      });
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-      if (error instanceof AxiosError && error.response) {
-        switch (error.response.status) {
-          case 500:
-            return console.error('server error', error);
-          case 403:
-            return console.error('not authenticated', error);
-          case 400:
-            return console.error('bad request', error);
-          default:
-            return console.error(error);
-        }
-      } else {
-        console.error(error);
-      }
-    }
+    navigate('/mypage/owner');
+    // try {
+    //   const response = await axios.delete(`${baseUrl}/contents/delete-content/${contentId}`, {
+    //     withCredentials: true,
+    //   });
+    //   console.log(response);
+    // } catch (error) {
+    //   console.error(error);
+    //   if (error instanceof AxiosError && error.response) {
+    //     switch (error.response.status) {
+    //       case 403:
+    //         return console.error('Forbidden', error);
+    //       case 404:
+    //         return console.error('Content Not Found', error);
+    //       default:
+    //         return console.error(error);
+    //     }
+    //   } else {
+    //     console.error(error);
+    //   }
+    // }
   };
 
   const moveToDetailPage = () => {
@@ -82,6 +81,21 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
     }
   };
 
+  const titleHandler = () => {
+    setTitleEditing(false);
+    setTitleValue(titleValue);
+  };
+
+  const descriptionHandler = () => {
+    setDescriptionEditing(false);
+    setDescriptionValue(descriptionValue);
+  };
+
+  const linkHandler = () => {
+    setLinkEditing(false);
+    setLinkValue(linkValue);
+  };
+
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
       <section className='mx-auto my-10 flex w-[810px] flex-col items-center gap-10'>
@@ -98,11 +112,11 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
           <div className='flex justify-between p-1'>
             <div className='flex gap-2'>
               <span className='font-semibold'>조회</span>
-              <span className='text-gray-46'>{content.viewCount} 회</span>
+              <span className='text-gray-46'>{content.viewer} 회</span>
             </div>
             <div className='flex gap-2'>
               <span className='font-semibold'>찜</span>
-              <span className='text-gray-46'>{content.likeCount} 명</span>
+              <span className='text-gray-46'>{content.like_count} 명</span>
             </div>
           </div>
         </div>
@@ -117,13 +131,13 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
                   value={titleValue}
                   onChange={(e) => setTitleValue(e.target.value)}
                 />
-                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setTitleEditing(false)}>
+                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={titleHandler}>
                   수정완료
                 </BtnMypage>
               </div>
             ) : (
               <div className='flex w-full items-end border-b border-b-gray-75 p-1'>
-                <p className='grow text-gray-46'>{content.title}</p>
+                <p className='grow text-gray-46'>{titleValue}</p>
                 <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setTitleEditing(true)}>
                   변경
                 </BtnMypage>
@@ -140,13 +154,13 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
                   value={descriptionValue}
                   onChange={(e) => setDescriptionValue(e.target.value)}
                 />
-                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setDescriptionEditing(false)}>
+                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={descriptionHandler}>
                   수정완료
                 </BtnMypage>
               </div>
             ) : (
               <div className='flex w-full items-end border-b border-b-gray-75 p-1'>
-                <p className='grow text-gray-46'>{content.site_description}</p>
+                <p className='grow text-gray-46'>{descriptionValue}</p>
                 <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setDescriptionEditing(true)}>
                   변경
                 </BtnMypage>
@@ -163,13 +177,13 @@ const MypageOwnerItemDetail: React.FC<MypageOwnerItemDetailProps> = ({ contentId
                   value={linkValue}
                   onChange={(e) => setLinkValue(e.target.value)}
                 />
-                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setLinkEditing(false)}>
+                <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={linkHandler}>
                   수정완료
                 </BtnMypage>
               </div>
             ) : (
               <div className='flex w-full items-end border-b border-b-gray-75 p-1'>
-                <p className='grow text-gray-46'>{content.site_url}</p>
+                <p className='grow text-gray-46'>{linkValue}</p>
                 <BtnMypage className='px-2 py-1 text-sm font-semibold' onClick={() => setLinkEditing(true)}>
                   변경
                 </BtnMypage>

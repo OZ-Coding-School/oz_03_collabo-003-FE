@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import userData from '../../data/users.json';
 import { MdOutlineKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
 import BtnMypage from './button/BtnMypage';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store/store';
 
 interface SideBarProps {
   items: string[];
@@ -15,7 +15,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const user = userData;
+  const username = useAuthStore((state) => state.username);
 
   const itemStyle = 'flex h-[60px] items-center border-b border-b-gray-dc p-4 text-[18px] cursor-pointer';
   const activeItemStyle = 'text-blue-primary font-semibold';
@@ -27,7 +27,7 @@ const SideBar: React.FC<SideBarProps> = ({ items, selectedItem, onSelectedItem }
       {isOpen && (
         <div className='relative z-10 flex min-w-[292px] flex-col border-r border-r-gray-dc bg-white-f9'>
           <span className='flex min-h-[90px] items-center justify-center border-b border-b-gray-dc text-[18px] font-semibold'>
-            {user.username} 님
+            {username} 님
           </span>
           <ul className='flex grow flex-col'>
             {items.map((item, index) => (

@@ -9,11 +9,13 @@
     "main_category_id": 1,
     "semi_category_id": 1,
     "site_url": "https://www.figma.com/",
-    "is_analyzed": false,
+    "is_analyzed": true,
     "rating": 4.5,
     "ratingParticipation": 100,
     "viewer": 200,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 700
   },
   {
     "id": 2,
@@ -29,7 +31,9 @@
     "rating": 4.8,
     "ratingParticipation": 150,
     "viewer": 300,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 1200
   },
   {
     "id": 3,
@@ -41,11 +45,13 @@
     "main_category_id": 2,
     "semi_category_id": 15,
     "site_url": "https://openai.com/chatgpt",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.9,
     "ratingParticipation": 500,
     "viewer": 1000,
-    "isBookmarked": false
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 1400
   },
   {
     "id": 4,
@@ -57,11 +63,13 @@
     "main_category_id": 1,
     "semi_category_id": 2,
     "site_url": "https://github.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.7,
     "ratingParticipation": 400,
     "viewer": 700,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 800
   },
   {
     "id": 5,
@@ -73,11 +81,13 @@
     "main_category_id": 3,
     "semi_category_id": 23,
     "site_url": "https://www.airbnb.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.7,
     "ratingParticipation": 300,
     "viewer": 600,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 2100
   },
   {
     "id": 6,
@@ -89,11 +99,13 @@
     "main_category_id": 1,
     "semi_category_id": 1,
     "site_url": "https://zoom.us/",
-    "is_analyzed": false,
+    "is_analyzed": true,
     "rating": 4.6,
     "ratingParticipation": 300,
     "viewer": 700,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 1100
   },
   {
     "id": 7,
@@ -105,11 +117,13 @@
     "main_category_id": 1,
     "semi_category_id": 2,
     "site_url": "https://slack.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.8,
     "ratingParticipation": 220,
     "viewer": 450,
-    "isBookmarked": false
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 760
   },
   {
     "id": 8,
@@ -125,7 +139,9 @@
     "rating": 4.5,
     "ratingParticipation": 300,
     "viewer": 600,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 440
   },
   {
     "id": 9,
@@ -141,7 +157,9 @@
     "rating": 4.7,
     "ratingParticipation": 450,
     "viewer": 800,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 320
   },
   {
     "id": 10,
@@ -153,11 +171,13 @@
     "main_category_id": 3,
     "semi_category_id": 25,
     "site_url": "https://www.coursera.org/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.8,
     "ratingParticipation": 600,
     "viewer": 1200,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 680
   },
   {
     "id": 11,
@@ -173,7 +193,9 @@
     "rating": 4.4,
     "ratingParticipation": 350,
     "viewer": 700,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 210
   },
   {
     "id": 12,
@@ -185,11 +207,13 @@
     "main_category_id": 2,
     "semi_category_id": 15,
     "site_url": "https://www.jasper.ai/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.7,
     "ratingParticipation": 400,
     "viewer": 900,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 320
   },
   {
     "id": 13,
@@ -205,7 +229,9 @@
     "rating": 4.3,
     "ratingParticipation": 150,
     "viewer": 300,
-    "isBookmarked": false
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 120
   },
   {
     "id": 14,
@@ -217,11 +243,13 @@
     "main_category_id": 3,
     "semi_category_id": 26,
     "site_url": "https://www.upwork.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.4,
     "ratingParticipation": 250,
     "viewer": 450,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 70
   },
   {
     "id": 15,
@@ -233,11 +261,13 @@
     "main_category_id": 1,
     "semi_category_id": 1,
     "site_url": "https://asana.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.7,
     "ratingParticipation": 400,
     "viewer": 900,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 190
   },
   {
     "id": 16,
@@ -253,7 +283,9 @@
     "rating": 4.7,
     "ratingParticipation": 500,
     "viewer": 900,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 940
   },
   {
     "id": 17,
@@ -265,11 +297,13 @@
     "main_category_id": 3,
     "semi_category_id": 25,
     "site_url": "https://www.duolingo.com/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.9,
     "ratingParticipation": 700,
     "viewer": 1300,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 740
   },
   {
     "id": 18,
@@ -285,7 +319,9 @@
     "rating": 4.8,
     "ratingParticipation": 600,
     "viewer": 1200,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 380
   },
   {
     "id": 19,
@@ -301,7 +337,9 @@
     "rating": 4.5,
     "ratingParticipation": 300,
     "viewer": 650,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 850
   },
   {
     "id": 20,
@@ -317,7 +355,9 @@
     "rating": 4.6,
     "ratingParticipation": 200,
     "viewer": 500,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 570
   },
   {
     "id": 21,
@@ -333,7 +373,9 @@
     "rating": 4.8,
     "ratingParticipation": 400,
     "viewer": 800,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 90
   },
   {
     "id": 22,
@@ -349,7 +391,9 @@
     "rating": 4.6,
     "ratingParticipation": 300,
     "viewer": 600,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 415
   },
   {
     "id": 23,
@@ -365,7 +409,9 @@
     "rating": 4.5,
     "ratingParticipation": 400,
     "viewer": 800,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 2,
+    "like_count": 330
   },
   {
     "id": 24,
@@ -377,11 +423,13 @@
     "main_category_id": 4,
     "semi_category_id": 31,
     "site_url": "https://startup-support.gov/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.6,
     "ratingParticipation": 250,
     "viewer": 500,
-    "isBookmarked": true
+    "isBookmarked": true,
+    "user_id": 2,
+    "like_count": 770
   },
   {
     "id": 25,
@@ -397,7 +445,9 @@
     "rating": 4.8,
     "ratingParticipation": 300,
     "viewer": 700,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 777
   },
   {
     "id": 26,
@@ -409,11 +459,13 @@
     "main_category_id": 4,
     "semi_category_id": 33,
     "site_url": "https://financial-support.gov/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.4,
     "ratingParticipation": 200,
     "viewer": 400,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 888
   },
   {
     "id": 27,
@@ -425,11 +477,13 @@
     "main_category_id": 4,
     "semi_category_id": 34,
     "site_url": "https://childcare-support.gov/",
-    "is_analyzed": true,
+    "is_analyzed": false,
     "rating": 4.7,
     "ratingParticipation": 350,
     "viewer": 750,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 555
   },
   {
     "id": 28,
@@ -445,7 +499,9 @@
     "rating": 4.3,
     "ratingParticipation": 180,
     "viewer": 350,
-    "isBookmarked": false
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 987
   },
   {
     "id": 29,
@@ -461,6 +517,62 @@
     "rating": 4.6,
     "ratingParticipation": 180,
     "viewer": 350,
-    "isBookmarked": true
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 321
+  },
+  {
+    "id": 30,
+    "title": "보너스잡",
+    "thumbnail": "/images/thumbnail-bonusjob.png",
+    "site_description": "취업하면 보너스 축하금을 주는 채용 사이트.",
+    "main_category": "정보 플랫폼",
+    "semi_category": "비즈니스 & 프리랜서",
+    "main_category_id": 3,
+    "semi_category_id": 26,
+    "site_url": "https://bonusjob.co.kr/",
+    "is_analyzed": true,
+    "rating": 4.6,
+    "ratingParticipation": 180,
+    "viewer": 350,
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 200
+  },
+  {
+    "id": 31,
+    "title": "직업훈련포털 HRD-Net",
+    "thumbnail": "/images/thumbnail-HRD-net.png",
+    "site_description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
+    "main_category": "정부지원",
+    "semi_category": "기타 정부지원",
+    "main_category_id": 4,
+    "semi_category_id": 35,
+    "site_url": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
+    "is_analyzed": true,
+    "rating": 4.6,
+    "ratingParticipation": 180,
+    "viewer": 350,
+    "isBookmarked": false,
+    "user_id": 2,
+    "like_count": 180
+  },
+  {
+    "id": 32,
+    "title": "Pixabay(픽사베이)",
+    "thumbnail": "/images/thumbnail-pixabay.png",
+    "site_description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
+    "main_category": "업무 툴",
+    "semi_category": "이미지 공유",
+    "main_category_id": 1,
+    "semi_category_id": 8,
+    "site_url": "https://pixabay.com/",
+    "is_analyzed": true,
+    "rating": 4.6,
+    "ratingParticipation": 180,
+    "viewer": 350,
+    "isBookmarked": true,
+    "user_id": 1,
+    "like_count": 250
   }
 ]

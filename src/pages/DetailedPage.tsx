@@ -18,7 +18,7 @@ const DetailedPage = () => {
   return (
     <div className='detail-container'>
       <div className='img-box h-[60vh] bg-gray-c4'>
-        <img src={content.image} alt={content.title} className='m-auto h-full'></img>
+        <img src={content.thumbnail} alt={content.title} className='m-auto h-full'></img>
       </div>
       <div className='site-title-box'>
         <div>

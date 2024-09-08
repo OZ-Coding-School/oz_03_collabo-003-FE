@@ -3,6 +3,7 @@ import userData from '../../data/users.json';
 import BtnMypage from '../common/button/BtnMypage';
 import { useForm } from 'react-hook-form';
 import WhiteBtn from '../common/button/WhiteBtn';
+import { useAuthStore } from '../../store/store';
 
 interface UserFormData {
   nickName: string;
@@ -13,6 +14,8 @@ const MyPageUserInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [naming, setNaming] = useState(userData.username);
   const [password, setPassword] = useState('');
+
+  const username = useAuthStore((state) => state.username);
 
   const {
     register,
@@ -61,7 +64,7 @@ const MyPageUserInfo = () => {
       <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <span className='text-xl'>
-            환영합니다, <strong>{userData.username}</strong>님
+            환영합니다, <strong>{username}</strong>님
           </span>
           <span className='text-lg'>
             권한: <strong>이용자</strong>

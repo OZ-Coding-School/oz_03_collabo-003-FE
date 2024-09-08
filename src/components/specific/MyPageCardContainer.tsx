@@ -55,16 +55,18 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
               {currentCards.map((card) => (
                 <MyPageImgCard
                   key={card.id}
-                  id={card.id}
-                  title={card.title}
-                  description={card.site_description}
-                  image={card.thumbnail}
-                  link={card.site_url}
-                  rating={card.rating}
-                  ratingParticipation={card.ratingParticipation}
-                  viewer={card.viewer}
+                  content={{
+                    id: card.id,
+                    title: card.title,
+                    site_description: card.site_description,
+                    thumbnail: card.thumbnail,
+                    site_url: card.site_url,
+                    rating: card.rating,
+                    ratingParticipation: card.ratingParticipation,
+                    viewer: card.viewer,
+                    isBookmarked: card.isBookmarked,
+                  }}
                   layout={layout}
-                  isBookmarked={card.isBookmarked}
                 />
               ))}
             </div>

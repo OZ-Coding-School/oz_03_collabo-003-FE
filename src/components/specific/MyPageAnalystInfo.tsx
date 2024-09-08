@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import userData from '../../data/analystProfile.json';
+import analystData from '../../data/analystProfile.json';
 import BtnMypage from '../common/button/BtnMypage';
 import MyPageAnalystInfoEdit from '../specific/MyPageAnalystInfoEdit';
+import { useAuthStore } from '../../store/store';
+import { Analyst } from '../../types/type';
 
 const MyPageAnalystInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const username = useAuthStore((state) => state.username);
+
+  const analyst = analystData.find((analyst) => analyst.id === 1) as Analyst;
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -22,7 +27,7 @@ const MyPageAnalystInfo = () => {
       <div className='mx-auto my-24 flex min-h-[480px] w-[700px] flex-col p-6'>
         <div className='mb-10 flex items-center justify-between border-b-2 p-1'>
           <p className='text-xl'>
-            환영합니다, <span className='font-bold'>{userData.username}</span>님
+            환영합니다, <span className='font-bold'>{username}</span>님
           </p>
           <p className='text-lg'>
             권한: <span className='font-bold'>분석가</span>
@@ -41,19 +46,19 @@ const MyPageAnalystInfo = () => {
             <div className='space-y-4'>
               <div className='flex'>
                 <p className='my-auto font-semibold'>사진</p>
-                <img src={userData.image} alt='analyst-profile-img' className='m-auto size-20' />
+                <img src={analyst.image} alt='analyst-profile-img' className='m-auto size-20' />
               </div>
               <div>
                 <p className={`mb-2 ${subTitle}`}>소개</p>
-                <span>{userData.intro}</span>
+                <span>{analyst.intro}</span>
               </div>
               <div>
                 <p className={`mb-2 ${subTitle}`}>장점</p>
-                <span>{userData.merit}</span>
+                <span>{analyst.merit}</span>
               </div>
               <div>
                 <p className={`${subTitle} mb-2`}>전하고 싶은 한 마디</p>
-                <span>{userData.summary}</span>
+                <span>{analyst.summary}</span>
               </div>
             </div>
           </div>

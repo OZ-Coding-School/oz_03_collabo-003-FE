@@ -72,7 +72,7 @@ export interface Analyst {
   intro: string;
   link?: string;
   merit: string;
-  oneWord: string;
+  summary: string;
 }
 
 export interface SemiCategory {

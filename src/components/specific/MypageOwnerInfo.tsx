@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import userData from '../../data/users.json';
 import BtnMypage from '../common/button/BtnMypage';
-import { User } from '../../types/type';
+import { useAuthStore } from '../../store/store';
 //import { auth } from '../../apis/api/auth';
 
 interface MypageOwnerInfoProps {
   onSelectedItem: (item: string) => void;
 }
 
+interface OwnerState {
+  business_name: string;
+  business_number: number;
+  phone_number: number;
+}
+
+const ownerData = {
+  business_name: '(주)올디',
+  business_number: 1231212345,
+  phone_number: 11112345678,
+};
+
 const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<OwnerState | null>(null);
+  const username = useAuthStore((state) => state.username);
 
   const fetchUserData = async () => {
-    setUser(userData);
+    setUser(ownerData);
     // try {
     //   const response = await auth.getProfile();
     //   console.log('유저프로필 조회 성공', response);
@@ -78,7 +90,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
         <div className='flex items-end justify-between border-b-2 border-b-gray-75 p-1'>
           <div className='flex gap-2'>
             <span className='text-[20px] text-gray-46'>환영합니다,</span>
-            <span className='text-[20px] font-semibold'>{user?.username} 님</span>
+            <span className='text-[20px] font-semibold'>{username} 님</span>
           </div>
           <div className='flex gap-1'>
             <span className='text-[20px] text-gray-46'>권한:</span>
@@ -91,7 +103,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
               <span className='text-center text-[18px] font-semibold'>등록한 웹</span>
               <div className='flex items-center justify-center gap-1'>
                 <span className={stateNumber} onClick={() => onSelectedItem('사이트 관리')}>
-                  10
+                  4
                 </span>
                 <span className='text-center text-[18px] text-gray-46'>건</span>
               </div>

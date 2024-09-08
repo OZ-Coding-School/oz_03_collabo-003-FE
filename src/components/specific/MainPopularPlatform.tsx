@@ -44,7 +44,7 @@ const MainPopularPlatform = () => {
   }, []);
 
   const filteredContents = contents.filter((content) => content.main_category === selectedCategory);
-  const sortedContents = filteredContents.sort((a, b) => b.id - a.id);
+  const sortedContents = filteredContents.sort((a, b) => (b.like_count as number) - (a.like_count as number));
   const popularContents = sortedContents.slice(0, 8);
 
   const tabStyle =

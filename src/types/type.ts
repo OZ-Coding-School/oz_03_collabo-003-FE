@@ -37,12 +37,13 @@ export interface Content {
     rating: number;
   };
   qna?: QnA;
-  viewCount?: number;
-  likeCount?: number;
+  viewer?: number;
   is_analyzed?: boolean;
   rating?: number;
   ratingParticipation?: number;
   isBookmarked?: boolean;
+  user_id?: number;
+  like_count?: number;
 }
 
 export interface User {
@@ -97,9 +98,9 @@ export type AnalysisContent = {
   contentId: number;
   clientId: number;
   title: string;
-  link: string;
-  image: string;
-  description: string;
+  site_url: string;
+  thumbnail: string;
+  site_description: string;
   main_category: string;
   status: string;
 };

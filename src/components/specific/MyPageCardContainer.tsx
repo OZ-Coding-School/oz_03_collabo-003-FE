@@ -9,6 +9,9 @@ interface MyPageCardContainerProps {
   layout: 'user' | 'client'; // user = 찜 하트 활성화, client = 찜 하트 비활성화
 }
 
+const myCards = allCards.filter((card) => card.user_id === 1);
+const ownerCards = myCards.filter((card) => card.is_analyzed === true);
+
 const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,9 +19,9 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = allCards.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = (layout === 'user' ? myCards : ownerCards).slice(indexOfFirstCard, indexOfLastCard);
 
-  const totalPages = Math.ceil(allCards.length / cardsPerPage);
+  const totalPages = Math.ceil((layout === 'user' ? myCards : ownerCards).length / cardsPerPage);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -29,20 +32,20 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
   return (
     <div className='h-[calc(100vh-70px)] w-full overflow-auto'>
       <div className='mx-15 my-10 w-full px-4'>
-        {allCards.length > 0 ? (
+        {myCards.length > 0 ? (
           <>
             <div className='m-auto grid w-[860px] grid-cols-3 gap-4 xl:w-[1030px] xl:gap-5 2xl:w-[1200px] 2xl:gap-6'>
               {layout === 'user' && (
                 <div className='col-span-3 text-lg'>
                   <span className='text-gray-75'>전체</span>
-                  <span className='ml-1 font-semibold text-blue-accent'>{allCards.length}</span>
+                  <span className='ml-1 font-semibold text-blue-accent'>{myCards.length}</span>
                 </div>
               )}
               {layout === 'client' && (
                 <div className='col-span-3 flex justify-between'>
                   <div className='text-lg'>
                     <span className='text-gray-75'>전체</span>
-                    <span className='ml-1 font-semibold text-blue-accent'>{allCards.length}</span>
+                    <span className='ml-1 font-semibold text-blue-accent'>{ownerCards.length}</span>
                   </div>
                   <BtnMypage onClick={sitePlusBtn} className='mx-2 w-[160px] p-2 text-sm font-semibold'>
                     + 사이트 등록하기
@@ -83,7 +86,12 @@ const MyPageCardContainer: React.FC<MyPageCardContainerProps> = ({ layout }) => 
             )}
           </>
         )}
-        {allCards.length > 0 && <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} />}
+        {layout === 'user' && myCards.length > 0 && (
+          <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} />
+        )}
+        {layout === 'client' && ownerCards.length > 0 && (
+          <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} />
+        )}
       </div>
     </div>
   );

@@ -22,13 +22,10 @@ type AnalysisContent = {
   selected: AppliedAnalyst | null;
   status: string;
   title: string;
-  link: string;
-  image: string;
+  thumbnail: string;
   created_at: string;
   scheduled_at: string;
 };
-
-const analyst = analystData.find((analyst) => analyst.id === 1) as Analyst;
 
 const MyPageOwnerAnalysisRequest = () => {
   const [contents, setContents] = useState<AnalysisContent[]>([]);
@@ -64,6 +61,7 @@ const MyPageOwnerAnalysisRequest = () => {
   // 분석가 프로필 열람
   const analystProfileHandler = async (analystId: number) => {
     console.log('분석가 프로필 열람', analystId);
+    const analyst = analystData.find((analyst) => analyst.id === analystId) as Analyst;
     setAnalystProfile(analyst);
     setProfileModalOpen(true);
     // try {
@@ -158,7 +156,7 @@ const MyPageOwnerAnalysisRequest = () => {
           {currentContents.map((content) => (
             <section className='flex w-full flex-col gap-8 rounded-md' key={content.contentId}>
               <div className='flex gap-3 rounded-md bg-white p-4 shadow-custom-light'>
-                <img className='h-[75px] w-[120px]' src={content.image} alt={content.title} />
+                <img className='h-[75px] w-[120px]' src={content.thumbnail} alt={content.title} />
                 <div className='flex flex-col gap-0.5'>
                   <span className='text-lg text-gray-46'>{content.title}</span>
                   <span className='text-sm text-gray-75'>

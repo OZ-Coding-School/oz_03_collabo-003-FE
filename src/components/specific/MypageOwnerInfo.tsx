@@ -103,7 +103,7 @@ const MypageOwnerInfo: React.FC<MypageOwnerInfoProps> = ({ onSelectedItem }) => 
               <span className='text-center text-[18px] font-semibold'>등록한 웹</span>
               <div className='flex items-center justify-center gap-1'>
                 <span className={stateNumber} onClick={() => onSelectedItem('사이트 관리')}>
-                  10
+                  4
                 </span>
                 <span className='text-center text-[18px] text-gray-46'>건</span>
               </div>

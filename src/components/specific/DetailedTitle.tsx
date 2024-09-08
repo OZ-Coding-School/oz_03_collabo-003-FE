@@ -6,10 +6,19 @@ import { QnA } from '../../types/type.ts';
 interface Content {
   id: number;
   title: string;
-  link: string;
-  image: string;
-  description: string;
-  category: string;
+  site_url: string;
+  thumbnail: string;
+  site_description: string;
+  main_category?: {
+    id: number;
+    categories: string;
+    slug: string;
+    semi_category: {
+      id: number;
+      label: string;
+      slug: string;
+    };
+  };
   detailedInfo?: string;
   review?: {
     id: number;
@@ -29,7 +38,7 @@ interface DetailedTitleProps {
 
 const DetailedTitle: React.FC<DetailedTitleProps> = ({ content }) => {
   const handleJoinClick = () => {
-    window.location.href = content.link;
+    window.location.href = content.site_url;
   };
 
   return (
@@ -48,7 +57,7 @@ const DetailedTitle: React.FC<DetailedTitleProps> = ({ content }) => {
           <BtnHeart className='mx-3 text-3xl' />
         </div>
       </div>
-      <div className='ml-10 w-1/2 text-gray-75'>{content.description}</div>
+      <div className='ml-10 w-1/2 text-gray-75'>{content.site_description}</div>
     </div>
   );
 };

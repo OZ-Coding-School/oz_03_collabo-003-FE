@@ -6,20 +6,11 @@ import DisabledBtn from '../common/button/DisabledBtn';
 import dayjs from 'dayjs';
 import BtnMypage from '../common/button/BtnMypage';
 import axios from 'axios';
-import analystInfo from '../../data/analystProfile.json';
+import analystData from '../../data/analystProfile.json';
 import ModalContainer from '../common/ModalContainer';
+import { Analyst } from '../../types/type';
 
-type AnalystProfile = {
-  id: number;
-  username: string;
-  image: string;
-  intro: string;
-  link: string;
-  merit: string;
-  summary: string;
-};
-
-type Analyst = {
+type AppliedAnalyst = {
   analystId: number;
   analystName: string;
 };
@@ -27,12 +18,11 @@ type Analyst = {
 type AnalysisContent = {
   contentId: number;
   clientId: number;
-  accepted: Analyst[];
-  selected: Analyst | null;
+  accepted: AppliedAnalyst[];
+  selected: AppliedAnalyst | null;
   status: string;
   title: string;
-  link: string;
-  image: string;
+  thumbnail: string;
   created_at: string;
   scheduled_at: string;
 };
@@ -41,7 +31,7 @@ const MyPageOwnerAnalysisRequest = () => {
   const [contents, setContents] = useState<AnalysisContent[]>([]);
   const [selectedAnalyst, setSelectedAnalyst] = useState<boolean>(false);
   const [reportUrl, setReportUrl] = useState<string>('');
-  const [analystProfile, setAnalystProfile] = useState<AnalystProfile | null>(null);
+  const [analystProfile, setAnalystProfile] = useState<Analyst | null>(null);
   const [profileModalOpen, setProfileModalOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 1;
@@ -71,7 +61,8 @@ const MyPageOwnerAnalysisRequest = () => {
   // 분석가 프로필 열람
   const analystProfileHandler = async (analystId: number) => {
     console.log('분석가 프로필 열람', analystId);
-    setAnalystProfile(analystInfo);
+    const analyst = analystData.find((analyst) => analyst.id === analystId) as Analyst;
+    setAnalystProfile(analyst);
     setProfileModalOpen(true);
     // try {
     //   const response = await axios.get(`${baseUrl}/analysts/${analystId}`, {
@@ -165,7 +156,7 @@ const MyPageOwnerAnalysisRequest = () => {
           {currentContents.map((content) => (
             <section className='flex w-full flex-col gap-8 rounded-md' key={content.contentId}>
               <div className='flex gap-3 rounded-md bg-white p-4 shadow-custom-light'>
-                <img className='h-[75px] w-[120px]' src={content.image} alt={content.title} />
+                <img className='h-[75px] w-[120px]' src={content.thumbnail} alt={content.title} />
                 <div className='flex flex-col gap-0.5'>
                   <span className='text-lg text-gray-46'>{content.title}</span>
                   <span className='text-sm text-gray-75'>

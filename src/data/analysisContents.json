@@ -4,87 +4,87 @@
     "clientId": 1,
     "accepted": [
       {
-        "analystId": 11,
-        "analystName": "분석가11"
+        "analystId": 1,
+        "analystName": "분석왕"
       },
       {
-        "analystId": 12,
-        "analystName": "분석가12"
+        "analystId": 2,
+        "analystName": "올디분석가"
       },
       {
-        "analystId": 13,
-        "analystName": "분석가13"
+        "analystId": 3,
+        "analystName": "애널리스트"
       }
     ],
     "selected": null,
-    "status": "Pending",
+    "status": "Accepted",
     "title": "Figma(피그마)",
-    "link": "https://www.figma.com/",
-    "image": "https://via.placeholder.com/330x220",
-    "description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
+    "site_url": "https://www.figma.com/",
+    "thumbnail": "/images/thumbnail-figma.png",
+    "site_description": "피그마는 디자이너와 개발자가 협업할 수 있는 디자인 툴입니다.",
     "main_category": "업무 툴",
     "created_at": "2024-08-02T16:40:20Z",
     "scheduled_at": "2024-09-18T00:00:00Z"
   },
   {
-    "contentId": 2,
+    "contentId": 6,
     "clientId": 1,
     "accepted": [
       {
-        "analystId": 11,
-        "analystName": "분석가11"
+        "analystId": 1,
+        "analystName": "분석왕"
       },
       {
-        "analystId": 12,
-        "analystName": "분석가12"
+        "analystId": 2,
+        "analystName": "올디분석가"
       }
     ],
     "selected": {
-      "analystId": 11,
-      "analystName": "분석가11"
+      "analystId": 1,
+      "analystName": "분석왕"
     },
     "status": "Completed",
-    "title": "Pixabay(픽사베이)",
-    "link": "https://pixabay.com/",
-    "image": "https://via.placeholder.com/330x220",
-    "description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
+    "title": "Zoom",
+    "site_url": "https://zoom.us/",
+    "thumbnail": "/images/thumbnail-zoom.png",
+    "site_description": "Zoom은 화상 회의 및 온라인 미팅을 위한 도구입니다.",
     "main_category": "업무 툴",
     "created_at": "2024-08-11T16:40:20Z",
     "scheduled_at": "2024-08-31T00:00:00Z"
   },
   {
-    "contentId": 14,
-    "clientId": 2,
+    "contentId": 13,
+    "clientId": 1,
     "accepted": [
       {
-        "analystId": 11,
-        "analystName": "분석가11"
+        "analystId": 1,
+        "analystName": "분석왕"
       }
     ],
     "selected": {
-      "analystId": 11,
-      "analystName": "분석가11"
+      "analystId": 1,
+      "analystName": "분석왕"
     },
     "status": "Accepted",
-    "title": "직업훈련포털 HRD-Net",
-    "link": "https://www.hrd.go.kr/hrdp/ma/pmmao/newIndexRenewal.do",
-    "image": "https://via.placeholder.com/330x220",
-    "description": "내일배움카드제, 근로자직무능력향상훈련, 기업체 지원훈련, 일학습병행, 전국훈련기관",
-    "main_category": "정부지원",
+    "title": "ZoomInfo",
+    "site_url": "https://www.zoominfo.com/",
+    "thumbnail": "/images/thumbnail-zoominfo.png",
+    "site_description": "ZoomInfo는 비즈니스 정보 및 고객 분석 도구입니다.",
+    "main_category": "업무 툴",
     "created_at": "2024-08-11T16:40:20Z",
     "scheduled_at": "2024-08-31T00:00:00Z"
   },
   {
-    "contentId": 10,
-    "clientId": 3,
+    "contentId": 32,
+    "clientId": 1,
     "accepted": [],
     "selected": null,
     "status": "Pending",
-    "title": "보너스잡",
-    "link": "https://bonusjob.co.kr/",
-    "image": "https://via.placeholder.com/330x220",
-    "description": "취업하면 보너스 축하금을 주는 채용 사이트",
-    "main_category": "정보 플랫폼",
+    "title": "Pixabay(픽사베이)",
+    "site_url": "https://pixabay.com/",
+    "thumbnail": "/images/thumbnail-pixabay.png",
+    "site_description": "무료 & 유료 이미지와 영상을 다운로드 할 수 있습니다.",
+    "main_category": "업무 툴",
     "created_at": "2024-08-11T16:40:20Z",
     "scheduled_at": "2024-08-31T00:00:00Z"
   }

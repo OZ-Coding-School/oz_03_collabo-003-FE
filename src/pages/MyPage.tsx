@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SideBar from '../components/common/SideBar';
 import MyPageCardContainer from '../components/specific/MyPageCardContainer';
 import MyPageUserInfo from '../components/specific/MyPageUserInfo';
 import MyPageAuthz from '../components/specific/MyPageAuthz';
+import { useAuthStore } from '../store/store';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const items: string[] = ['찜 목록', '회원 정보', '권한 관리'];
   const [selectedItem, setSelectedItem] = useState(items[0]);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      return navigate('/');
+    }
+  }, []);
 
   return (
     <div className='flex size-auto'>

@@ -4,16 +4,24 @@ import BtnToggle from '../common/button/BtnToggle';
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 import dayjs from 'dayjs';
 import Pagination from '../common/Pagination.js';
-
 import { QnA } from '../../types/type.js';
 
 interface Content {
   id: number;
   title: string;
-  link: string;
-  image: string;
-  description: string;
-  category: string;
+  site_url: string;
+  thumbnail: string;
+  site_description: string;
+  main_category?: {
+    id: number;
+    categories: string;
+    slug: string;
+    semi_category: {
+      id: number;
+      label: string;
+      slug: string;
+    };
+  };
   detailedInfo?: string;
   review?: {
     id: number;

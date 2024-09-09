@@ -7,10 +7,19 @@ import { QnA } from '../../types/type.js';
 interface Content {
   id: number;
   title: string;
-  link: string;
-  image: string;
-  description: string;
-  category: string;
+  site_url: string;
+  thumbnail: string;
+  site_description: string;
+  main_category?: {
+    id: number;
+    categories: string;
+    slug: string;
+    semi_category: {
+      id: number;
+      label: string;
+      slug: string;
+    };
+  };
   detailedInfo?: string;
   review?: {
     id: number;

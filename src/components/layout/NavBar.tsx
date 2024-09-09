@@ -7,7 +7,7 @@ import NavMobileMenu from '../specific/NavMobileMenu';
 import { FiMenu } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Loading from '../common/Loading';
-import { categoryService } from '../../apis/services/categoryService';
+import { categoriesAPI } from '../../apis/api/categories';
 import { Category } from '../../types/type';
 
 const Navbar: React.FC = () => {
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
     const fetchCategories = async () => {
       try {
         setIsLoading(true);
-        const fetchedCategories = await categoryService.getCategories();
+        const fetchedCategories = await categoriesAPI.getAllCategories();
         setCategories(fetchedCategories);
       } catch (error) {
         console.error('카테고리 fetch 에러', error);
